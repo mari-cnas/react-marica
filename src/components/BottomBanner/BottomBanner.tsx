@@ -1,17 +1,11 @@
 import { memo, ReactElement, useEffect, useRef, useState } from 'react'
 
 import { Col, Container, Row } from 'react-bootstrap'
-import {
-  AiFillFacebook,
-  AiOutlineInstagram,
-  AiOutlineTwitter,
-  AiFillYoutube,
-} from 'react-icons/ai'
 
 import appStore from '../../assets/app-store.png'
 import phone from '../../assets/cellphone.png'
 import googlePlay from '../../assets/google-play.png'
-import { Bg, Bg2, CellDiv, Text, Title } from './styled'
+import { Bg, Bg2, Text, Title } from './styled'
 
 interface IBaseComponentProps {
   children?: React.ReactNode

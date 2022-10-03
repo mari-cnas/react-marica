@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 
-import { Button, Col, Container, Form, Row } from 'react-bootstrap'
+import { Spinner, Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { FaMapMarkedAlt } from 'react-icons/fa'
@@ -51,7 +51,7 @@ const TouristicPoints: React.FC = () => {
       {loading && (
         <div className="d-flex flex-column my-5">
           <div className="d-flex flex-column align-self-center">
-            <p>Carregando informações...</p>
+            <Spinner animation="border" variant="primary" />
           </div>
         </div>
       )}
@@ -101,7 +101,7 @@ const TouristicPoints: React.FC = () => {
             </Row>
             <Row className="justify-content-center">
               {touristicPoints?.map((point) => (
-                <Col className="col-6 col-md-4 my-2">
+                <Col className="d-flex col-6 col-md-4 my-2">
                   <GeneralCard ponto={point} key={point.id} />
                 </Col>
               ))}

@@ -19,16 +19,16 @@ interface IGeneralCardProps {
 
 const GeneralCard: React.FC<IGeneralCardProps> = ({ ponto }) => {
   return (
-    <CardBg className="d-flex flex-column my-5">
+    <CardBg className="d-flex flex-column w-100">
       <CoverImg capa={ponto.capa} className="mb-2" />
       <BodyDiv className="d-flex flex-column">
         <Link to={`/pontos/${ponto.id}`} className="text-decoration-none ">
           <InfoTitle className="text-start">{ponto.nome}</InfoTitle>
         </Link>
-        <div className="d-flex ">
+        <div className="d-flex flex-wrap ">
           {ponto.categorias.map((categoria) => (
             <CategoriesDiv
-              className="d-flex text-start me-3"
+              className="d-flex text-start my-1 mx-1"
               key={categoria.id}
             >
               {categoria.label}
@@ -36,7 +36,7 @@ const GeneralCard: React.FC<IGeneralCardProps> = ({ ponto }) => {
           ))}
         </div>
         {ponto.enderecos.map((endereco) => (
-          <InfoText className="text-start mt-3" key={endereco.id}>
+          <InfoText className="text-start my-3" key={endereco.id}>
             {endereco.label}
           </InfoText>
         ))}

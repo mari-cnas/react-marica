@@ -13,6 +13,9 @@ const Config = {
     baseUrl: import.meta.env.VITE_API_BASE_URL,
     token: import.meta.env.VITE_API_TOKEN,
   },
+  googleApi: {
+    key: import.meta.env.VITE_GOOGLE_API,
+  },
 }
 
 export default Config

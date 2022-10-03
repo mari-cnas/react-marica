@@ -1,24 +1,29 @@
 import { memo, useEffect } from 'react'
 
-// import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react'
-import { Carousel, Col, Container, Row } from 'react-bootstrap'
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
+import { Spinner, Col, Container, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft, AiOutlineCheckCircle } from 'react-icons/ai'
 import { BiMap } from 'react-icons/bi'
 import { BsTelephone, BsFacebook } from 'react-icons/bs'
 import { FaRegMoneyBillAlt } from 'react-icons/fa'
+import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
-import { ReactSVG } from 'react-svg'
+import Slider from 'react-slick'
 import { useTouristicPoints } from 'TouristicPointsContext/TouristicPointsContext'
 
+import Config from 'Config'
+
+import BaseComponent from 'components/BaseComponent'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
+import MapMarker from 'components/MapMarker'
 
 import useTitle from 'hooks/useTitle'
 
 import appStore from '../../assets/app-store.png'
 import googlePlay from '../../assets/google-play.png'
-import { Categories, HomeBg, IconDiv } from './styled'
+import { Categories, HomeBg, IconDiv, ImageDiv } from './styled'
 
 const TouristicPoint: React.FC = () => {
   const { t, i18n } = useTranslation()
@@ -26,6 +31,18 @@ const TouristicPoint: React.FC = () => {
   const { loading, error, touristicPoint, fetchTouristicPoint } =
     useTouristicPoints()
   const { id } = useParams()
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+  }
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: Config.googleApi.key,
+  })
 
   useEffect(() => {
     setTitle(t('home.head-title'))
@@ -43,29 +60,25 @@ const TouristicPoint: React.FC = () => {
       {loading && (
         <div className="d-flex flex-column my-5">
           <div className="d-flex flex-column align-self-center">
-            <p>Carregando informações...</p>
+            <Spinner animation="border" variant="primary" />
           </div>
         </div>
       )}
       {!loading && !error && touristicPoint && (
         <>
-          <Row>
-            <Carousel>
-              {touristicPoint?.item.images.map((banner) => (
-                <Carousel.Item key={banner.id}>
-                  <img
-                    className="d-block w-100"
-                    style={{ height: 250 }}
-                    src={banner.src}
-                    alt="First"
-                  />
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </Row>
+          <Slider {...settings}>
+            {touristicPoint?.item.images.map((banner) => (
+              <ImageDiv
+                key={banner.id}
+                capa={banner.src}
+                className="d-block w-100"
+              />
+            ))}
+          </Slider>
+
           <HomeBg className="d-flex flex-column py-5">
             <Container className="py-1">
-              <Row className=" justify-content-between">
+              <Row sm={1} className=" justify-content-between d-flex flex-wrap">
                 <Col className=" col-md-8 ">
                   <Link to="/">
                     <AiOutlineArrowLeft />
@@ -148,7 +161,7 @@ const TouristicPoint: React.FC = () => {
                     {touristicPoint.item.estruturas.map((estrutura) => (
                       <div className="d-flex me-3">
                         <IconDiv>
-                          <ReactSVG src={estrutura.icone} />
+                          <SVG src={estrutura.icone} fill="rgb(110, 189, 0)" />
                         </IconDiv>
                         <p>{estrutura.label}</p>
                       </div>
@@ -159,7 +172,7 @@ const TouristicPoint: React.FC = () => {
                     {touristicPoint.item.restricoes.map((restricao) => (
                       <div className="d-flex me-3">
                         <IconDiv>
-                          <ReactSVG src={restricao.icone} />
+                          <SVG src={restricao.icone} fill="rgb(110, 189, 0)" />
                         </IconDiv>
                         <p>{restricao.label}</p>
                       </div>
@@ -168,6 +181,19 @@ const TouristicPoint: React.FC = () => {
                 </Col>
                 <Col className=" col-md-4 ">
                   <p>Localização</p>
+
+                  <div style={{ height: 300 }}>
+                    <GoogleMap
+                      mapContainerStyle={{ width: '100%', height: '100%' }}
+                      center={{
+                        lat: Number(touristicPoint.item.addresses[0].lat),
+                        lng: Number(touristicPoint.item.addresses[0].lng),
+                      }}
+                      zoom={10}
+                    >
+                      <MapMarker />
+                    </GoogleMap>
+                  </div>
                   <p>Conheça nosso app</p>
                   <div className="d-flex">
                     <img

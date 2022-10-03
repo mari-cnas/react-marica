@@ -40,7 +40,7 @@ export const CategoriesDiv = styled.button`
   color: rgb(102, 102, 102);
   border: 1px solid rgb(238, 238, 238);
   background-color: rgb(238, 238, 238);
-  padding: 5px 20px;
+  padding: 5px 10px;
   border-radius: 20px;
   font-weight: 300;
   font-size: 12px;

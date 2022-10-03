@@ -21,7 +21,7 @@ export const LinkDiv = styled.div`
 
   /* mouse over link */
   a:hover {
-    color: white;
+    color: rgb(110, 500, 0);
   }
 
   /* selected link */

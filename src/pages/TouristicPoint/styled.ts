@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 
+interface ICoverImgProps {
+  capa: string
+}
 export const HomeBg = styled.div`
   background-color: rgb(245, 245, 245);
 `
@@ -40,4 +43,11 @@ export const Categories = styled.button`
   a:active {
     color: blue;
   }
+`
+export const ImageDiv = styled.div<ICoverImgProps>`
+  background-image: ${({ capa }) => `url(${capa})`};
+  width: 100%;
+  height: 250px;
+  background-size: cover;
+  background-position: center center;
 `
