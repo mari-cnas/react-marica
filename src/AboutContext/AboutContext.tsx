@@ -12,7 +12,7 @@ import Api from 'services/Api'
 import { AboutType } from 'types/AboutType'
 
 interface IContextProps {
-  about: AboutType
+  about: AboutType | undefined
   loading: boolean
   fetchAbout: () => Promise<void>
 }

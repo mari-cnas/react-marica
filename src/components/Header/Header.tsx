@@ -35,12 +35,6 @@ const Header: React.FC<IBaseComponentProps> = ({ children }) => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <DrawerMenu>
-                <button
-                  onClick={() => setIsOpen((isOpen) => !isOpen)}
-                  type="button"
-                >
-                  x
-                </button>
                 <ul>
                   <li>Inicial</li>
                   <li>Sobre a cidade</li>

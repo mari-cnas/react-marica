@@ -51,8 +51,8 @@ const About: React.FC<IBaseComponentProps> = () => {
                   <h2> Conheça Maricá</h2>
                 </div>
                 <div
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{ __html: about?.sobre?.content }}
+                  // eslint-disable-next-line react/no-danger, @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
+                  dangerouslySetInnerHTML={{ __html: about?.sobre?.content! }}
                   className="justify-content-center py-3"
                 />
               </div>

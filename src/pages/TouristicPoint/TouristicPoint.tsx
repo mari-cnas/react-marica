@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { memo, useEffect } from 'react'
 
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
@@ -66,6 +67,7 @@ const TouristicPoint: React.FC = () => {
       )}
       {!loading && !error && touristicPoint && (
         <>
+          {/* // eslint-disable-next-line react/jsx-props-no-spreading */},
           <Slider {...settings}>
             {touristicPoint?.item.images.map((banner) => (
               <ImageDiv
@@ -75,7 +77,6 @@ const TouristicPoint: React.FC = () => {
               />
             ))}
           </Slider>
-
           <HomeBg className="d-flex flex-column py-5">
             <Container className="py-1">
               <Row sm={1} className=" justify-content-between d-flex flex-wrap">
@@ -142,7 +143,7 @@ const TouristicPoint: React.FC = () => {
                       <FaRegMoneyBillAlt />
                     </IconDiv>
                     <p>
-                      {touristicPoint.item.gratuito == '1' ? 'Gratuita' : ''}
+                      {touristicPoint.item.gratuito === '1' ? 'Gratuita' : ''}
                     </p>
                   </div>
                   <h3>Tipos de Viajantes</h3>
@@ -191,7 +192,10 @@ const TouristicPoint: React.FC = () => {
                       }}
                       zoom={10}
                     >
-                      <MapMarker />
+                      <MapMarker
+                        lat={Number(touristicPoint.item.addresses[0].lat)}
+                        lng={Number(touristicPoint.item.addresses[0].lng)}
+                      />
                     </GoogleMap>
                   </div>
                   <p>Conheça nosso app</p>
