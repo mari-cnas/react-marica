@@ -1,9 +1,15 @@
+import { Row } from 'react-bootstrap'
 import styled from 'styled-components'
 
 export const HomeBg = styled.div`
   background-color: rgb(245, 245, 245);
 `
-export const Categories = styled.button`
+
+export const Categories = styled(Row)`
+  overflow-x: scroll;
+`
+
+export const Category = styled.button`
   color: white;
   border: none;
   background-color: rgb(110, 189, 0);

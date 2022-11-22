@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { memo, useEffect } from 'react'
 
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 import { Spinner, Col, Container, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft, AiOutlineCheckCircle } from 'react-icons/ai'
@@ -17,6 +16,7 @@ import Config from 'Config'
 
 import BaseComponent from 'components/BaseComponent'
 import Footer from 'components/Footer'
+import GoogleMap from 'components/GoogleMap'
 import Header from 'components/Header'
 import MapMarker from 'components/MapMarker'
 
@@ -40,10 +40,6 @@ const TouristicPoint: React.FC = () => {
     slidesToShow: 4,
     slidesToScroll: 1,
   }
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: Config.googleApi.key,
-  })
 
   useEffect(() => {
     setTitle(t('home.head-title'))
@@ -67,7 +63,7 @@ const TouristicPoint: React.FC = () => {
       )}
       {!loading && !error && touristicPoint && (
         <>
-          {/* // eslint-disable-next-line react/jsx-props-no-spreading */},
+          {/* // eslint-disable-next-line react/jsx-props-no-spreading */}
           <Slider {...settings}>
             {touristicPoint?.item.images.map((banner) => (
               <ImageDiv
@@ -80,31 +76,33 @@ const TouristicPoint: React.FC = () => {
           <HomeBg className="d-flex flex-column py-5">
             <Container className="py-1">
               <Row sm={1} className=" justify-content-between d-flex flex-wrap">
-                <Col className=" col-md-8 ">
-                  <Link to="/">
-                    <AiOutlineArrowLeft />
-                  </Link>{' '}
-                  <div className="d-flex flex-column">
-                    <p> Pontos Turísticos</p>
-                    <h2>{touristicPoint.item.nome}</h2>
+                <Col className="col-12 col-md-8 ">
+                  <div className="d-flex ">
+                    <Link to="/">
+                      <AiOutlineArrowLeft size={20} />
+                    </Link>
+                    <div className="d-flex flex-column mx-2">
+                      <p> Pontos Turísticos</p>
+                      <h2 className="mb-4">{touristicPoint.item.nome}</h2>
+                    </div>
                   </div>
                   <div className="d-flex ">
                     {touristicPoint.item.categorias.map((categoria) => (
                       <Categories
-                        className="d-flex text-start me-3"
+                        className="d-flex text-start me-3 mb-3"
                         key={categoria.id}
                       >
                         {categoria.label}
                       </Categories>
                     ))}
                   </div>
-                  <p>{touristicPoint.item.descricao_t}</p>
+                  <p className="mb-5">{touristicPoint.item.descricao_t}</p>
                   <h3>Sobre</h3>
                   <div className="border-top mb-5">
                     {touristicPoint.item.addresses.map((address) => (
-                      <div className="d-flex">
+                      <div className="d-flex mt-3">
                         <IconDiv>
-                          <BiMap />
+                          <BiMap size={22} className="me-2" />
                         </IconDiv>
                         <p className="d-flex text-start me-3" key={address.id}>
                           {address.label}
@@ -112,9 +110,9 @@ const TouristicPoint: React.FC = () => {
                       </div>
                     ))}
                     {touristicPoint.item.phones.map((phone) => (
-                      <div className="d-flex">
+                      <div className="d-flex mt-3">
                         <IconDiv>
-                          <BsTelephone />
+                          <BsTelephone size={22} className="me-2" />
                         </IconDiv>
                         <p className="d-flex text-start me-3" key={phone.id}>
                           {phone.nome}
@@ -123,82 +121,86 @@ const TouristicPoint: React.FC = () => {
                       </div>
                     ))}
                     {touristicPoint.item.redes.map((rede) => (
-                      <div className="d-flex">
+                      <div className="d-flex mt-3">
                         <IconDiv>
-                          <BsFacebook />
+                          <BsFacebook size={22} className="me-2" />
                         </IconDiv>
-                        <p className="d-flex text-start me-3" key={rede.nome}>
+                        <a
+                          href="https://www.facebook.com/pnsdoamparomarica/"
+                          className="d-flex text-start me-3 text-decoration-none"
+                          key={rede.nome}
+                        >
                           {rede.user}
-                        </p>
+                        </a>
                       </div>
                     ))}
                   </div>
                   <h3>Dicas</h3>
-                  <div className="border-top mb-5">
+                  <div className="border-top pt-3 mb-5">
                     {touristicPoint.item.dicas_t}
                   </div>
                   <h3>Valor de Entrada</h3>
-                  <div className="border-top mb-5 d-flex">
+                  <div className="border-top pt-3 mb-5 d-flex">
                     <IconDiv>
-                      <FaRegMoneyBillAlt />
+                      <FaRegMoneyBillAlt className="me-2" />
                     </IconDiv>
                     <p>
-                      {touristicPoint.item.gratuito === '1' ? 'Gratuita' : ''}
+                      {touristicPoint.item.gratuito === 1 ? 'Gratuita' : ''}
                     </p>
                   </div>
                   <h3>Tipos de Viajantes</h3>
-                  <div className="border-top mb-5 d-flex flex-column">
+                  <Row className="border-top pt-3 mb-5 justify-content-between">
                     {touristicPoint.item.viajantes.map((viajante) => (
-                      <div className="d-flex me-3">
+                      <Col className=" d-flex me-3 col-12 col-md-3">
                         <IconDiv>
-                          <AiOutlineCheckCircle />
+                          <AiOutlineCheckCircle className="me-2" />
                         </IconDiv>
                         <p>{viajante.label}</p>
-                      </div>
+                      </Col>
                     ))}
-                  </div>
+                  </Row>
                   <h3>Estruturas</h3>
-                  <div className="border-top mb-5 d-flex flex-column">
+                  <Row className="border-top pt-3 mb-5 justify-content-between">
                     {touristicPoint.item.estruturas.map((estrutura) => (
-                      <div className="d-flex me-3">
+                      <Col className="d-flex me-3 col-12 col-md-3">
                         <IconDiv>
-                          <SVG src={estrutura.icone} fill="rgb(110, 189, 0)" />
+                          <SVG
+                            src={estrutura.icone}
+                            fill="rgb(110, 189, 0)"
+                            className="me-2"
+                          />
                         </IconDiv>
                         <p>{estrutura.label}</p>
-                      </div>
+                      </Col>
                     ))}
-                  </div>
+                  </Row>
                   <h3>Restrições</h3>
-                  <div className="border-top mb-5 d-flex flex-column">
+                  <Row className="border-top pt-3 mb-5 justify-content-between">
                     {touristicPoint.item.restricoes.map((restricao) => (
-                      <div className="d-flex me-3">
+                      <Col className="d-flex me-3 col-12 col-md-3">
                         <IconDiv>
-                          <SVG src={restricao.icone} fill="rgb(110, 189, 0)" />
+                          <SVG
+                            src={restricao.icone}
+                            fill="rgb(110, 189, 0)"
+                            className="me-2"
+                          />
                         </IconDiv>
                         <p>{restricao.label}</p>
-                      </div>
+                      </Col>
                     ))}
-                  </div>
+                  </Row>
                 </Col>
-                <Col className=" col-md-4 ">
-                  <p>Localização</p>
+                <Col className="col-12 col-md-4 ">
+                  <p className="fw-bold">Localização</p>
 
                   <div style={{ height: 300 }}>
                     <GoogleMap
-                      mapContainerStyle={{ width: '100%', height: '100%' }}
-                      center={{
-                        lat: Number(touristicPoint.item.addresses[0].lat),
-                        lng: Number(touristicPoint.item.addresses[0].lng),
-                      }}
-                      zoom={10}
-                    >
-                      <MapMarker
-                        lat={Number(touristicPoint.item.addresses[0].lat)}
-                        lng={Number(touristicPoint.item.addresses[0].lng)}
-                      />
-                    </GoogleMap>
+                      lat={Number(touristicPoint.item.addresses[0].lat)}
+                      lng={Number(touristicPoint.item.addresses[0].lng)}
+                      zoom={15}
+                    />
                   </div>
-                  <p>Conheça nosso app</p>
+                  <p className="fw-bold my-2">Conheça nosso app</p>
                   <div className="d-flex">
                     <img
                       src={googlePlay}

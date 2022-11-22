@@ -15,7 +15,7 @@ import useTitle from 'hooks/useTitle'
 
 import { TouristicPointType } from 'types/TouristicPointType'
 
-import { Categories, HomeBg } from './styled'
+import { Categories, Category, HomeBg } from './styled'
 
 const TouristicPoints: React.FC = () => {
   const { t, i18n } = useTranslation()
@@ -87,21 +87,21 @@ const TouristicPoints: React.FC = () => {
                 </div>
               </Col>
             </Row>
-            <Row className=" my-2">
+            <Categories className=" my-2  flex-nowrap flex-md-wrap">
               {categories?.map((category) => (
-                <Categories
+                <Category
                   className="me-2 my-2"
                   key={category.id}
                   value={category.label}
                   onClick={handleSearch}
                 >
                   {category.label}
-                </Categories>
+                </Category>
               ))}
-            </Row>
-            <Row className="justify-content-center">
+            </Categories>
+            <Row className="justify-content-center row-cols-1 row-cols-md-3">
               {touristicPoints?.map((point) => (
-                <Col className="d-flex col-6 col-md-4 my-2">
+                <Col className="d-flex my-2">
                   <GeneralCard ponto={point} key={point.id} />
                 </Col>
               ))}

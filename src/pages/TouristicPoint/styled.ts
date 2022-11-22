@@ -47,7 +47,7 @@ export const Categories = styled.button`
 export const ImageDiv = styled.div<ICoverImgProps>`
   background-image: ${({ capa }) => `url(${capa})`};
   width: 100%;
-  height: 250px;
+  height: 350px;
   background-size: cover;
   background-position: center center;
 `

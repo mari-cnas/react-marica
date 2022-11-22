@@ -53,7 +53,7 @@ const Header: React.FC<IBaseComponentProps> = ({ children }) => {
           </Navbar.Collapse>
         </Navbar>
         <div>
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" className="img-fluid" />
         </div>
 
         <ul className="list-unstyled list-group list-group-horizontal align-items-center">
