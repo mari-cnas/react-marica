@@ -1,19 +1,18 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 
-import { Spinner, Button, Col, Container, Form, Row } from 'react-bootstrap'
+import { Spinner, Button, Col, Container, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { FaMapMarkedAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { useTouristicPoints } from 'TouristicPointsContext/TouristicPointsContext'
+
+import { useTouristicPoints } from 'context/TouristicPointsContext'
 
 import Footer from 'components/Footer'
 import GeneralCard from 'components/GeneralCard'
 import Header from 'components/Header'
 
 import useTitle from 'hooks/useTitle'
-
-import { TouristicPointType } from 'types/TouristicPointType'
 
 import { Categories, Category, HomeBg } from './styled'
 
@@ -44,7 +43,7 @@ const TouristicPoints: React.FC = () => {
     fetchTouristicPoints()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchTouristicPoints])
-  console.log('busca', search)
+
   return (
     <>
       <Header />
@@ -60,10 +59,14 @@ const TouristicPoints: React.FC = () => {
           <Container className="py-1">
             <Row className=" justify-content-between">
               <Col className="d-flex">
-                <Link to="/">
-                  <AiOutlineArrowLeft />
-                </Link>{' '}
-                <h2> Pontos Turísticos</h2>
+                <div className="d-flex ">
+                  <Link to="/">
+                    <AiOutlineArrowLeft size={20} />
+                  </Link>
+                  <div className="d-flex flex-column mx-2">
+                    <h2> Pontos Turísticos</h2>
+                  </div>
+                </div>
               </Col>
               <Col>
                 <Button variant="primary">

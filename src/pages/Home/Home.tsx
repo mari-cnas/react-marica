@@ -41,8 +41,8 @@ const Home: React.FC = () => {
       {!isLoading && (
         <HomeBg className="d-flex flex-column py-5">
           <Container className="py-5">
-            <Row className="justify-content-center">
-              <Col className="col-6 col-md-4 mb-2">
+            <Row className="justify-content-center g-2">
+              <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
                   icon={FaUmbrellaBeach}
                   title="Pontos Turísticos"
@@ -50,7 +50,7 @@ const Home: React.FC = () => {
                   page="/pontos-turisticos"
                 />
               </Col>
-              <Col className="col-6 col-md-4 mb-2">
+              <Col className="d-flex col-6 col-md-4">
                 <HomeCard
                   icon={MdHotel}
                   title="Hotéis e Pousadas"
@@ -58,7 +58,7 @@ const Home: React.FC = () => {
                   page="/hoteis-e-pousadas"
                 />
               </Col>
-              <Col className="col-6 col-md-4 mb-2">
+              <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
                   icon={GiForkKnifeSpoon}
                   title="Bares e Restaurantes"
@@ -66,7 +66,7 @@ const Home: React.FC = () => {
                   page="/bares-e-restaurantes"
                 />
               </Col>
-              <Col className="col-6 col-md-4 mb-2">
+              <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
                   icon={FaUmbrellaBeach}
                   title="Delivery"
@@ -74,7 +74,7 @@ const Home: React.FC = () => {
                   page="/delivery"
                 />
               </Col>
-              <Col className="col-6 col-md-4 mb-2">
+              <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
                   icon={FaUmbrellaBeach}
                   title="Comércio Local"
@@ -82,7 +82,7 @@ const Home: React.FC = () => {
                   page="/comercio-local"
                 />
               </Col>
-              <Col className="col-6 col-md-4 mb-2">
+              <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
                   icon={FaUmbrellaBeach}
                   title="Espaços para Eventos
@@ -91,7 +91,7 @@ const Home: React.FC = () => {
                   page="/espacos-para-eventos"
                 />
               </Col>
-              <Col className="col-6 col-md-4 mb-2">
+              <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
                   icon={FaUmbrellaBeach}
                   title="Eventos"
@@ -99,7 +99,7 @@ const Home: React.FC = () => {
                   page="/eventos"
                 />
               </Col>
-              <Col className="col-6 col-md-4 mb-2">
+              <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
                   icon={FaUmbrellaBeach}
                   title="Roteiros turísticos"
@@ -107,7 +107,7 @@ const Home: React.FC = () => {
                   page="https://contato.site/5d9bab8/marica-cvb3/paginaprincipal"
                 />
               </Col>
-              <Col className="col-6 col-md-4 mb-2">
+              <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
                   icon={FaUmbrellaBeach}
                   title="Artesanato"
@@ -115,7 +115,7 @@ const Home: React.FC = () => {
                   page="http://www.feirartemarica.com.br/"
                 />
               </Col>
-              <Col className="col-6 col-md-4 mb-2">
+              <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
                   icon={FaUmbrellaBeach}
                   title="Sobre a cidade"

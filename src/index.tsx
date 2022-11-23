@@ -1,13 +1,15 @@
 import React, { Suspense } from 'react'
 
-import { AboutProvider } from 'AboutContext/AboutContext'
-import { BannersProvider } from 'BannersContext/BannersContext'
 import ReactDOM from 'react-dom/client'
-import { TouristicPointsProvider } from 'TouristicPointsContext/TouristicPointsContext'
 
-import 'services/i18n'
+import { AboutProvider } from 'context/AboutContext'
+import { BannersProvider } from 'context/BannersContext'
+import { TouristicPointsProvider } from 'context/TouristicPointsContext'
 
 import App from './App'
+import GlobalStyles from './styles/GlobalStyles'
+
+import 'services/i18n'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'slick-carousel/slick/slick.css'
@@ -19,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <AboutProvider>
         <BannersProvider>
           <App />
+          <GlobalStyles />
         </BannersProvider>
       </AboutProvider>
     </TouristicPointsProvider>

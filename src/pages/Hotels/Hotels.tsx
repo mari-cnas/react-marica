@@ -1,11 +1,12 @@
 import { memo, useEffect } from 'react'
 
-import { useHotels } from 'HotelsContext/HotelsContext'
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { FaMapMarkedAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+
+import { useHotels } from 'context/HotelsContext'
 
 import Footer from 'components/Footer'
 import GeneralCard from 'components/GeneralCard'

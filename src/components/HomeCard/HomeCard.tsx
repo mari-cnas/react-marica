@@ -24,14 +24,14 @@ const HomeCard: React.FC<IHomeCardProps> = ({
   const Icon = icon
   children as ReactElement
   return (
-    <CardBg>
+    <CardBg className="w-100 ">
       <div className="d-flex justify-content-center">
         <Icon style={{ width: '48px', height: '56px' }} />
       </div>
-      <Card.Body>
+      <Card.Body className="d-flex flex-column px-0">
         <InfoTitle className="text-center">{title}</InfoTitle>
         <InfoText className="text-center">{description}</InfoText>
-        <LinkDiv className="d-flex justify-content-center w-100">
+        <LinkDiv className="d-flex align-self-center">
           <a href={page}>Acessar</a>
         </LinkDiv>
       </Card.Body>

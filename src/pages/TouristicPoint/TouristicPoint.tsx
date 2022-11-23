@@ -10,15 +10,12 @@ import { FaRegMoneyBillAlt } from 'react-icons/fa'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
-import { useTouristicPoints } from 'TouristicPointsContext/TouristicPointsContext'
 
-import Config from 'Config'
+import { useTouristicPoints } from 'context/TouristicPointsContext'
 
-import BaseComponent from 'components/BaseComponent'
 import Footer from 'components/Footer'
 import GoogleMap from 'components/GoogleMap'
 import Header from 'components/Header'
-import MapMarker from 'components/MapMarker'
 
 import useTitle from 'hooks/useTitle'
 
@@ -57,7 +54,7 @@ const TouristicPoint: React.FC = () => {
       {loading && (
         <div className="d-flex flex-column my-5">
           <div className="d-flex flex-column align-self-center">
-            <Spinner animation="border" variant="primary" />
+            <Spinner animation="border" variant="primary" className="my-auto" />
           </div>
         </div>
       )}

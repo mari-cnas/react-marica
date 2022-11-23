@@ -1,6 +1,6 @@
 import { memo, useEffect } from 'react'
 
-import { useAbout } from 'AboutContext/AboutContext'
+import { useAbout } from 'context/AboutContext'
 import { Container } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft } from 'react-icons/ai'

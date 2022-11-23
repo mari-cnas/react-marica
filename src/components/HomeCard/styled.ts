@@ -1,7 +1,7 @@
-import { Card } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 import styled from 'styled-components'
 
-export const LinkDiv = styled.div`
+export const LinkDiv = styled(Button)`
   color: rgb(110, 189, 0);
   border: 1px solid rgb(110, 189, 0);
   background-color: transparent;

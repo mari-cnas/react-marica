@@ -1,7 +1,7 @@
 import React, { memo, ReactElement } from 'react'
 
 import GoogleMapReact from 'google-map-react'
-import { useTouristicPoints } from 'TouristicPointsContext/TouristicPointsContext'
+import { useTouristicPoints } from 'context/TouristicPointsContext'
 
 import Config from 'Config'
 

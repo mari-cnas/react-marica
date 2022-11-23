@@ -1,6 +1,6 @@
 import { memo } from 'react'
 
-import { useBanners } from 'BannersContext/BannersContext'
+import { useBanners } from 'context/BannersContext'
 import Carousel from 'react-bootstrap/Carousel'
 
 interface IBaseComponentProps {

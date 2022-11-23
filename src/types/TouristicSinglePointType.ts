@@ -7,7 +7,7 @@ export type TouristicSinglePointType = {
     nome: string
     email: string
     site: string
-    gratuito: string
+    gratuito: number
     descricao_t: string
     dicas_t: string
     addresses: AddressType[]
