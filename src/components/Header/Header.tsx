@@ -58,16 +58,16 @@ const Header: React.FC<IBaseComponentProps> = ({ children }) => {
 
         <ul className="list-unstyled list-group list-group-horizontal align-items-center">
           <li>
-            <AiFillFacebook />
+            <AiFillFacebook size={20} className="mx-1" />
           </li>
           <li>
-            <AiOutlineInstagram />
+            <AiOutlineInstagram size={20} className="mx-1" />
           </li>
           <li>
-            <AiOutlineTwitter />
+            <AiOutlineTwitter size={20} className="mx-1" />
           </li>
           <li>
-            <AiFillYoutube />
+            <AiFillYoutube size={20} className="mx-1" />
           </li>
         </ul>
       </Container>

@@ -4,6 +4,7 @@ import { Spinner, Button, Col, Container, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { FaMapMarkedAlt } from 'react-icons/fa'
+import { HiSearch } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 
 import { useTouristicPoints } from 'context/TouristicPointsContext'
@@ -14,7 +15,7 @@ import Header from 'components/Header'
 
 import useTitle from 'hooks/useTitle'
 
-import { Categories, Category, HomeBg } from './styled'
+import { Categories, Category, HomeBg, InputBox, MapButton } from './styled'
 
 const TouristicPoints: React.FC = () => {
   const { t, i18n } = useTranslation()
@@ -28,11 +29,17 @@ const TouristicPoints: React.FC = () => {
     searchTouristicPoints,
   } = useTouristicPoints()
   const [search, setSearch] = useState('')
+  const [hasSearch, setHasSearch] = useState(false)
 
-  const handleSearch = useCallback(
-    () => searchTouristicPoints(search),
-    [searchTouristicPoints, search],
-  )
+  const handleSearch = useCallback(() => {
+    searchTouristicPoints(search)
+    setHasSearch(true)
+  }, [searchTouristicPoints, setHasSearch, search])
+  const clearSearch = useCallback(() => {
+    setSearch('')
+    searchTouristicPoints('')
+    setHasSearch(false)
+  }, [searchTouristicPoints, setHasSearch])
 
   useEffect(() => {
     setTitle(t('home.head-title'))
@@ -58,39 +65,50 @@ const TouristicPoints: React.FC = () => {
         <HomeBg className="d-flex flex-column py-5">
           <Container className="py-1">
             <Row className=" justify-content-between">
-              <Col className="d-flex">
-                <div className="d-flex ">
+              <Col className="d-flex col-8">
+                <div className="d-flex align-items-center">
                   <Link to="/">
-                    <AiOutlineArrowLeft size={20} />
+                    <AiOutlineArrowLeft size={20} style={{ color: 'black' }} />
                   </Link>
-                  <div className="d-flex flex-column mx-2">
+                  <div className="d-flex flex-column ms-2">
                     <h2> Pontos Turísticos</h2>
                   </div>
                 </div>
               </Col>
-              <Col>
-                <Button variant="primary">
-                  <FaMapMarkedAlt className="me-1" />
-                  Mapa
-                </Button>
-              </Col>
-              <Col className="col-4 d-flex align-items-center">
-                <div className="d-flex">
+              <Col className="d-flex col-4 align-items-center justify-content-end">
+                <Link to="/pontos-turisticos/mapa">
+                  <MapButton style={{ height: '40px' }} className="me-3">
+                    <FaMapMarkedAlt className="me-1" />
+                    Mapa
+                  </MapButton>
+                </Link>
+                <InputBox>
                   <input
                     type="text"
                     placeholder="Buscar pontos turísticos"
-                    className="me-2"
+                    className="border-0"
                     aria-label="Search"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                   />
-                  <Button variant="outline-success" onClick={handleSearch}>
-                    Search
+                  <Button type="button" variant="link" onClick={handleSearch}>
+                    <HiSearch style={{ color: 'black' }} />
                   </Button>
-                </div>
+                  {hasSearch === true && (
+                    <Button
+                      style={{ height: '40px', color: 'black' }}
+                      type="button"
+                      variant="link"
+                      onClick={clearSearch}
+                      className="text-decoration-none"
+                    >
+                      <p className="m-0">x</p>
+                    </Button>
+                  )}
+                </InputBox>
               </Col>
             </Row>
-            <Categories className=" my-2  flex-nowrap flex-md-wrap">
+            <Categories className=" ps-2 my-2  flex-nowrap flex-md-wrap">
               {categories?.map((category) => (
                 <Category
                   className="me-2 my-2"
@@ -104,8 +122,8 @@ const TouristicPoints: React.FC = () => {
             </Categories>
             <Row className="justify-content-center row-cols-1 row-cols-md-3">
               {touristicPoints?.map((point) => (
-                <Col className="d-flex my-2">
-                  <GeneralCard ponto={point} key={point.id} />
+                <Col className="d-flex my-2" key={point.id}>
+                  <GeneralCard ponto={point} />
                 </Col>
               ))}
             </Row>

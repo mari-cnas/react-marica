@@ -11,6 +11,10 @@ html,body,#root{
     min-height: 100vh;
 }
 
+/* mouse over link */
+a:hover {
+  color: transparent;
+}
 
 
 `

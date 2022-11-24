@@ -1,7 +1,13 @@
-import { AddressType } from './AddressType'
 import { CategoryType } from './CategoryType'
 
-export type TouristicPointType = {
+export type AddressType = {
+  id: number
+  lat: number
+  lng: number
+  label: string
+}
+
+export type PageType = {
   id: number
   nome: string
   capa: string

@@ -8,6 +8,7 @@ import Hotels from 'pages/Hotels'
 import NotFound from 'pages/NotFound'
 import TouristicPoint from 'pages/TouristicPoint'
 import TouristicPoints from 'pages/TouristicPoints'
+import TouristicPointsMap from 'pages/TouristicPointsMap'
 
 const Routes: React.FC = () => {
   return (
@@ -18,6 +19,10 @@ const Routes: React.FC = () => {
         <Route path="/pontos/:id" element={<TouristicPoint />} />
         <Route path="/hoteis-e-pousadas" element={<Hotels />} />
         <Route path="/sobre" element={<About />} />
+        <Route
+          path="/pontos-turisticos/mapa"
+          element={<TouristicPointsMap />}
+        />
         <Route path="*" element={<NotFound />} />
       </Switch>
     </BrowserRouter>

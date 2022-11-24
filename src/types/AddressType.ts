@@ -1,6 +1,6 @@
 export type AddressType = {
-  id: string
-  lat: string
-  lng: string
+  id: number
+  lat: number
+  lng: number
   label: string
 }
