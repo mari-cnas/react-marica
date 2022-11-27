@@ -22,30 +22,83 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
   return (
     <Bg>
       <Container>
-        <Row className="d-flex justify-content-between pt-4 pb-2">
-          <Col>
-            <ul className="list-unstyled list-group list-group-horizontal align-items-center mb-4">
-              <li className="me-3">
-                <AiFillFacebook /> Facebook
+        <Row className="d-flex justify-content-between pt-2 pb-2">
+          <Col className="d-flex flex-column align-items-center align-items-md-start">
+            <ul className="list-unstyled list-group list-group-horizontal align-items-center  mb-4">
+              <li className="d-flex align-items-center me-3">
+                <AiFillFacebook className="me-2" />{' '}
+                <a
+                  href="https://www.facebook.com"
+                  className="d-flex d-none d-md-block "
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Facebook
+                </a>
               </li>
-              <li className="me-3">
-                <AiOutlineInstagram /> Instagram
+              <li className="d-flex align-items-center me-3">
+                <AiOutlineInstagram className="me-2" />
+                <a
+                  href="https://www.instagram.com"
+                  className="d-flex d-none d-md-block"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Instagram
+                </a>
               </li>
-              <li className="me-3">
-                <AiOutlineTwitter /> Twitter
+              <li className="d-flex align-items-center me-3">
+                <AiOutlineTwitter className="me-2" />
+                <a
+                  href="https://www.twitter.com"
+                  className="d-flex d-none d-md-block"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Twitter
+                </a>
               </li>
-              <li className="me-3">
-                <AiFillYoutube /> Youtube
+              <li className="d-flex align-items-center me-3">
+                <AiFillYoutube className="me-2" />
+                <a
+                  href="https://www.youtube.com"
+                  className="d-flex d-none d-md-block"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Youtube
+                </a>
               </li>
             </ul>
-            Área do comerciante
+            <a
+              href="https://app.marica2030.com.br/"
+              className="text-decoration-underline"
+            >
+              Área do comerciante
+            </a>
           </Col>
-          <Col className="d-flex justify-content-between align-items-center">
-            <img src={logo2} alt="logo2" className=" mx-3 w-25" />
+          <Col className="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <img
+              src={logo2}
+              alt="logo2"
+              className=" mx-3 "
+              style={{ height: '60px', width: '108px' }}
+            />
 
-            <div>
-              <p>Manual Gastronomia</p>
-              <p> Manual Hospedagem</p>
+            <div className="d-flex flex-column">
+              <a
+                href="https://www.conhecamarica.com.br/static/media/guia-gastronomico.f9556598.pdf"
+                className="text-decoration-underline"
+              >
+                Manual Gastronomia
+              </a>
+              <a
+                href="https://www.conhecamarica.com.br/static/media/guia-hospedagem.2046547a.pdf"
+                className="text-decoration-underline"
+              >
+                {' '}
+                Manual Hospedagem
+              </a>
             </div>
             <img src={logo} alt="logo" className=" ms-3" />
           </Col>

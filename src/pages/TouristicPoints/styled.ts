@@ -10,16 +10,12 @@ export const Categories = styled(Row)`
 `
 
 export const MapButton = styled(Button)`
-  height: 80px;
   font-size: 18px;
   justify-content: center;
   align-items: center;
   width: fit-content;
-  height: 30px;
-  font-size: 18px;
   color: rgb(255, 255, 255);
   background-color: rgb(45, 103, 127);
-  padding: 0px 20px;
   border-radius: 20px;
   border: none;
   white-space: nowrap;
@@ -35,14 +31,11 @@ export const InputBox = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 40px;
   border: 1px solid rgb(51, 51, 51);
   border-radius: 20px;
   background-color: rgb(255, 255, 255);
-  box-sizing: border - box;
   font-size: 18px;
   color: rgb(51, 51, 51);
-  padding: 10px;
 
   textarea:focus,
   input:focus {

@@ -20,7 +20,7 @@ interface IGeneralCardProps {
 const GeneralCard: React.FC<IGeneralCardProps> = ({ ponto }) => {
   return (
     <CardBg className="d-flex flex-column w-100">
-      <CoverImg capa={ponto.capa} className="mb-2" />
+      <CoverImg capa={ponto.capa} className="mb-2 img-fluid" />
       <BodyDiv className="d-flex flex-column">
         <Link to={`/pontos/${ponto.id}`} className="text-decoration-none ">
           <InfoTitle className="text-start">{ponto.nome}</InfoTitle>

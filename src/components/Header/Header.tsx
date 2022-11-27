@@ -28,7 +28,7 @@ const Header: React.FC<IBaseComponentProps> = ({ children }) => {
 
   return (
     <Bg>
-      <Container className="d-flex justify-content-between">
+      <Container className="d-flex justify-content-between align-items-center">
         <Navbar expand="false">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           Menu
@@ -56,20 +56,20 @@ const Header: React.FC<IBaseComponentProps> = ({ children }) => {
           <img src={logo} alt="logo" className="img-fluid" />
         </div>
 
-        <ul className="list-unstyled list-group list-group-horizontal align-items-center">
-          <li>
+        <div className="d-flex flex-row d-none d-md-block list-unstyled list-group list-group-horizontal align-items-center">
+          <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
             <AiFillFacebook size={20} className="mx-1" />
-          </li>
-          <li>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
             <AiOutlineInstagram size={20} className="mx-1" />
-          </li>
-          <li>
+          </a>
+          <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
             <AiOutlineTwitter size={20} className="mx-1" />
-          </li>
-          <li>
+          </a>
+          <a href="https://www.youtube.com" target="_blank" rel="noreferrer">
             <AiFillYoutube size={20} className="mx-1" />
-          </li>
-        </ul>
+          </a>
+        </div>
       </Container>
     </Bg>
   )

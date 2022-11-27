@@ -65,7 +65,7 @@ const TouristicPoints: React.FC = () => {
         <HomeBg className="d-flex flex-column py-5">
           <Container className="py-1">
             <Row className=" justify-content-between">
-              <Col className="d-flex col-8">
+              <Col className="d-flex">
                 <div className="d-flex align-items-center">
                   <Link to="/">
                     <AiOutlineArrowLeft size={20} style={{ color: 'black' }} />
@@ -75,9 +75,9 @@ const TouristicPoints: React.FC = () => {
                   </div>
                 </div>
               </Col>
-              <Col className="d-flex col-4 align-items-center justify-content-end">
+              <Col className="d-flex flex-column flex-md-row align-items-center justify-content-end">
                 <Link to="/pontos-turisticos/mapa">
-                  <MapButton style={{ height: '40px' }} className="me-3">
+                  <MapButton className="me-3 my-2 py-2 px-3">
                     <FaMapMarkedAlt className="me-1" />
                     Mapa
                   </MapButton>
@@ -86,7 +86,7 @@ const TouristicPoints: React.FC = () => {
                   <input
                     type="text"
                     placeholder="Buscar pontos turísticos"
-                    className="border-0"
+                    className="border-0 mx-3 py-2"
                     aria-label="Search"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
