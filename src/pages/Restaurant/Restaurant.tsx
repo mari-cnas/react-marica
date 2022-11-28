@@ -206,7 +206,7 @@ const Restaurant: React.FC = () => {
                             <MdAttachMoney
                               size={22}
                               className="me-2"
-                              key={i}
+                              key={id}
                               color={_priceRange}
                             />
                           ),

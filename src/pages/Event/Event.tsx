@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { memo, useEffect } from 'react'
 
+import { getDate, getHours, getMinutes, getYear } from 'date-fns'
 import { Spinner, Col, Container, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import {
   AiOutlineArrowLeft,
   AiOutlineMail,
-  AiOutlineClockCircle,
   AiOutlineCheckCircle,
   AiFillFacebook,
   AiOutlineInstagram,
@@ -24,6 +24,13 @@ import { useEvents } from 'context/EventsContext'
 import Footer from 'components/Footer'
 import GoogleMap from 'components/GoogleMap'
 import Header from 'components/Header'
+
+import {
+  formatEndDate,
+  formatStartDate,
+  getMonthAbbreviation,
+  getMonthName,
+} from 'helpers'
 
 import useTitle from 'hooks/useTitle'
 
@@ -103,15 +110,63 @@ const Event: React.FC = () => {
                       </Categories>
                     ))}
                   </div>
-
-                  <div className="d-flex mt-3 w-50">
-                    <IconDiv>
-                      <AiOutlineClockCircle size={22} className="me-2" />
-                    </IconDiv>
-                    <p>{event.item.datahora_inicio_f}</p>
-                    <p>{event.item.datahora_fim_f}</p>
-                  </div>
-                  <p className="mb-5">{event.item.descricao_t}</p>
+                  {event?.item.datahora_inicio_f && event?.item.datahora_fim_f && (
+                    <div className="d-flex">
+                      <div className="d-flex flex-column align-items-center me-3">
+                        <span style={{ color: '#dc3545' }}>
+                          {getMonthAbbreviation(
+                            formatStartDate(event.item.datahora_inicio_f),
+                          )}
+                        </span>
+                        <span>
+                          {getDate(
+                            new Date(
+                              formatStartDate(event.item.datahora_inicio_f),
+                            ),
+                          )}
+                        </span>
+                      </div>
+                      <div>
+                        <div>
+                          De:{' '}
+                          {`${getDate(
+                            new Date(
+                              formatStartDate(event.item.datahora_inicio_f),
+                            ),
+                          )} de ${getMonthName(
+                            formatStartDate(event.item.datahora_inicio_f),
+                          )} de ${getYear(
+                            new Date(
+                              formatStartDate(event.item.datahora_inicio_f),
+                            ),
+                          )}, às ${getHours(
+                            new Date(
+                              formatStartDate(event.item.datahora_inicio_f),
+                            ),
+                          )}:${getMinutes(
+                            new Date(
+                              formatStartDate(event.item.datahora_inicio_f),
+                            ),
+                          )}h`}
+                        </div>
+                        <div>
+                          Até:{' '}
+                          {`${getDate(
+                            new Date(formatEndDate(event.item.datahora_fim_f)),
+                          )} de ${getMonthName(
+                            formatEndDate(event.item.datahora_fim_f),
+                          )} de ${getYear(
+                            new Date(formatEndDate(event.item.datahora_fim_f)),
+                          )}, às ${getHours(
+                            new Date(formatEndDate(event.item.datahora_fim_f)),
+                          )}:${getMinutes(
+                            new Date(formatEndDate(event.item.datahora_fim_f)),
+                          )}h`}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <p className="mb-5 my-3">{event.item.descricao_t}</p>
                   <h3>Sobre</h3>
                   <div className="border-top mb-5">
                     {event.item.addresses.map((address) => (
