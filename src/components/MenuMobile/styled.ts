@@ -8,7 +8,7 @@ export const MenuContainer = styled.section<IMenuContainerProps>`
   position: absolute;
   backdrop-filter: blur(3px);
   width: 100%;
-  height: 100%;
+  height: 0px;
   top: 0;
   right: 0;
   left: 0;
