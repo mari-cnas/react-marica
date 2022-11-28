@@ -1,13 +1,17 @@
-import { Button, Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import styled from 'styled-components'
 
-export const LinkDiv = styled(Button)`
+export const LinkDiv = styled.button`
   color: rgb(110, 189, 0);
   border: 1px solid rgb(110, 189, 0);
   background-color: transparent;
   padding: 0px 20px;
   border-radius: 20px;
 
+  &:hover {
+    color: rgb(110, 500, 0);
+    border: 1px solid rgb(110, 500, 0);
+  }
   /* unvisited link */
   a:link {
     color: rgb(110, 189, 0);
@@ -26,7 +30,7 @@ export const LinkDiv = styled(Button)`
 
   /* selected link */
   a:active {
-    color: blue;
+    color: rgb(110, 500, 0);
   }
 `
 export const CardBg = styled(Card)`

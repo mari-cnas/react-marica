@@ -2,7 +2,6 @@ import { memo, ReactElement } from 'react'
 
 import { Card } from 'react-bootstrap'
 import { IconType } from 'react-icons'
-import { Link } from 'react-router-dom'
 
 import { CardBg, InfoText, InfoTitle, LinkDiv } from './styled'
 

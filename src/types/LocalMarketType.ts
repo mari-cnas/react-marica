@@ -1,4 +1,12 @@
-export type CategoryType = {
+import { AddressType } from './AddressType'
+import { CategoryType } from './CategoryType'
+
+export type LocalMarketType = {
   id: number
-  label: string
+  nome: string
+  capa: string
+  lat: number
+  lng: number
+  categorias: CategoryType[]
+  enderecos: AddressType[]
 }

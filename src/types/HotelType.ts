@@ -1,17 +1,17 @@
 export type HotelType = {
-  id: string
+  id: number
   nome: string
   capa: string
-  lat: string
-  lng: string
+  lat: number
+  lng: number
   categorias: {
-    id: string
+    id: number
     label: string
   }[]
   enderecos: {
-    id: string
-    lat: string
-    lng: string
+    id: number
+    lat: number
+    lng: number
     label: string
   }[]
 }

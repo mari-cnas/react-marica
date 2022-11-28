@@ -2,6 +2,10 @@ import { memo } from 'react'
 
 import { Link } from 'react-router-dom'
 
+import { strToSlug } from 'helpers'
+
+import { HotelType } from 'types/HotelType'
+import { RestaurantType } from 'types/RestaurantType'
 import { TouristicPointType } from 'types/TouristicPointType'
 
 import {
@@ -14,15 +18,24 @@ import {
 } from './styled'
 
 interface IGeneralCardProps {
-  ponto: TouristicPointType
+  ponto: TouristicPointType | HotelType | RestaurantType
+  pagina: string
 }
 
-const GeneralCard: React.FC<IGeneralCardProps> = ({ ponto }) => {
+const GeneralCardSlug: React.FC<IGeneralCardProps> = ({ ponto, pagina }) => {
   return (
     <CardBg className="d-flex flex-column w-100">
-      <CoverImg capa={ponto.capa} className="mb-2 img-fluid" />
+      <Link
+        to={`/${pagina}/${ponto.id}/${strToSlug(ponto.nome)}`}
+        className="text-decoration-none "
+      >
+        <CoverImg capa={ponto.capa} className="mb-2 img-fluid" />
+      </Link>
       <BodyDiv className="d-flex flex-column">
-        <Link to={`/pontos/${ponto.id}`} className="text-decoration-none ">
+        <Link
+          to={`/${pagina}/${ponto.id}/${strToSlug(ponto.nome)}`}
+          className="text-decoration-none "
+        >
           <InfoTitle className="text-start">{ponto.nome}</InfoTitle>
         </Link>
         <div className="d-flex flex-wrap ">
@@ -44,4 +57,4 @@ const GeneralCard: React.FC<IGeneralCardProps> = ({ ponto }) => {
     </CardBg>
   )
 }
-export default memo(GeneralCard)
+export default memo(GeneralCardSlug)

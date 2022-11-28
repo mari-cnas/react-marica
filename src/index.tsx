@@ -4,6 +4,11 @@ import ReactDOM from 'react-dom/client'
 
 import { AboutProvider } from 'context/AboutContext'
 import { BannersProvider } from 'context/BannersContext'
+import { EventsProvider } from 'context/EventsContext'
+import { EventSpacesProvider } from 'context/EventSpacesContext'
+import { HotelsProvider } from 'context/HotelsContext'
+import { LocalMarketsProvider } from 'context/LocalMarketsContext'
+import { RestaurantsProvider } from 'context/RestaurantsContext'
 import { TouristicPointsProvider } from 'context/TouristicPointsContext'
 
 import App from './App'
@@ -17,13 +22,23 @@ import 'slick-carousel/slick/slick-theme.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Suspense>
-    <TouristicPointsProvider>
-      <AboutProvider>
-        <BannersProvider>
-          <App />
-          <GlobalStyles />
-        </BannersProvider>
-      </AboutProvider>
-    </TouristicPointsProvider>
+    <EventsProvider>
+      <EventSpacesProvider>
+        <LocalMarketsProvider>
+          <RestaurantsProvider>
+            <HotelsProvider>
+              <TouristicPointsProvider>
+                <AboutProvider>
+                  <BannersProvider>
+                    <App />
+                    <GlobalStyles />
+                  </BannersProvider>
+                </AboutProvider>
+              </TouristicPointsProvider>
+            </HotelsProvider>
+          </RestaurantsProvider>
+        </LocalMarketsProvider>
+      </EventSpacesProvider>
+    </EventsProvider>
   </Suspense>,
 )

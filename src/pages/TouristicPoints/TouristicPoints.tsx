@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import { useTouristicPoints } from 'context/TouristicPointsContext'
 
 import Footer from 'components/Footer'
-import GeneralCard from 'components/GeneralCard'
+import GeneralCardSlug from 'components/GeneralCardSlug'
 import Header from 'components/Header'
 
 import useTitle from 'hooks/useTitle'
@@ -71,7 +71,7 @@ const TouristicPoints: React.FC = () => {
                     <AiOutlineArrowLeft size={20} style={{ color: 'black' }} />
                   </Link>
                   <div className="d-flex flex-column ms-2">
-                    <h2> Pontos Turísticos</h2>
+                    <h2>Pontos Turísticos</h2>
                   </div>
                 </div>
               </Col>
@@ -123,7 +123,7 @@ const TouristicPoints: React.FC = () => {
             <Row className="justify-content-center row-cols-1 row-cols-md-3">
               {touristicPoints?.map((point) => (
                 <Col className="d-flex my-2" key={point.id}>
-                  <GeneralCard ponto={point} />
+                  <GeneralCardSlug ponto={point} pagina="pontos-turisticos" />
                 </Col>
               ))}
             </Row>

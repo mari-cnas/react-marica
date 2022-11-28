@@ -74,12 +74,15 @@ const TouristicPoint: React.FC = () => {
             <Container className="py-1">
               <Row sm={1} className=" justify-content-between d-flex flex-wrap">
                 <Col className="col-12 col-md-8 ">
-                  <div className="d-flex ">
+                  <div className="d-flex align-items-center">
                     <Link to="/">
-                      <AiOutlineArrowLeft size={20} />
+                      <AiOutlineArrowLeft
+                        size={20}
+                        style={{ color: 'black' }}
+                      />
                     </Link>
                     <div className="d-flex flex-column mx-2">
-                      <p> Pontos Turísticos</p>
+                      <p className="mb-1"> Pontos Turísticos</p>
                       <h2 className="mb-4">{touristicPoint.item.nome}</h2>
                     </div>
                   </div>
@@ -123,7 +126,7 @@ const TouristicPoint: React.FC = () => {
                           <BsFacebook size={22} className="me-2" />
                         </IconDiv>
                         <a
-                          href="https://www.facebook.com/pnsdoamparomarica/"
+                          href={rede.url}
                           className="d-flex text-start me-3 text-decoration-none"
                           key={rede.nome}
                         >

@@ -47,7 +47,7 @@ export const Category = styled.button`
   color: white;
   border: none;
   background-color: rgb(110, 189, 0);
-  padding: 5px 20px;
+  padding: 0px 20px;
   border-radius: 20px;
   font-size: 18px;
   align-items: center;

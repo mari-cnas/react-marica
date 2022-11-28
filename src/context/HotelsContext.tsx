@@ -2,19 +2,25 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
 } from 'react'
 
 import Api from 'services/Api'
 
+import { CategoryType } from 'types/CategoryType'
+import { HotelSingleType } from 'types/HotelSingleType'
 import { HotelType } from 'types/HotelType'
 
 interface IContextProps {
   hotels: HotelType[]
+  hotel: HotelSingleType | null
+  categories: CategoryType[]
   loading: boolean
-  fetchHotel: () => Promise<void>
+  error: string | null
+  fetchHotel: (id: number) => Promise<void>
+  fetchHotels: () => Promise<void>
+  searchHotels: (search: string) => Promise<void>
 }
 
 interface IHotelProviderProps {
@@ -25,17 +31,58 @@ export const ReactContext = createContext<IContextProps>({} as IContextProps)
 
 export const HotelsProvider: React.FC<IHotelProviderProps> = ({ children }) => {
   const [loading, setIsLoading] = useState(true)
+  const [hotel, setHotel] = useState<HotelSingleType | null>(null)
   const [hotels, setHotels] = useState<HotelType[]>([])
+  const [categories, setCategories] = useState<CategoryType[]>([])
+  const [error, setError] = useState<string | null>(null)
 
-  const fetchHotel = useCallback(async () => {
+  const fetchHotels = useCallback(async () => {
     setIsLoading(true)
+    setError(null)
 
     try {
       const { data } = await Api.get(`/hoteis-e-pousadas`)
       setHotels(data.collection)
-      console.log('data', data.collection)
+      setCategories(data.categorias)
     } catch {
-      console.log('Não foi possível carregar as informações')
+      setHotels([])
+      setError('Não foi possível carregar as informações')
+    } finally {
+      setIsLoading(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const searchHotels = useCallback(async (search: string) => {
+    setIsLoading(true)
+    setError(null)
+    const params = {
+      busca: search,
+    }
+
+    try {
+      const { data } = await Api.get(`/hoteis-e-pousadas/busca`, { params })
+      setHotels(data.collection)
+      setCategories(data.categorias)
+    } catch {
+      setHotels([])
+      setError('Não foi possível carregar')
+    } finally {
+      setIsLoading(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const fetchHotel = useCallback(async (id: number) => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const { data } = await Api.get(`/hoteis-e-pousadas/${id}`)
+      setHotel(data)
+    } catch {
+      setHotel(null)
+      setError('Não foi possível carregar')
     } finally {
       setIsLoading(false)
     }
@@ -47,10 +94,24 @@ export const HotelsProvider: React.FC<IHotelProviderProps> = ({ children }) => {
       value={useMemo(
         () => ({
           loading,
+          error,
+          hotel,
           hotels,
+          categories,
           fetchHotel,
+          fetchHotels,
+          searchHotels,
         }),
-        [loading, hotels, fetchHotel],
+        [
+          loading,
+          error,
+          hotel,
+          hotels,
+          categories,
+          fetchHotel,
+          fetchHotels,
+          searchHotels,
+        ],
       )}
     >
       {children}

@@ -14,7 +14,6 @@ import { ButtonContainer, LinkBackToHome, PageTitle } from './styled'
 
 const TouristicPointsMap: React.FC = () => {
   const { touristicPoints } = useTouristicPoints()
-  console.log(touristicPoints)
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
 

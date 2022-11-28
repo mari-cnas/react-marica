@@ -1,80 +1,133 @@
-import { memo, useEffect } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
+import { Spinner, Button, Col, Container, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { FaMapMarkedAlt } from 'react-icons/fa'
+import { HiSearch } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 
 import { useHotels } from 'context/HotelsContext'
 
 import Footer from 'components/Footer'
-import GeneralCard from 'components/GeneralCard'
+import GeneralCardSlug from 'components/GeneralCardSlug'
 import Header from 'components/Header'
-import LanguageSwitcher from 'components/LanguageSwitcher'
 
 import useTitle from 'hooks/useTitle'
 
-import { HomeBg } from './styled'
+import { Categories, Category, HomeBg, InputBox, MapButton } from './styled'
 
 const Hotels: React.FC = () => {
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
-  const { loading, hotels, fetchHotel } = useHotels()
+  const { loading, error, hotels, categories, fetchHotels, searchHotels } =
+    useHotels()
+  const [search, setSearch] = useState('')
+  const [hasSearch, setHasSearch] = useState(false)
+
+  const handleSearch = useCallback(() => {
+    searchHotels(search)
+    setHasSearch(true)
+  }, [searchHotels, setHasSearch, search])
+  const clearSearch = useCallback(() => {
+    setSearch('')
+    searchHotels('')
+    setHasSearch(false)
+  }, [searchHotels, setHasSearch])
 
   useEffect(() => {
     setTitle(t('home.head-title'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 
-  console.log('tp', hotels)
+  useEffect(() => {
+    fetchHotels()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchHotels])
+
   return (
     <>
       <Header />
       {loading && (
         <div className="d-flex flex-column my-5">
           <div className="d-flex flex-column align-self-center">
-            <p>Carregando informações...</p>
+            <Spinner animation="border" variant="primary" />
           </div>
         </div>
       )}
-      {!loading && (
+      {!loading && !error && (
         <HomeBg className="d-flex flex-column py-5">
-          <Container className="py-5">
-            <div className="d-flex justify-content-between">
-              <Link to="/">
-                <AiOutlineArrowLeft />
-              </Link>{' '}
-              <h2> Hoteis e Pousadas</h2>
-              <Button variant="primary">
-                <FaMapMarkedAlt className="me-1" />
-                Mapa
-              </Button>
-              <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
-              </Form>
-            </div>
-
-            <Row className="justify-content-center">
-              <Col className="col-6 col-md-4 mb-2">oi</Col>
+          <Container className="py-1">
+            <Row className=" justify-content-between">
+              <Col className="d-flex">
+                <div className="d-flex align-items-center">
+                  <Link to="/">
+                    <AiOutlineArrowLeft size={20} style={{ color: 'black' }} />
+                  </Link>
+                  <div className="d-flex flex-column ms-2">
+                    <h2>Hotéis e Pousadas</h2>
+                  </div>
+                </div>
+              </Col>
+              <Col className="d-flex flex-column flex-md-row align-items-center justify-content-end">
+                <Link to="/hoteis-e-pousadas/mapa">
+                  <MapButton className="me-3 my-2 py-2 px-3">
+                    <FaMapMarkedAlt className="me-1" />
+                    Mapa
+                  </MapButton>
+                </Link>
+                <InputBox>
+                  <input
+                    type="text"
+                    placeholder="Buscar hotéis e pousadas"
+                    className="border-0 mx-3 py-2"
+                    aria-label="Search"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                  <Button type="button" variant="link" onClick={handleSearch}>
+                    <HiSearch style={{ color: 'black' }} />
+                  </Button>
+                  {hasSearch === true && (
+                    <Button
+                      style={{ height: '40px', color: 'black' }}
+                      type="button"
+                      variant="link"
+                      onClick={clearSearch}
+                      className="text-decoration-none"
+                    >
+                      <p className="m-0">x</p>
+                    </Button>
+                  )}
+                </InputBox>
+              </Col>
+            </Row>
+            <Categories className=" ps-2 my-2  flex-nowrap flex-md-wrap">
+              {categories?.map((category) => (
+                <Category
+                  className="me-2 my-2"
+                  key={category.id}
+                  value={category.label}
+                  onClick={handleSearch}
+                >
+                  {category.label}
+                </Category>
+              ))}
+            </Categories>
+            <Row className="justify-content-center row-cols-1 row-cols-md-3">
+              {hotels?.map((point) => (
+                <Col className="d-flex my-2" key={point.id}>
+                  <GeneralCardSlug ponto={point} pagina="hoteis-e-pousadas" />
+                </Col>
+              ))}
             </Row>
           </Container>
         </HomeBg>
       )}
+
       <Footer />
     </>
   )
 }
 
 export default memo(Hotels)
-// {touristicPoints.map((touristicPoint) => (
-// <GeneralCard
-// local={touristicPoint?.nome}
-// capa={touristicPoint?.capa}
-/// >
