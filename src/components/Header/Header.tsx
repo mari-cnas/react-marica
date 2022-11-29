@@ -10,6 +10,7 @@ import {
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 import MenuMobile from 'components/MenuMobile'
+import { MenuOverlay } from 'components/MenuMobile/styled'
 
 import logo from '../../assets/marica-logo.png'
 import { Bg } from './styled'
@@ -20,12 +21,15 @@ interface IHeaderProps {
 
 const Header: React.FC<IHeaderProps> = ({ children }) => {
   children as ReactElement
-  const [menuIsVisible, setMenuIsVisible] = useState(true)
-
+  const [menuIsVisible, setMenuIsVisible] = useState(false)
   return (
-    <Bg>
-      <Container className="d-flex justify-content-between align-items-center">
-        <GiHamburgerMenu onClick={() => setMenuIsVisible(true)} />
+    <Bg className="d-flex align-items-center ">
+      <MenuOverlay
+        menuIsVisible={menuIsVisible}
+        onClick={() => setMenuIsVisible(false)}
+      />
+      <Container className="d-flex justify-content-between align-items-center ">
+        <GiHamburgerMenu type="button" onClick={() => setMenuIsVisible(true)} />
         <MenuMobile
           menuIsVisible={menuIsVisible}
           setMenuIsVisible={setMenuIsVisible}
