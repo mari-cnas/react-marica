@@ -38,6 +38,7 @@ export const CardBg = styled(Card)`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px;
 `
 export const InfoTitle = styled(Card.Title)`
   font-family: Roboto, sans-serif;

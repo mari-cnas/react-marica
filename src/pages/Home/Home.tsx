@@ -2,9 +2,12 @@ import { memo, useEffect, useState } from 'react'
 
 import { Col, Container, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { FaUmbrellaBeach } from 'react-icons/fa'
-import { GiForkKnifeSpoon } from 'react-icons/gi'
-import { MdHotel } from 'react-icons/md'
+import { FaUmbrellaBeach, FaRoute, FaRegCalendarAlt } from 'react-icons/fa'
+import { GiForkKnifeSpoon, GiMicrophone } from 'react-icons/gi'
+import { HiOutlineLibrary } from 'react-icons/hi'
+import { MdHotel, MdStore } from 'react-icons/md'
+import { RiMotorbikeFill } from 'react-icons/ri'
+import { SiApacheairflow } from 'react-icons/si'
 
 import BottomBanner from 'components/BottomBanner'
 import CarouselBg from 'components/CarouselBg'
@@ -68,7 +71,7 @@ const Home: React.FC = () => {
               </Col>
               <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
-                  icon={FaUmbrellaBeach}
+                  icon={RiMotorbikeFill}
                   title="Delivery"
                   description="Receba o melhor de Maricá no conforto da sua casa"
                   page="/delivery"
@@ -76,7 +79,7 @@ const Home: React.FC = () => {
               </Col>
               <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
-                  icon={FaUmbrellaBeach}
+                  icon={MdStore}
                   title="Comércio Local"
                   description="Veja onde fazer as suas compras"
                   page="/comercio-local"
@@ -84,7 +87,7 @@ const Home: React.FC = () => {
               </Col>
               <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
-                  icon={FaUmbrellaBeach}
+                  icon={GiMicrophone}
                   title="Espaços para Eventos
                   "
                   description="Locais para fazer suas festas ou reuniões"
@@ -93,7 +96,7 @@ const Home: React.FC = () => {
               </Col>
               <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
-                  icon={FaUmbrellaBeach}
+                  icon={FaRegCalendarAlt}
                   title="Eventos"
                   description="Confira o calendário de eventos da cidade"
                   page="/eventos"
@@ -101,7 +104,7 @@ const Home: React.FC = () => {
               </Col>
               <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
-                  icon={FaUmbrellaBeach}
+                  icon={FaRoute}
                   title="Roteiros turísticos"
                   description="Conheça diversas trilhas ecológicas e de aventura, com variados níveis de dificuldade."
                   page="https://contato.site/5d9bab8/marica-cvb3/paginaprincipal"
@@ -109,7 +112,7 @@ const Home: React.FC = () => {
               </Col>
               <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
-                  icon={FaUmbrellaBeach}
+                  icon={SiApacheairflow}
                   title="Artesanato"
                   description="Conheça e compre as criações dos artesãos de Maricá/RJ"
                   page="http://www.feirartemarica.com.br/"
@@ -117,7 +120,7 @@ const Home: React.FC = () => {
               </Col>
               <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
-                  icon={FaUmbrellaBeach}
+                  icon={HiOutlineLibrary}
                   title="Sobre a cidade"
                   description="Conheça mais sobre Maricá"
                   page="/sobre"

@@ -8,7 +8,7 @@ export const MenuContainer = styled.section<IMenuContainerProps>`
   position: absolute;
   backdrop-filter: blur(3px);
   width: 100%;
-  height: 100%;
+  height: 10px;
   top: 0;
   right: 0;
   left: 0;
@@ -34,9 +34,10 @@ export const MenuContainer = styled.section<IMenuContainerProps>`
     flex-direction: column;
     gap: 2rem;
   }
-`
 
-// ${({ isVisible }) =>
-//  isVisible &&
-//   opacity: 1
-// }}
+  /* ${({ isVisible }) =>
+    isVisible &&
+    `
+      opacity: 1;
+    `} */
+`
