@@ -67,18 +67,28 @@ const LocalMarket: React.FC = () => {
       {!loading && !error && localMarket && (
         <>
           {/* // eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Slider {...settings}>
-            {localMarket?.item.images.map((banner) => (
-              <>
+          {localMarket?.item.images.length < 4 && (
+            <div className="d-flex justify-content-between">
+              {localMarket?.item.images.map((banner) => (
                 <ImageDiv
                   key={banner.id}
                   capa={banner.src}
                   className="d-block w-100"
                 />
-                <ImageDiv capa={banner.src} className="d-block w-100" />
-              </>
-            ))}
-          </Slider>
+              ))}
+            </div>
+          )}
+          {localMarket?.item.images.length >= 4 && (
+            <Slider {...settings}>
+              {localMarket?.item.images.map((banner) => (
+                <ImageDiv
+                  key={banner.id}
+                  capa={banner.src}
+                  className="d-block w-100"
+                />
+              ))}
+            </Slider>
+          )}
 
           <HomeBg className="d-flex flex-column py-5">
             <Container className="py-1">

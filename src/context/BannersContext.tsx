@@ -14,6 +14,7 @@ import { BannerType } from 'types/BannerType'
 interface IContextProps {
   banners: BannerType[]
   loading: boolean
+  error: string | null
   fetchBanners: () => Promise<void>
 }
 
@@ -28,15 +29,17 @@ export const BannersProvider: React.FC<IBannersProviderProps> = ({
 }) => {
   const [loading, setIsLoading] = useState(true)
   const [banners, setBanners] = useState<BannerType[]>([])
+  const [error, setError] = useState<string | null>(null)
 
   const fetchBanners = useCallback(async () => {
     setIsLoading(true)
+    setError(null)
 
     try {
       const { data } = await Api.get(`/banners`)
       setBanners(data)
     } catch {
-      console.log('Não foi possível carregar as informações')
+      setError('Não foi possível carregar')
     } finally {
       setIsLoading(false)
     }
@@ -54,8 +57,9 @@ export const BannersProvider: React.FC<IBannersProviderProps> = ({
           loading,
           banners,
           fetchBanners,
+          error,
         }),
-        [loading, banners, fetchBanners],
+        [loading, banners, error, fetchBanners],
       )}
     >
       {children}

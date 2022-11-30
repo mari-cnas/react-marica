@@ -66,16 +66,28 @@ const EventSpace: React.FC = () => {
       )}
       {!loading && !error && eventSpace && (
         <>
-          {/* // eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Slider {...settings}>
-            {eventSpace?.item.images.map((banner) => (
-              <ImageDiv
-                key={banner.id}
-                capa={banner.src}
-                className="d-block w-100"
-              />
-            ))}
-          </Slider>
+          {eventSpace?.item.images.length < 4 && (
+            <div className="d-flex justify-content-between">
+              {eventSpace?.item.images.map((banner) => (
+                <ImageDiv
+                  key={banner.id}
+                  capa={banner.src}
+                  className="d-block w-100"
+                />
+              ))}
+            </div>
+          )}
+          {eventSpace?.item.images.length >= 4 && (
+            <Slider {...settings}>
+              {eventSpace?.item.images.map((banner) => (
+                <ImageDiv
+                  key={banner.id}
+                  capa={banner.src}
+                  className="d-block w-100"
+                />
+              ))}
+            </Slider>
+          )}
           <HomeBg className="d-flex flex-column py-5">
             <Container className="py-1">
               <Row sm={1} className=" justify-content-between d-flex flex-wrap">

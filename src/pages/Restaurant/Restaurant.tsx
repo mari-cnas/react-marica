@@ -77,15 +77,28 @@ const Restaurant: React.FC = () => {
       {!loading && !error && restaurant && (
         <>
           {/* // eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Slider {...settings}>
-            {restaurant?.item.images.map((banner) => (
-              <ImageDiv
-                key={banner.id}
-                capa={banner.src}
-                className="d-block w-100"
-              />
-            ))}
-          </Slider>
+          {restaurant?.item.images.length < 4 && (
+            <div className="d-flex justify-content-between">
+              {restaurant?.item.images.map((banner) => (
+                <ImageDiv
+                  key={banner.id}
+                  capa={banner.src}
+                  className="d-block w-100"
+                />
+              ))}
+            </div>
+          )}
+          {restaurant?.item.images.length >= 4 && (
+            <Slider {...settings}>
+              {restaurant?.item.images.map((banner) => (
+                <ImageDiv
+                  key={banner.id}
+                  capa={banner.src}
+                  className="d-block w-100"
+                />
+              ))}
+            </Slider>
+          )}
           <HomeBg className="d-flex flex-column py-5">
             <Container className="py-1">
               <Row sm={1} className=" justify-content-between d-flex flex-wrap">
@@ -201,7 +214,7 @@ const Restaurant: React.FC = () => {
                     <IconDiv>
                       {restaurant?.item.faixa_preco &&
                         priceRange(restaurant?.item.faixa_preco)?.map(
-                          (_priceRange, i) => (
+                          (_priceRange) => (
                             // eslint-disable-next-line react/no-array-index-key
                             <MdAttachMoney
                               size={22}

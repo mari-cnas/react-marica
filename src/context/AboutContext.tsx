@@ -15,6 +15,7 @@ interface IContextProps {
   about: AboutType | undefined
   loading: boolean
   fetchAbout: () => Promise<void>
+  error: string | null
 }
 
 interface IAboutProviderProps {
@@ -26,15 +27,17 @@ export const ReactContext = createContext<IContextProps>({} as IContextProps)
 export const AboutProvider: React.FC<IAboutProviderProps> = ({ children }) => {
   const [loading, setIsLoading] = useState(true)
   const [about, setAbout] = useState<AboutType | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
 
   const fetchAbout = useCallback(async () => {
     setIsLoading(true)
+    setError(null)
 
     try {
       const { data } = await Api.get(`/apps/get`)
       setAbout(data)
     } catch {
-      console.log('Não foi possível carregar as informações')
+      setError('Não foi possível carregar')
     } finally {
       setIsLoading(false)
     }
@@ -52,8 +55,9 @@ export const AboutProvider: React.FC<IAboutProviderProps> = ({ children }) => {
           loading,
           about,
           fetchAbout,
+          error,
         }),
-        [loading, about, fetchAbout],
+        [loading, about, error, fetchAbout],
       )}
     >
       {children}

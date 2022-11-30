@@ -1,14 +1,14 @@
 import { memo, useEffect } from 'react'
 
-import { useAbout } from 'context/AboutContext'
 import { Container } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
+import { useAbout } from 'context/AboutContext'
+
 import Footer from 'components/Footer'
 import Header from 'components/Header'
-import LanguageSwitcher from 'components/LanguageSwitcher'
 
 import useTitle from 'hooks/useTitle'
 
@@ -21,7 +21,7 @@ interface IBaseComponentProps {
 const About: React.FC<IBaseComponentProps> = () => {
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
-  const { loading, about } = useAbout()
+  const { loading, about, error } = useAbout()
 
   useEffect(() => {
     setTitle(t('home.head-title'))
@@ -38,7 +38,7 @@ const About: React.FC<IBaseComponentProps> = () => {
           </div>
         </div>
       )}
-      {!loading && (
+      {!loading && !error && (
         <>
           <AboutBg />
           <Container className="py-5">
@@ -66,5 +66,4 @@ const About: React.FC<IBaseComponentProps> = () => {
   )
 }
 
-// <p></p>
 export default memo(About)

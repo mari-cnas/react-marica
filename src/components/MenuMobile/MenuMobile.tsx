@@ -62,7 +62,7 @@ const MenuMobile: React.FC<IMenuMobileProps> = ({
             <MdStore /> Comércio Local
           </Link>
           <Link to="/espacos-para-eventos">
-            <GiMicrophone /> Espaçoes para Eventos
+            <GiMicrophone /> Espaços para Eventos
           </Link>
           <Link to="/eventos">
             <FaRegCalendarAlt /> Eventos
