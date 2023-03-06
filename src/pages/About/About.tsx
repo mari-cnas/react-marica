@@ -24,7 +24,7 @@ const About: React.FC<IBaseComponentProps> = () => {
   const { loading, about, error } = useAbout()
 
   useEffect(() => {
-    setTitle(t('home.head-title'))
+    setTitle(t('Sobre'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 

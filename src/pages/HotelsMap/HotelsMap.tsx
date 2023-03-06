@@ -18,7 +18,7 @@ const HotelsMap: React.FC = () => {
   const setTitle = useTitle()
 
   useEffect(() => {
-    setTitle(t('Mapa | Pontos Turísticos'))
+    setTitle(t('Mapa | Hotéis e Pousadas'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
   return (

@@ -42,7 +42,7 @@ const TouristicPoints: React.FC = () => {
   }, [searchTouristicPoints, setHasSearch])
 
   useEffect(() => {
-    setTitle(t('home.head-title'))
+    setTitle(t('Pontos Turísticos'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 

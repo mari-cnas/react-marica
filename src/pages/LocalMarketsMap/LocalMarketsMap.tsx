@@ -18,7 +18,7 @@ const LocalMarketsMap: React.FC = () => {
   const setTitle = useTitle()
 
   useEffect(() => {
-    setTitle(t('Mapa | Comércio Local'))
+    setTitle(t('Mapa | Comércios Locais'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
   return (

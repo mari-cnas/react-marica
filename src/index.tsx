@@ -3,7 +3,7 @@ import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 
 import { AboutProvider } from 'context/AboutContext'
-import { BannersProvider } from 'context/BannersContext'
+import { BannersHeaderProvider } from 'context/BannersHeaderContext'
 import { EventsProvider } from 'context/EventsContext'
 import { EventSpacesProvider } from 'context/EventSpacesContext'
 import { HotelsProvider } from 'context/HotelsContext'
@@ -29,10 +29,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <HotelsProvider>
               <TouristicPointsProvider>
                 <AboutProvider>
-                  <BannersProvider>
+                  <BannersHeaderProvider>
                     <App />
                     <GlobalStyles />
-                  </BannersProvider>
+                  </BannersHeaderProvider>
                 </AboutProvider>
               </TouristicPointsProvider>
             </HotelsProvider>

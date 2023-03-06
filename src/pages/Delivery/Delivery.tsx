@@ -1,6 +1,7 @@
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 
 import { Container } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { RiMotorbikeFill } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
@@ -8,9 +9,19 @@ import { Link } from 'react-router-dom'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
 
+import useTitle from 'hooks/useTitle'
+
 import { DeliveryBox, HomeBg, IconDiv } from './styled'
 
 const Delivery: React.FC = () => {
+  const { t, i18n } = useTranslation()
+  const setTitle = useTitle()
+
+  useEffect(() => {
+    setTitle(t('Delivery'))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i18n.resolvedLanguage])
+
   return (
     <>
       <Header />

@@ -12,7 +12,7 @@ import Api from 'services/Api'
 import { AboutType } from 'types/AboutType'
 
 interface IContextProps {
-  about: AboutType | undefined
+  about: AboutType | null
   loading: boolean
   fetchAbout: () => Promise<void>
   error: string | null
@@ -25,8 +25,8 @@ interface IAboutProviderProps {
 export const ReactContext = createContext<IContextProps>({} as IContextProps)
 
 export const AboutProvider: React.FC<IAboutProviderProps> = ({ children }) => {
-  const [loading, setIsLoading] = useState(true)
-  const [about, setAbout] = useState<AboutType | undefined>(undefined)
+  const [loading, setIsLoading] = useState(false)
+  const [about, setAbout] = useState<AboutType | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   const fetchAbout = useCallback(async () => {
@@ -34,8 +34,8 @@ export const AboutProvider: React.FC<IAboutProviderProps> = ({ children }) => {
     setError(null)
 
     try {
-      const { data } = await Api.get(`/apps/get`)
-      setAbout(data)
+      const response = await Api.get(`/apps/get`)
+      setAbout(response.data)
     } catch {
       setError('Não foi possível carregar')
     } finally {

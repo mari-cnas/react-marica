@@ -42,7 +42,7 @@ const Restaurants: React.FC = () => {
   }, [searchRestaurants, setHasSearch])
 
   useEffect(() => {
-    setTitle(t('home.head-title'))
+    setTitle(t('Bares e Restaurantes'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 

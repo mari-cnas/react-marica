@@ -35,7 +35,9 @@ const Header: React.FC<IHeaderProps> = ({ children }) => {
           setMenuIsVisible={setMenuIsVisible}
         />
         <div>
-          <img src={logo} alt="logo" className="img-fluid" />
+          <a href="/">
+            <img src={logo} alt="logo" className="img-fluid" />
+          </a>
         </div>
 
         <div className="d-flex flex-row d-none d-md-block list-unstyled list-group list-group-horizontal align-items-center">

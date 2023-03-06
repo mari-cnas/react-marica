@@ -36,7 +36,7 @@ const Hotels: React.FC = () => {
   }, [searchHotels, setHasSearch])
 
   useEffect(() => {
-    setTitle(t('home.head-title'))
+    setTitle(t('Hotéis e Pousadas'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 

@@ -18,7 +18,7 @@ const EventsMap: React.FC = () => {
   const setTitle = useTitle()
 
   useEffect(() => {
-    setTitle(t('Mapa | Espaços para Eventos'))
+    setTitle(t('Mapa | Eventos'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
   return (

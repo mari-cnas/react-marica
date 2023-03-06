@@ -42,7 +42,7 @@ const LocalMarkets: React.FC = () => {
   }, [searchLocalMarkets, setHasSearch])
 
   useEffect(() => {
-    setTitle(t('home.head-title'))
+    setTitle(t('Comércio Local'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 

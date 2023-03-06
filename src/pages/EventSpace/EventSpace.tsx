@@ -45,9 +45,10 @@ const EventSpace: React.FC = () => {
   }
 
   useEffect(() => {
-    setTitle(t('home.head-title'))
+    if (eventSpace?.item?.nome)
+      setTitle(t(`${eventSpace.item?.nome} | Espaços para Eventos`))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.resolvedLanguage])
+  }, [i18n.resolvedLanguage, eventSpace?.item?.nome])
 
   useEffect(() => {
     if (id) fetchEventSpace(Number(id))

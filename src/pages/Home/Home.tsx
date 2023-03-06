@@ -14,7 +14,6 @@ import CarouselBg from 'components/CarouselBg'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
 import HomeCard from 'components/HomeCard'
-import LanguageSwitcher from 'components/LanguageSwitcher'
 
 import useTitle from 'hooks/useTitle'
 

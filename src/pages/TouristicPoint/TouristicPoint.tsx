@@ -39,9 +39,10 @@ const TouristicPoint: React.FC = () => {
   }
 
   useEffect(() => {
-    setTitle(t('home.head-title'))
+    if (touristicPoint?.item?.nome)
+      setTitle(t(`${touristicPoint?.item?.nome} | Pontos Turísticos`))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.resolvedLanguage])
+  }, [i18n.resolvedLanguage, touristicPoint?.item?.nome])
 
   useEffect(() => {
     if (id) fetchTouristicPoint(Number(id))

@@ -53,9 +53,9 @@ const Event: React.FC = () => {
   }
 
   useEffect(() => {
-    setTitle(t('home.head-title'))
+    if (event?.item?.nome) setTitle(t(`${event.item?.nome} | Eventos`))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.resolvedLanguage])
+  }, [i18n.resolvedLanguage, event?.item?.nome])
 
   useEffect(() => {
     if (id) fetchEvent(Number(id))

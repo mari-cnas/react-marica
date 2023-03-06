@@ -46,9 +46,10 @@ const Hotel: React.FC = () => {
   }
 
   useEffect(() => {
-    setTitle(t('home.head-title'))
+    if (hotel?.item?.nome)
+      setTitle(t(`${hotel?.item?.nome} | Hotéis e Pousadas`))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.resolvedLanguage])
+  }, [i18n.resolvedLanguage, hotel?.item?.nome])
 
   useEffect(() => {
     if (id) fetchHotel(Number(id))

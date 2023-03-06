@@ -42,7 +42,7 @@ const EventSpaces: React.FC = () => {
   }, [searchEventSpaces, setHasSearch])
 
   useEffect(() => {
-    setTitle(t('home.head-title'))
+    setTitle(t('Espaços para eventos'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 

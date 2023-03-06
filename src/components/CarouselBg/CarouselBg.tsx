@@ -2,14 +2,14 @@ import { memo } from 'react'
 
 import Carousel from 'react-bootstrap/Carousel'
 
-import { useBanners } from 'context/BannersContext'
+import { useHeaderBanners } from 'context/BannersHeaderContext'
 
 interface ICarouselBgProps {
   children?: React.ReactNode
 }
 
 const CarouselBg: React.FC<ICarouselBgProps> = () => {
-  const { banners, loading, error } = useBanners()
+  const { banners, loading } = useHeaderBanners()
 
   return (
     <>
@@ -20,11 +20,11 @@ const CarouselBg: React.FC<ICarouselBgProps> = () => {
           </div>
         </div>
       )}
-      {!loading && !error && (
+      {!loading && (
         <Carousel>
           {banners.map((banner) => (
             <Carousel.Item key={banner.id}>
-              <a href={banner.url}>
+              <a href={banner.url} target="_blank" rel="noreferrer">
                 <img
                   className="d-none d-md-block w-100"
                   src={banner.image_l}
@@ -42,9 +42,7 @@ const CarouselBg: React.FC<ICarouselBgProps> = () => {
           ))}
         </Carousel>
       )}
-      {!loading && !error && banners.length === 0 && (
-        <h2>Nenhum resultado encontrado</h2>
-      )}
+      {!loading && banners.length === 0 && <h2>Nenhum resultado encontrado</h2>}
     </>
   )
 }
