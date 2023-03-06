@@ -10,6 +10,8 @@ import Header from 'components/Header'
 
 import useTitle from 'hooks/useTitle'
 
+import { Wrapper } from 'styles/GlobalStyles'
+
 import { ButtonContainer, LinkBackToHome, PageTitle } from './styled'
 
 const TouristicPointsMap: React.FC = () => {
@@ -22,7 +24,7 @@ const TouristicPointsMap: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
   return (
-    <>
+    <Wrapper>
       <Header />
       <main>
         <ButtonContainer>
@@ -33,7 +35,7 @@ const TouristicPointsMap: React.FC = () => {
         </ButtonContainer>
         <GeneralMap endPoint={touristicPoints} />
       </main>
-    </>
+    </Wrapper>
   )
 }
 

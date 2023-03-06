@@ -11,6 +11,8 @@ import Header from 'components/Header'
 
 import useTitle from 'hooks/useTitle'
 
+import { Wrapper } from 'styles/GlobalStyles'
+
 import { DeliveryBox, HomeBg, IconDiv } from './styled'
 
 const Delivery: React.FC = () => {
@@ -23,15 +25,15 @@ const Delivery: React.FC = () => {
   }, [i18n.resolvedLanguage])
 
   return (
-    <>
+    <Wrapper>
       <Header />
-      <HomeBg className="d-flex flex-column py-5">
+      <HomeBg className="d-flex flex-column py-5 flex-grow-1">
         <Container className="py-1">
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center mb-3">
             <Link to="/">
               <AiOutlineArrowLeft size={20} style={{ color: 'black' }} />
             </Link>
-            <h2 className="ms-2">Delivery</h2>
+            <h2 className="mb-0 ms-2">Delivery</h2>
           </div>
           <p>Selecione o tipo de estabelecimento:</p>
           <DeliveryBox>
@@ -49,7 +51,7 @@ const Delivery: React.FC = () => {
         </Container>
       </HomeBg>
       <Footer />
-    </>
+    </Wrapper>
   )
 }
 

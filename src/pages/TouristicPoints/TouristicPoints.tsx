@@ -5,17 +5,20 @@ import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { FaMapMarkedAlt } from 'react-icons/fa'
 import { HiSearch } from 'react-icons/hi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useTouristicPoints } from 'context/TouristicPointsContext'
 
+import Category from 'components/Category'
 import Footer from 'components/Footer'
 import GeneralCardSlug from 'components/GeneralCardSlug'
 import Header from 'components/Header'
 
 import useTitle from 'hooks/useTitle'
 
-import { Categories, Category, HomeBg, InputBox, MapButton } from './styled'
+import { Wrapper } from 'styles/GlobalStyles'
+
+import { HomeBg, InputBox, MapButton } from './styled'
 
 const TouristicPoints: React.FC = () => {
   const { t, i18n } = useTranslation()
@@ -25,11 +28,14 @@ const TouristicPoints: React.FC = () => {
     error,
     touristicPoints,
     categories,
+    fetchCategory,
     fetchTouristicPoints,
     searchTouristicPoints,
   } = useTouristicPoints()
   const [search, setSearch] = useState('')
   const [hasSearch, setHasSearch] = useState(false)
+  const [categoryValue, setCategoryValue] = useState('')
+  const navigate = useNavigate()
 
   const handleSearch = useCallback(() => {
     searchTouristicPoints(search)
@@ -41,10 +47,17 @@ const TouristicPoints: React.FC = () => {
     setHasSearch(false)
   }, [searchTouristicPoints, setHasSearch])
 
+  const returnToList = useCallback(() => {
+    navigate(categoryValue.length > 0 ? `/pontos-turisticos` : `/`)
+    setCategoryValue('')
+    searchTouristicPoints('')
+  }, [navigate, categoryValue, setCategoryValue, searchTouristicPoints])
+
   useEffect(() => {
-    setTitle(t('Pontos Turísticos'))
+    setTitle(t(`Pontos Turísticos ${categoryValue}`))
+    // setCategoryValue('')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.resolvedLanguage])
+  }, [i18n.resolvedLanguage, categoryValue])
 
   useEffect(() => {
     fetchTouristicPoints()
@@ -52,13 +65,11 @@ const TouristicPoints: React.FC = () => {
   }, [fetchTouristicPoints])
 
   return (
-    <>
+    <Wrapper>
       <Header />
       {loading && (
-        <div className="d-flex flex-column my-5">
-          <div className="d-flex flex-column align-self-center">
-            <Spinner animation="border" variant="primary" />
-          </div>
+        <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1">
+          <Spinner animation="border" variant="primary" />
         </div>
       )}
       {!loading && !error && (
@@ -67,11 +78,22 @@ const TouristicPoints: React.FC = () => {
             <Row className=" justify-content-between">
               <Col className="d-flex">
                 <div className="d-flex align-items-center">
-                  <Link to="/">
+                  <button
+                    type="button"
+                    onClick={returnToList}
+                    style={{ border: 'none' }}
+                  >
                     <AiOutlineArrowLeft size={20} style={{ color: 'black' }} />
-                  </Link>
-                  <div className="d-flex flex-column ms-2">
-                    <h2>Pontos Turísticos</h2>
+                  </button>
+                  <div className="d-flex flex-column ms-2 ">
+                    {categoryValue.length >= 0 ? (
+                      <>
+                        <h2>Pontos Turísticos</h2>
+                        <h2>{categoryValue}</h2>
+                      </>
+                    ) : (
+                      <h2 className="mb-0">Pontos Turísticos</h2>
+                    )}
                   </div>
                 </div>
               </Col>
@@ -86,7 +108,7 @@ const TouristicPoints: React.FC = () => {
                   <input
                     type="text"
                     placeholder="Buscar pontos turísticos"
-                    className="border-0 mx-3 py-2"
+                    className="border-0 mx-3 py-2 w-100"
                     aria-label="Search"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
@@ -108,18 +130,11 @@ const TouristicPoints: React.FC = () => {
                 </InputBox>
               </Col>
             </Row>
-            <Categories className=" ps-2 my-2  flex-nowrap flex-md-wrap">
-              {categories?.map((category) => (
-                <Category
-                  className="me-2 my-2"
-                  key={category.id}
-                  value={category.label}
-                  onClick={handleSearch}
-                >
-                  {category.label}
-                </Category>
-              ))}
-            </Categories>
+            <Category
+              categories={categories}
+              fetchCategory={fetchCategory}
+              setCategoryValue={setCategoryValue}
+            />
             <Row className="justify-content-center row-cols-1 row-cols-md-3">
               {touristicPoints?.map((point) => (
                 <Col className="d-flex my-2" key={point.id}>
@@ -132,7 +147,7 @@ const TouristicPoints: React.FC = () => {
       )}
 
       <Footer />
-    </>
+    </Wrapper>
   )
 }
 

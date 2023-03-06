@@ -26,6 +26,8 @@ import Header from 'components/Header'
 
 import useTitle from 'hooks/useTitle'
 
+import { Wrapper } from 'styles/GlobalStyles'
+
 import appStore from '../../assets/app-store.png'
 import googlePlay from '../../assets/google-play.png'
 import { Categories, HomeBg, IconDiv, ImageDiv } from './styled'
@@ -56,7 +58,7 @@ const EventSpace: React.FC = () => {
   }, [id])
 
   return (
-    <>
+    <Wrapper>
       <Header />
       {loading && (
         <div className="d-flex flex-column my-5">
@@ -364,7 +366,7 @@ const EventSpace: React.FC = () => {
       )}
 
       <Footer />
-    </>
+    </Wrapper>
   )
 }
 

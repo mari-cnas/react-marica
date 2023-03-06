@@ -21,6 +21,7 @@ interface IContextProps {
   fetchTouristicPoint: (id: number) => Promise<void>
   fetchTouristicPoints: () => Promise<void>
   searchTouristicPoints: (search: string) => Promise<void>
+  fetchCategory: (id: number) => Promise<void>
 }
 
 interface ITouristicPointsProviderProps {
@@ -94,6 +95,22 @@ export const TouristicPointsProvider: React.FC<
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const fetchCategory = useCallback(async (id: number) => {
+    setIsLoading(true)
+    try {
+      const {
+        data: { categorias, collection },
+      } = await Api.get(`/pontos/categorias/${id}`)
+      setTouristicPoints(collection)
+      setCategories(categorias)
+    } catch (e) {
+      // eslint-disable-next-line prettier/prettier, no-console
+      console.error(e)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
   return (
     <ReactContext.Provider
       value={useMemo(
@@ -103,6 +120,7 @@ export const TouristicPointsProvider: React.FC<
           touristicPoint,
           touristicPoints,
           categories,
+          fetchCategory,
           fetchTouristicPoint,
           fetchTouristicPoints,
           searchTouristicPoints,
@@ -113,6 +131,7 @@ export const TouristicPointsProvider: React.FC<
           touristicPoint,
           touristicPoints,
           categories,
+          fetchCategory,
           fetchTouristicPoint,
           fetchTouristicPoints,
           searchTouristicPoints,

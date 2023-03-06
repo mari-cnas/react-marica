@@ -30,7 +30,6 @@ const MenuMobile: React.FC<IMenuMobileProps> = ({
         menuIsVisible={menuIsVisible}
         onClick={() => setMenuIsVisible(false)}
         className="position-fixed"
-        style={{ height: '100rem', width: '100rem' }}
       />
 
       <MenuContainer isVisible={menuIsVisible}>
@@ -67,11 +66,19 @@ const MenuMobile: React.FC<IMenuMobileProps> = ({
           <Link to="/eventos">
             <FaRegCalendarAlt /> Eventos
           </Link>
-          <a href="https://contato.site/5d9bab8/marica-cvb3/paginaprincipal">
+          <a
+            href="https://contato.site/5d9bab8/marica-cvb3/paginaprincipal"
+            target="_blank"
+            rel="noreferrer"
+          >
             <FaRoute />
             Roteiros Turísticos
           </a>
-          <a href="http://www.feirartemarica.com.br/">
+          <a
+            href="http://www.feirartemarica.com.br/"
+            target="_blank"
+            rel="noreferrer"
+          >
             <SiApacheairflow /> Artesanato
           </a>
         </nav>

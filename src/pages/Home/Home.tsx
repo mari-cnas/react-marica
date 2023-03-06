@@ -107,6 +107,7 @@ const Home: React.FC = () => {
                   title="Roteiros turísticos"
                   description="Conheça diversas trilhas ecológicas e de aventura, com variados níveis de dificuldade."
                   page="https://contato.site/5d9bab8/marica-cvb3/paginaprincipal"
+                  target="_blank"
                 />
               </Col>
               <Col className="d-flex col-6 col-md-4 ">
@@ -115,6 +116,7 @@ const Home: React.FC = () => {
                   title="Artesanato"
                   description="Conheça e compre as criações dos artesãos de Maricá/RJ"
                   page="http://www.feirartemarica.com.br/"
+                  target="_blank"
                 />
               </Col>
               <Col className="d-flex col-6 col-md-4 ">

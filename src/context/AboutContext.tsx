@@ -2,7 +2,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
 } from 'react'
@@ -43,10 +42,6 @@ export const AboutProvider: React.FC<IAboutProviderProps> = ({ children }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  useEffect(() => {
-    fetchAbout()
-  }, [fetchAbout])
 
   return (
     <ReactContext.Provider

@@ -15,6 +15,8 @@ import Header from 'components/Header'
 
 import useTitle from 'hooks/useTitle'
 
+import { Wrapper } from 'styles/GlobalStyles'
+
 import { Categories, Category, HomeBg, InputBox, MapButton } from './styled'
 
 const EventSpaces: React.FC = () => {
@@ -52,13 +54,11 @@ const EventSpaces: React.FC = () => {
   }, [fetchEventSpaces])
 
   return (
-    <>
+    <Wrapper>
       <Header />
       {loading && (
-        <div className="d-flex flex-column my-5">
-          <div className="d-flex flex-column align-self-center">
-            <Spinner animation="border" variant="primary" />
-          </div>
+        <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1">
+          <Spinner animation="border" variant="primary" />
         </div>
       )}
       {!loading && !error && (
@@ -71,7 +71,7 @@ const EventSpaces: React.FC = () => {
                     <AiOutlineArrowLeft size={20} style={{ color: 'black' }} />
                   </Link>
                   <div className="d-flex flex-column ms-2">
-                    <h2>Espaços para Eventos</h2>
+                    <h2 className="mb-0">Espaços para Eventos</h2>
                   </div>
                 </div>
               </Col>
@@ -86,7 +86,7 @@ const EventSpaces: React.FC = () => {
                   <input
                     type="text"
                     placeholder="Buscar espaços para eventos"
-                    className="border-0 mx-3 py-2"
+                    className="border-0 mx-3 py-2 w-100"
                     aria-label="Search"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
@@ -135,7 +135,7 @@ const EventSpaces: React.FC = () => {
       )}
 
       <Footer />
-    </>
+    </Wrapper>
   )
 }
 

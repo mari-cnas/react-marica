@@ -10,7 +10,7 @@ import {
 
 import logo2 from '../../assets/marica-protege.png'
 import logo from '../../assets/marica-turismo-logo.png'
-import { Bg } from './styled'
+import { FooterBg } from './styled'
 
 interface IBaseComponentProps {
   children?: React.ReactNode
@@ -20,7 +20,7 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
   children as ReactElement
 
   return (
-    <Bg>
+    <FooterBg>
       <Container>
         <Row className="d-flex justify-content-between pt-2 pb-2">
           <Col className="d-flex flex-column align-items-center align-items-md-start">
@@ -28,7 +28,7 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
               <li className="d-flex align-items-center me-3">
                 <AiFillFacebook className="me-2" />{' '}
                 <a
-                  href="https://www.facebook.com"
+                  href="https://web.facebook.com/prefeiturademarica"
                   className="d-flex d-none d-md-block "
                   target="_blank"
                   rel="noreferrer"
@@ -39,7 +39,7 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
               <li className="d-flex align-items-center me-3">
                 <AiOutlineInstagram className="me-2" />
                 <a
-                  href="https://www.instagram.com"
+                  href="https://www.instagram.com/prefeiturademarica"
                   className="d-flex d-none d-md-block"
                   target="_blank"
                   rel="noreferrer"
@@ -50,7 +50,7 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
               <li className="d-flex align-items-center me-3">
                 <AiOutlineTwitter className="me-2" />
                 <a
-                  href="https://www.twitter.com"
+                  href="https://twitter.com/MaricaRJ"
                   className="d-flex d-none d-md-block"
                   target="_blank"
                   rel="noreferrer"
@@ -61,7 +61,7 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
               <li className="d-flex align-items-center me-3">
                 <AiFillYoutube className="me-2" />
                 <a
-                  href="https://www.youtube.com"
+                  href="https://www.youtube.com/user/prefeiturademarica1"
                   className="d-flex d-none d-md-block"
                   target="_blank"
                   rel="noreferrer"
@@ -73,6 +73,8 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
             <a
               href="https://app.marica2030.com.br/"
               className="text-decoration-underline"
+              target="_blank"
+              rel="noreferrer"
             >
               Área do comerciante
             </a>
@@ -89,12 +91,16 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
               <a
                 href="https://www.conhecamarica.com.br/static/media/guia-gastronomico.f9556598.pdf"
                 className="text-decoration-underline"
+                target="_blank"
+                rel="noreferrer"
               >
                 Manual Gastronomia
               </a>
               <a
                 href="https://www.conhecamarica.com.br/static/media/guia-hospedagem.2046547a.pdf"
                 className="text-decoration-underline"
+                target="_blank"
+                rel="noreferrer"
               >
                 {' '}
                 Manual Hospedagem
@@ -104,7 +110,7 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
           </Col>
         </Row>
       </Container>
-    </Bg>
+    </FooterBg>
   )
 }
 

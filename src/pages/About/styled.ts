@@ -29,4 +29,8 @@ export const AboutBg = styled.div`
       rgb(245, 245, 245) 100%
     );
   }
+
+  a {
+    color: black;
+  }
 `

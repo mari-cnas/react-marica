@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Bg = styled.div`
+export const FooterBg = styled.footer`
   background-color: rgb(51, 51, 51);
   color: white;
   margin-top: auto;

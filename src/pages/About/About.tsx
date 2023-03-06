@@ -12,6 +12,8 @@ import Header from 'components/Header'
 
 import useTitle from 'hooks/useTitle'
 
+import { Wrapper } from 'styles/GlobalStyles'
+
 import { AboutBg, BodyBg } from './styled'
 
 interface IBaseComponentProps {
@@ -21,15 +23,20 @@ interface IBaseComponentProps {
 const About: React.FC<IBaseComponentProps> = () => {
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
-  const { loading, about, error } = useAbout()
+  const { loading, about, error, fetchAbout } = useAbout()
 
   useEffect(() => {
     setTitle(t('Sobre'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 
+  useEffect(() => {
+    fetchAbout()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
-    <>
+    <Wrapper>
       <Header />
       {loading && (
         <div className="d-flex flex-column my-5">
@@ -44,11 +51,15 @@ const About: React.FC<IBaseComponentProps> = () => {
           <Container className="py-5">
             <BodyBg className="d-flex flex-column py-5">
               <div className="d-flex flex-column py-2 px-5">
-                <div className="d-flex">
-                  <Link to="/">
-                    <AiOutlineArrowLeft />
+                <div className="d-flex align-items-center">
+                  <Link to="/" title="voltar">
+                    <AiOutlineArrowLeft
+                      style={{ color: 'black' }}
+                      className="me-2"
+                      size={20}
+                    />
                   </Link>{' '}
-                  <h2> Conheça Maricá</h2>
+                  <h2 className="mb-0"> Conheça Maricá</h2>
                 </div>
                 <div
                   // eslint-disable-next-line react/no-danger, @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
@@ -62,7 +73,7 @@ const About: React.FC<IBaseComponentProps> = () => {
       )}
 
       <Footer />
-    </>
+    </Wrapper>
   )
 }
 

@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 
 import Carousel from 'react-bootstrap/Carousel'
 
@@ -9,7 +9,12 @@ interface ICarouselBgProps {
 }
 
 const CarouselBg: React.FC<ICarouselBgProps> = () => {
-  const { banners, loading } = useHeaderBanners()
+  const { banners, loading, fetchBanners } = useHeaderBanners()
+
+  useEffect(() => {
+    fetchBanners()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

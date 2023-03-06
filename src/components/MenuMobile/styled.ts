@@ -81,4 +81,6 @@ export const MenuOverlay = styled.div<IMenuProps>`
   left: 0;
   z-index: 2;
   position: absolute;
+  height: 100vh;
+  width: 100%;
 `

@@ -2,7 +2,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
 } from 'react'
@@ -13,6 +12,7 @@ import { BannerType } from 'types/BannerType'
 
 interface IContextProps {
   banners: BannerType[]
+  error: string | null
   loading: boolean
   fetchBanners: () => Promise<void>
 }
@@ -28,6 +28,7 @@ export const BannersHeaderProvider: React.FC<IBannersProviderProps> = ({
 }) => {
   const [loading, setIsLoading] = useState(true)
   const [banners, setBanners] = useState<BannerType[]>([])
+  const [error, setError] = useState<string | null>(null)
 
   const fetchBanners = useCallback(async () => {
     setIsLoading(true)
@@ -35,18 +36,14 @@ export const BannersHeaderProvider: React.FC<IBannersProviderProps> = ({
     try {
       const response = await Api.get(`/banners`)
       setBanners(response.data)
-    } catch (e) {
+    } catch {
       // eslint-disable-next-line no-console
-      console.error(e)
+      setError('Não foi possível carregar os banners')
     } finally {
       setIsLoading(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  useEffect(() => {
-    fetchBanners()
-  }, [fetchBanners])
 
   return (
     <ReactContext.Provider
@@ -54,9 +51,10 @@ export const BannersHeaderProvider: React.FC<IBannersProviderProps> = ({
         () => ({
           loading,
           banners,
+          error,
           fetchBanners,
         }),
-        [loading, banners, fetchBanners],
+        [loading, banners, error, fetchBanners],
       )}
     >
       {children}

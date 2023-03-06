@@ -34,6 +34,8 @@ import {
 
 import useTitle from 'hooks/useTitle'
 
+import { Wrapper } from 'styles/GlobalStyles'
+
 import appStore from '../../assets/app-store.png'
 import googlePlay from '../../assets/google-play.png'
 import { Categories, HomeBg, IconDiv, ImageDiv } from './styled'
@@ -63,7 +65,7 @@ const Event: React.FC = () => {
   }, [id])
 
   return (
-    <>
+    <Wrapper>
       <Header />
       {loading && (
         <div className="d-flex flex-column my-5">
@@ -360,12 +362,22 @@ const Event: React.FC = () => {
                   </div>
                   <p className="fw-bold my-2">Conheça nosso app</p>
                   <div className="d-flex">
-                    <img
-                      src={googlePlay}
-                      alt="logo"
-                      className="img-fluid w-50"
-                    />
-                    <img src={appStore} alt="logo" className="img-fluid w-50" />
+                    <a
+                      href="https://play.google.com/store/apps/details?id=com.marica2030.app"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-50 me-1"
+                    >
+                      <img src={googlePlay} alt="logo" className="img-fluid" />
+                    </a>
+                    <a
+                      href="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-50 ms-1"
+                    >
+                      <img src={appStore} alt="logo" className="img-fluid" />
+                    </a>
                   </div>
                 </Col>
               </Row>
@@ -375,7 +387,7 @@ const Event: React.FC = () => {
       )}
 
       <Footer />
-    </>
+    </Wrapper>
   )
 }
 

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
 * {
@@ -9,7 +9,7 @@ export default createGlobalStyle`
 
 html,body,#root{
     min-height: 100vh;
-    height:100%;
+   // height:100%;
 }
 
 
@@ -23,13 +23,18 @@ body {
 
 footer {
     margin-top: auto;
-    position: absolute;
+    /* position: absolute;
     right: 0;
     bottom: 0;
-    left: 0;
+    left: 0; */
 }
 
 .slick-prev, .slick-next {
    position: absolute; right: 50px;
 }
+`
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 `

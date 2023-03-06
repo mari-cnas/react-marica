@@ -1,7 +1,7 @@
 import { Card } from 'react-bootstrap'
 import styled from 'styled-components'
 
-export const LinkDiv = styled.button`
+export const LinkBtn = styled.button`
   color: rgb(110, 189, 0);
   border: 1px solid rgb(110, 189, 0);
   background-color: transparent;
@@ -39,6 +39,30 @@ export const CardBg = styled(Card)`
   align-items: center;
   justify-content: center;
   padding: 10px;
+
+  > div > a {
+    /* unvisited link */
+    &:link {
+      color: black;
+      text-decoration: none;
+    }
+
+    /* visited link */
+    &:visited {
+      color: black;
+    }
+
+    /* mouse over link */
+    &:hover {
+      color: black;
+      text-decoration: underline;
+    }
+
+    /* selected link */
+    &:active {
+      color: black;
+    }
+  }
 `
 export const InfoTitle = styled(Card.Title)`
   font-family: Roboto, sans-serif;

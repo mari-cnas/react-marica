@@ -15,6 +15,8 @@ import Header from 'components/Header'
 
 import useTitle from 'hooks/useTitle'
 
+import { Wrapper } from 'styles/GlobalStyles'
+
 import { Categories, Category, HomeBg, InputBox, MapButton } from './styled'
 
 const Hotels: React.FC = () => {
@@ -46,13 +48,11 @@ const Hotels: React.FC = () => {
   }, [fetchHotels])
 
   return (
-    <>
+    <Wrapper>
       <Header />
       {loading && (
-        <div className="d-flex flex-column my-5">
-          <div className="d-flex flex-column align-self-center">
-            <Spinner animation="border" variant="primary" />
-          </div>
+        <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1">
+          <Spinner animation="border" variant="primary" />
         </div>
       )}
       {!loading && !error && (
@@ -65,7 +65,7 @@ const Hotels: React.FC = () => {
                     <AiOutlineArrowLeft size={20} style={{ color: 'black' }} />
                   </Link>
                   <div className="d-flex flex-column ms-2">
-                    <h2>Hotéis e Pousadas</h2>
+                    <h2 className="mb-0">Hotéis e Pousadas</h2>
                   </div>
                 </div>
               </Col>
@@ -80,7 +80,7 @@ const Hotels: React.FC = () => {
                   <input
                     type="text"
                     placeholder="Buscar hotéis e pousadas"
-                    className="border-0 mx-3 py-2"
+                    className="border-0 mx-3 py-2 w-100"
                     aria-label="Search"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
@@ -126,7 +126,7 @@ const Hotels: React.FC = () => {
       )}
 
       <Footer />
-    </>
+    </Wrapper>
   )
 }
 
