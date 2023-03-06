@@ -21,6 +21,7 @@ interface IContextProps {
   fetchRestaurant: (id: number) => Promise<void>
   fetchRestaurants: () => Promise<void>
   searchRestaurants: (search: string) => Promise<void>
+  fetchCategory: (id: number) => Promise<void>
 }
 
 interface IRestaurantsProviderProps {
@@ -93,6 +94,22 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const fetchCategory = useCallback(async (id: number) => {
+    setIsLoading(true)
+    try {
+      const {
+        data: { categorias, collection },
+      } = await Api.get(`/restaurantes/categorias/${id}`)
+      setRestaurants(collection)
+      setCategories(categorias)
+    } catch (e) {
+      // eslint-disable-next-line prettier/prettier, no-console
+      console.error(e)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
   return (
     <ReactContext.Provider
       value={useMemo(
@@ -102,6 +119,7 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
           restaurant,
           restaurants,
           categories,
+          fetchCategory,
           fetchRestaurant,
           fetchRestaurants,
           searchRestaurants,
@@ -112,6 +130,7 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
           restaurant,
           restaurants,
           categories,
+          fetchCategory,
           fetchRestaurant,
           fetchRestaurants,
           searchRestaurants,

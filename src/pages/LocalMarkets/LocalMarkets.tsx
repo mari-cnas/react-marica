@@ -5,10 +5,11 @@ import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { FaMapMarkedAlt } from 'react-icons/fa'
 import { HiSearch } from 'react-icons/hi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useLocalMarkets } from 'context/LocalMarketsContext'
 
+import Category from 'components/Category'
 import Footer from 'components/Footer'
 import GeneralCardSlug from 'components/GeneralCardSlug'
 import Header from 'components/Header'
@@ -17,7 +18,7 @@ import useTitle from 'hooks/useTitle'
 
 import { Wrapper } from 'styles/GlobalStyles'
 
-import { Categories, Category, HomeBg, InputBox, MapButton } from './styled'
+import { HomeBg, InputBox, MapButton } from './styled'
 
 const LocalMarkets: React.FC = () => {
   const { t, i18n } = useTranslation()
@@ -27,11 +28,14 @@ const LocalMarkets: React.FC = () => {
     error,
     localMarkets,
     categories,
+    fetchCategory,
     fetchLocalMarkets,
     searchLocalMarkets,
   } = useLocalMarkets()
   const [search, setSearch] = useState('')
   const [hasSearch, setHasSearch] = useState(false)
+  const [categoryValue, setCategoryValue] = useState('')
+  const navigate = useNavigate()
 
   const handleSearch = useCallback(() => {
     searchLocalMarkets(search)
@@ -43,8 +47,14 @@ const LocalMarkets: React.FC = () => {
     setHasSearch(false)
   }, [searchLocalMarkets, setHasSearch])
 
+  const returnToList = useCallback(() => {
+    navigate(categoryValue.length > 0 ? `/comercio-local` : `/`)
+    setCategoryValue('')
+    searchLocalMarkets('')
+  }, [navigate, categoryValue, setCategoryValue, searchLocalMarkets])
+
   useEffect(() => {
-    setTitle(t('Comércio Local'))
+    setTitle(t(`Comércio Local ${categoryValue}`))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 
@@ -67,11 +77,22 @@ const LocalMarkets: React.FC = () => {
             <Row className=" justify-content-between">
               <Col className="d-flex">
                 <div className="d-flex align-items-center">
-                  <Link to="/">
+                  <button
+                    type="button"
+                    onClick={returnToList}
+                    style={{ border: 'none' }}
+                  >
                     <AiOutlineArrowLeft size={20} style={{ color: 'black' }} />
-                  </Link>
+                  </button>
                   <div className="d-flex flex-column ms-2">
-                    <h2 className="mb-0">Comércio Local</h2>
+                    {categoryValue.length >= 0 ? (
+                      <>
+                        <h2>Comércio Local</h2>
+                        <h2>{categoryValue}</h2>
+                      </>
+                    ) : (
+                      <h2 className="mb-0">Comércio Local</h2>
+                    )}
                   </div>
                 </div>
               </Col>
@@ -108,18 +129,11 @@ const LocalMarkets: React.FC = () => {
                 </InputBox>
               </Col>
             </Row>
-            <Categories className=" ps-2 my-2  flex-nowrap flex-md-wrap">
-              {categories?.map((category) => (
-                <Category
-                  className="me-2 my-2"
-                  key={category.id}
-                  value={category.label}
-                  onClick={handleSearch}
-                >
-                  {category.label}
-                </Category>
-              ))}
-            </Categories>
+            <Category
+              categories={categories}
+              fetchCategory={fetchCategory}
+              setCategoryValue={setCategoryValue}
+            />
             <Row className="justify-content-center row-cols-1 row-cols-md-3">
               {localMarkets?.map((point) => (
                 <Col className="d-flex my-2" key={point.id}>

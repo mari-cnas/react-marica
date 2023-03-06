@@ -21,6 +21,7 @@ interface IContextProps {
   fetchLocalMarket: (id: number) => Promise<void>
   fetchLocalMarkets: () => Promise<void>
   searchLocalMarkets: (search: string) => Promise<void>
+  fetchCategory: (id: number) => Promise<void>
 }
 
 interface ILocalMarketsProviderProps {
@@ -93,6 +94,22 @@ export const LocalMarketsProvider: React.FC<ILocalMarketsProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const fetchCategory = useCallback(async (id: number) => {
+    setIsLoading(true)
+    try {
+      const {
+        data: { categorias, collection },
+      } = await Api.get(`/comercios/categorias/${id}`)
+      setLocalMarkets(collection)
+      setCategories(categorias)
+    } catch (e) {
+      // eslint-disable-next-line prettier/prettier, no-console
+      console.error(e)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
   return (
     <ReactContext.Provider
       value={useMemo(
@@ -102,6 +119,7 @@ export const LocalMarketsProvider: React.FC<ILocalMarketsProviderProps> = ({
           localMarket,
           localMarkets,
           categories,
+          fetchCategory,
           fetchLocalMarket,
           fetchLocalMarkets,
           searchLocalMarkets,
@@ -112,6 +130,7 @@ export const LocalMarketsProvider: React.FC<ILocalMarketsProviderProps> = ({
           localMarket,
           localMarkets,
           categories,
+          fetchCategory,
           fetchLocalMarket,
           fetchLocalMarkets,
           searchLocalMarkets,

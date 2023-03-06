@@ -21,6 +21,7 @@ interface IContextProps {
   fetchEventSpace: (id: number) => Promise<void>
   fetchEventSpaces: () => Promise<void>
   searchEventSpaces: (search: string) => Promise<void>
+  fetchCategory: (id: number) => Promise<void>
 }
 
 interface IEventSpacesProviderProps {
@@ -93,6 +94,22 @@ export const EventSpacesProvider: React.FC<IEventSpacesProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const fetchCategory = useCallback(async (id: number) => {
+    setIsLoading(true)
+    try {
+      const {
+        data: { categorias, collection },
+      } = await Api.get(`/espacos/categorias/${id}`)
+      setEventSpaces(collection)
+      setCategories(categorias)
+    } catch (e) {
+      // eslint-disable-next-line prettier/prettier, no-console
+      console.error(e)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
   return (
     <ReactContext.Provider
       value={useMemo(
@@ -102,6 +119,7 @@ export const EventSpacesProvider: React.FC<IEventSpacesProviderProps> = ({
           eventSpace,
           eventSpaces,
           categories,
+          fetchCategory,
           fetchEventSpace,
           fetchEventSpaces,
           searchEventSpaces,
@@ -112,6 +130,7 @@ export const EventSpacesProvider: React.FC<IEventSpacesProviderProps> = ({
           eventSpace,
           eventSpaces,
           categories,
+          fetchCategory,
           fetchEventSpace,
           fetchEventSpaces,
           searchEventSpaces,

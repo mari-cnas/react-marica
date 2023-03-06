@@ -21,6 +21,7 @@ interface IContextProps {
   fetchHotel: (id: number) => Promise<void>
   fetchHotels: () => Promise<void>
   searchHotels: (search: string) => Promise<void>
+  fetchCategory: (id: number) => Promise<void>
 }
 
 interface IHotelProviderProps {
@@ -89,6 +90,22 @@ export const HotelsProvider: React.FC<IHotelProviderProps> = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const fetchCategory = useCallback(async (id: number) => {
+    setIsLoading(true)
+    try {
+      const {
+        data: { categorias, collection },
+      } = await Api.get(`/hoteis-e-pousadas/categorias/${id}`)
+      setHotels(collection)
+      setCategories(categorias)
+    } catch (e) {
+      // eslint-disable-next-line prettier/prettier, no-console
+      console.error(e)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
   return (
     <ReactContext.Provider
       value={useMemo(
@@ -98,6 +115,7 @@ export const HotelsProvider: React.FC<IHotelProviderProps> = ({ children }) => {
           hotel,
           hotels,
           categories,
+          fetchCategory,
           fetchHotel,
           fetchHotels,
           searchHotels,
@@ -108,6 +126,7 @@ export const HotelsProvider: React.FC<IHotelProviderProps> = ({ children }) => {
           hotel,
           hotels,
           categories,
+          fetchCategory,
           fetchHotel,
           fetchHotels,
           searchHotels,

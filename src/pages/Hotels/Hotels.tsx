@@ -5,10 +5,11 @@ import { useTranslation } from 'react-i18next'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { FaMapMarkedAlt } from 'react-icons/fa'
 import { HiSearch } from 'react-icons/hi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useHotels } from 'context/HotelsContext'
 
+import Category from 'components/Category'
 import Footer from 'components/Footer'
 import GeneralCardSlug from 'components/GeneralCardSlug'
 import Header from 'components/Header'
@@ -17,15 +18,24 @@ import useTitle from 'hooks/useTitle'
 
 import { Wrapper } from 'styles/GlobalStyles'
 
-import { Categories, Category, HomeBg, InputBox, MapButton } from './styled'
+import { HomeBg, InputBox, MapButton } from './styled'
 
 const Hotels: React.FC = () => {
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
-  const { loading, error, hotels, categories, fetchHotels, searchHotels } =
-    useHotels()
+  const {
+    loading,
+    error,
+    hotels,
+    categories,
+    fetchCategory,
+    fetchHotels,
+    searchHotels,
+  } = useHotels()
   const [search, setSearch] = useState('')
   const [hasSearch, setHasSearch] = useState(false)
+  const [categoryValue, setCategoryValue] = useState('')
+  const navigate = useNavigate()
 
   const handleSearch = useCallback(() => {
     searchHotels(search)
@@ -37,8 +47,14 @@ const Hotels: React.FC = () => {
     setHasSearch(false)
   }, [searchHotels, setHasSearch])
 
+  const returnToList = useCallback(() => {
+    navigate(categoryValue.length > 0 ? `/hoteis-e-pousadas` : `/`)
+    setCategoryValue('')
+    searchHotels('')
+  }, [navigate, categoryValue, setCategoryValue, searchHotels])
+
   useEffect(() => {
-    setTitle(t('Hotéis e Pousadas'))
+    setTitle(t(`Hotéis e Pousadas ${categoryValue}`))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 
@@ -61,11 +77,22 @@ const Hotels: React.FC = () => {
             <Row className=" justify-content-between">
               <Col className="d-flex">
                 <div className="d-flex align-items-center">
-                  <Link to="/">
+                  <button
+                    type="button"
+                    onClick={returnToList}
+                    style={{ border: 'none' }}
+                  >
                     <AiOutlineArrowLeft size={20} style={{ color: 'black' }} />
-                  </Link>
+                  </button>
                   <div className="d-flex flex-column ms-2">
-                    <h2 className="mb-0">Hotéis e Pousadas</h2>
+                    {categoryValue.length >= 0 ? (
+                      <>
+                        <h2>Hotéis e Pousadas</h2>
+                        <h2>{categoryValue}</h2>
+                      </>
+                    ) : (
+                      <h2 className="mb-0">Hotéis e Pousadas</h2>
+                    )}
                   </div>
                 </div>
               </Col>
@@ -102,18 +129,11 @@ const Hotels: React.FC = () => {
                 </InputBox>
               </Col>
             </Row>
-            <Categories className=" ps-2 my-2  flex-nowrap flex-md-wrap">
-              {categories?.map((category) => (
-                <Category
-                  className="me-2 my-2"
-                  key={category.id}
-                  value={category.label}
-                  onClick={handleSearch}
-                >
-                  {category.label}
-                </Category>
-              ))}
-            </Categories>
+            <Category
+              categories={categories}
+              fetchCategory={fetchCategory}
+              setCategoryValue={setCategoryValue}
+            />
             <Row className="justify-content-center row-cols-1 row-cols-md-3">
               {hotels?.map((point) => (
                 <Col className="d-flex my-2" key={point.id}>
