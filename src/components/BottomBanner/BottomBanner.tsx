@@ -1,4 +1,4 @@
-import { memo, ReactElement, useEffect, useRef, useState } from 'react'
+import { memo, ReactElement, useEffect, useState } from 'react'
 
 import { Col, Container, Row } from 'react-bootstrap'
 
@@ -14,7 +14,6 @@ interface IBaseComponentProps {
 const BottomBanner: React.FC<IBaseComponentProps> = ({ children }) => {
   children as ReactElement
   const [isOpen, setIsOpen] = useState(false)
-  const menuRef = useRef()
 
   useEffect(() => {
     document.addEventListener('mousedown', (e) => {

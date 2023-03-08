@@ -61,10 +61,8 @@ const LocalMarket: React.FC = () => {
     <Wrapper>
       <Header />
       {loading && (
-        <div className="d-flex flex-column my-5">
-          <div className="d-flex flex-column align-self-center">
-            <Spinner animation="border" variant="primary" className="my-auto" />
-          </div>
+        <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1">
+          <Spinner animation="border" variant="primary" />
         </div>
       )}
       {!loading && !error && localMarket && (
@@ -98,7 +96,7 @@ const LocalMarket: React.FC = () => {
               <Row sm={1} className=" justify-content-between d-flex flex-wrap">
                 <Col className="col-12 col-md-8 ">
                   <div className="d-flex align-items-center">
-                    <Link to="/">
+                    <Link to="/comercio-local">
                       <AiOutlineArrowLeft
                         size={20}
                         style={{ color: 'black' }}
@@ -142,11 +140,8 @@ const LocalMarket: React.FC = () => {
                           )}
                         </IconDiv>
                         <div className="d-flex flex-column" key={phone.id}>
-                          <p className="d-flex text-start me-3 mb-1">
-                            {phone.nome}
-                          </p>
                           <p className="d-flex text-start me-3">
-                            {phone.number}
+                            {phone.nome} &nbsp;{phone.number}
                           </p>
                         </div>
                       </div>
@@ -230,7 +225,7 @@ const LocalMarket: React.FC = () => {
                       </Row>
                     </div>
                   </div>
-                  {localMarket.item.estruturas.length > 0 && (
+                  {localMarket.item?.estruturas?.length > 0 && (
                     <>
                       <h3>Estruturas</h3>
                       <Row className="border-top pt-3 mb-5 justify-content-between">
@@ -249,7 +244,7 @@ const LocalMarket: React.FC = () => {
                       </Row>
                     </>
                   )}
-                  {localMarket.item.restricoes.length > 0 && (
+                  {localMarket.item?.restricoes?.length > 0 && (
                     <>
                       <h3>Restrições</h3>
                       <Row className="border-top pt-3 mb-5 justify-content-between">
@@ -268,17 +263,21 @@ const LocalMarket: React.FC = () => {
                       </Row>
                     </>
                   )}
-                  <h3>Formas de pagamento</h3>
-                  <Row className="border-top pt-3 mb-5 justify-content-between">
-                    {localMarket?.item.formas_pagamento.map((pagamento) => (
-                      <Col className="d-flex me-3 col-12 col-md-3">
-                        <IconDiv>
-                          <AiOutlineCheckCircle size={22} />
-                        </IconDiv>
-                        <p>{pagamento.label}</p>
-                      </Col>
-                    ))}
-                  </Row>
+                  {localMarket.item?.formas_pagamento?.length > 0 && (
+                    <>
+                      <h3>Formas de pagamento</h3>
+                      <Row className="border-top pt-3 mb-5 justify-content-between">
+                        {localMarket?.item.formas_pagamento.map((pagamento) => (
+                          <Col className="d-flex me-3 col-12 col-md-3">
+                            <IconDiv>
+                              <AiOutlineCheckCircle size={22} />
+                            </IconDiv>
+                            <p>{pagamento.label}</p>
+                          </Col>
+                        ))}
+                      </Row>
+                    </>
+                  )}
                 </Col>
                 <Col className="col-12 col-md-4 ">
                   <p className="fw-bold">Localização</p>
@@ -292,12 +291,22 @@ const LocalMarket: React.FC = () => {
                   </div>
                   <p className="fw-bold my-2">Conheça nosso app</p>
                   <div className="d-flex">
-                    <img
-                      src={googlePlay}
-                      alt="logo"
-                      className="img-fluid w-50"
-                    />
-                    <img src={appStore} alt="logo" className="img-fluid w-50" />
+                    <a
+                      href="https://play.google.com/store/apps/details?id=com.marica2030.app"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-50 me-1"
+                    >
+                      <img src={googlePlay} alt="logo" className="img-fluid" />
+                    </a>
+                    <a
+                      href="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-50 ms-1"
+                    >
+                      <img src={appStore} alt="logo" className="img-fluid" />
+                    </a>
                   </div>
                 </Col>
               </Row>

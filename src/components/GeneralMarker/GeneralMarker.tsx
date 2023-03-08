@@ -1,38 +1,41 @@
-import { Dispatch, memo, SetStateAction } from 'react'
+import { memo, useRef, useState } from 'react'
 
 import { FaMapMarkerAlt } from 'react-icons/fa'
 
 import MapCard from 'components/MapCard'
 
+import useClickOutside from 'hooks/useClickOutside'
+
 import { TouristicPointType } from 'types/TouristicPointType'
 
-import { Button, IconContainer, Menu } from './styled'
+import { Button, IconContainer, Menu, TriangleDiv } from './styled'
 
 interface IGeneralMarkerProps {
   touristicPoint: TouristicPointType
   lat: number
   lng: number
-  show: boolean
-  setShow: Dispatch<SetStateAction<boolean>>
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const GeneralMarker: React.FC<IGeneralMarkerProps> = ({
-  touristicPoint,
-  show,
-  setShow,
-}) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+const GeneralMarker: React.FC<IGeneralMarkerProps> = ({ touristicPoint }) => {
+  const [show, setShow] = useState(false)
+  const cardRef = useRef<HTMLDivElement>(null)
+  useClickOutside(cardRef, () => setShow(false))
 
   return (
-    <IconContainer>
-      <Button type="button" onClick={() => setShow(!show)}>
-        <FaMapMarkerAlt color="rgb(221, 75, 62)" size={28} />
-      </Button>
-      <Menu show={show}>
-        <MapCard apiContent={touristicPoint} title="malany" />
-      </Menu>
-    </IconContainer>
+    <div style={{ position: 'relative' }} ref={cardRef}>
+      <IconContainer>
+        <Button type="button" onClick={() => setShow(!show)}>
+          <FaMapMarkerAlt color="rgb(221, 75, 62)" size={28} />
+        </Button>
+        {show && (
+          <Menu>
+            <MapCard apiContent={touristicPoint} title={touristicPoint.nome} />
+            {/* <TriangleDiv /> */}
+          </Menu>
+        )}
+      </IconContainer>
+    </div>
   )
 }
 

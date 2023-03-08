@@ -62,10 +62,8 @@ const Hotel: React.FC = () => {
     <Wrapper>
       <Header />
       {loading && (
-        <div className="d-flex flex-column my-5">
-          <div className="d-flex flex-column align-self-center">
-            <Spinner animation="border" variant="primary" className="my-auto" />
-          </div>
+        <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1">
+          <Spinner animation="border" variant="primary" />
         </div>
       )}
       {!loading && !error && hotel && (
@@ -98,7 +96,7 @@ const Hotel: React.FC = () => {
               <Row sm={1} className=" justify-content-between d-flex flex-wrap">
                 <Col className="col-12 col-md-8 ">
                   <div className="d-flex align-items-center">
-                    <Link to="/">
+                    <Link to="/hoteis-e-pousadas">
                       <AiOutlineArrowLeft
                         size={20}
                         style={{ color: 'black' }}
@@ -142,11 +140,8 @@ const Hotel: React.FC = () => {
                           )}
                         </IconDiv>
                         <div className="d-flex flex-column" key={phone.id}>
-                          <p className="d-flex text-start me-3 mb-1">
-                            {phone.nome}
-                          </p>
-                          <p className="d-flex text-start me-3">
-                            {phone.number}
+                          <p className="d-flex text-start me-3 ">
+                            {phone.nome} &nbsp;{phone.number}
                           </p>
                         </div>
                       </div>
@@ -187,82 +182,94 @@ const Hotel: React.FC = () => {
                       </div>
                     ))}
                   </div>
-                  <h3>Comodidades</h3>
-                  <div className="d-flex flex-column border-top pt-3 mb-5">
-                    <div>
-                      <IconDiv>
-                        <IoMdKey size={22} className="me-2" />
-                      </IconDiv>
-                      <span>{hotel?.item.quartos} quartos </span>
-                    </div>
-                    <Row>
-                      <Col className="d-flex mt-3 align-items-center">
-                        <IconDiv>
-                          <RiCupFill size={22} className="me-2" />
-                        </IconDiv>
-                        <div className="d-flex flex-column">
-                          <p className="mb-1">Café da manhã</p>
-                          {hotel?.item.cafe_manha === true ? (
-                            <p>Aceita não-hóspedes</p>
-                          ) : (
-                            ' '
-                          )}
+                  {hotel.item?.quartos > 0 && (
+                    <>
+                      <h3>Comodidades</h3>
+                      <div className="d-flex flex-column border-top pt-3 mb-5">
+                        <div>
+                          <IconDiv>
+                            <IoMdKey size={22} className="me-2" />
+                          </IconDiv>
+                          <span>{hotel?.item.quartos} quartos </span>
                         </div>
-                      </Col>
-                      <Col className="d-flex mt-3 align-items-center">
-                        <IconDiv>
-                          <GiKnifeFork size={22} className="me-2" />
-                        </IconDiv>
-                        <div className="d-flex flex-column">
-                          <p className="mb-1">Almoço</p>
-                          {hotel?.item.almoco === true ? (
-                            <p>Aceita não-hóspedes</p>
-                          ) : (
-                            ' '
-                          )}
-                        </div>
-                      </Col>
-                      <Col className="d-flex mt-3 align-items-center">
-                        <IconDiv>
-                          <MdDinnerDining size={22} className="me-2" />
-                        </IconDiv>
-                        <div className="d-flex flex-column">
-                          <p className="mb-1">Jantar</p>
-                          {hotel?.item.jantar === true ? (
-                            <p>Aceita não-hóspedes</p>
-                          ) : (
-                            ' '
-                          )}
-                        </div>
-                      </Col>
-                    </Row>
-                  </div>
-                  <h3>Estruturas</h3>
-                  <Row className="border-top pt-3 mb-5 justify-content-between">
-                    {hotel.item.estruturas.map((estrutura) => (
-                      <Col className="d-flex me-3 col-12 col-md-3">
-                        <IconDiv>
-                          <SVG
-                            src={estrutura.icone}
-                            fill="rgb(110, 189, 0)"
-                            className="me-2"
-                          />
-                        </IconDiv>
-                        <p>{estrutura.label}</p>
-                      </Col>
-                    ))}
-                  </Row>
-                  <h3>Formas de pagamento</h3>
-                  <Row className="border-top pt-3 mb-5 justify-content-between">
-                    {hotel?.item.formas_pagamento.map((pagamento) => (
-                      <Col className="d-flex me-3 col-12 col-md-3">
-                        <IconDiv>
-                          <AiOutlineCheckCircle size={22} />
-                        </IconDiv>
-                        <p>{pagamento.label}</p>
-                      </Col>
-                    ))}
-                  </Row>
+                        <Row>
+                          <Col className="d-flex mt-3 align-items-center">
+                            <IconDiv>
+                              <RiCupFill size={22} className="me-2" />
+                            </IconDiv>
+                            <div className="d-flex flex-column">
+                              <p className="mb-1">Café da manhã</p>
+                              {hotel?.item.cafe_manha === true ? (
+                                <p>Aceita não-hóspedes</p>
+                              ) : (
+                                ' '
+                              )}
+                            </div>
+                          </Col>
+                          <Col className="d-flex mt-3 align-items-center">
+                            <IconDiv>
+                              <GiKnifeFork size={22} className="me-2" />
+                            </IconDiv>
+                            <div className="d-flex flex-column">
+                              <p className="mb-1">Almoço</p>
+                              {hotel?.item.almoco === true ? (
+                                <p>Aceita não-hóspedes</p>
+                              ) : (
+                                ' '
+                              )}
+                            </div>
+                          </Col>
+                          <Col className="d-flex mt-3 align-items-center">
+                            <IconDiv>
+                              <MdDinnerDining size={22} className="me-2" />
+                            </IconDiv>
+                            <div className="d-flex flex-column">
+                              <p className="mb-1">Jantar</p>
+                              {hotel?.item.jantar === true ? (
+                                <p>Aceita não-hóspedes</p>
+                              ) : (
+                                ' '
+                              )}
+                            </div>
+                          </Col>
+                        </Row>
+                      </div>
+                    </>
+                  )}
+                  {hotel.item?.estruturas.length > 0 && (
+                    <>
+                      <h3>Estruturas</h3>
+                      <Row className="border-top pt-3 mb-5 justify-content-between">
+                        {hotel.item.estruturas.map((estrutura) => (
+                          <Col className="d-flex me-3 col-12 col-md-3">
+                            <IconDiv>
+                              <SVG
+                                src={estrutura.icone}
+                                fill="rgb(110, 189, 0)"
+                                className="me-2"
+                              />
+                            </IconDiv>
+                            <p>{estrutura.label}</p>
+                          </Col>
+                        ))}
+                      </Row>
+                    </>
+                  )}
+                  {hotel.item?.formas_pagamento.length > 0 && (
+                    <>
+                      <h3>Formas de pagamento</h3>
+                      <Row className="border-top pt-3 mb-5 justify-content-between">
+                        {hotel?.item.formas_pagamento.map((pagamento) => (
+                          <Col className="d-flex me-3 col-12 col-md-3">
+                            <IconDiv>
+                              <AiOutlineCheckCircle size={22} />
+                            </IconDiv>
+                            <p>{pagamento.label}</p>
+                          </Col>
+                        ))}
+                      </Row>
+                    </>
+                  )}
                 </Col>
                 <Col className="col-12 col-md-4 ">
                   <p className="fw-bold">Localização</p>
@@ -276,12 +283,22 @@ const Hotel: React.FC = () => {
                   </div>
                   <p className="fw-bold my-2">Conheça nosso app</p>
                   <div className="d-flex">
-                    <img
-                      src={googlePlay}
-                      alt="logo"
-                      className="img-fluid w-50"
-                    />
-                    <img src={appStore} alt="logo" className="img-fluid w-50" />
+                    <a
+                      href="https://play.google.com/store/apps/details?id=com.marica2030.app"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-50 me-1"
+                    >
+                      <img src={googlePlay} alt="logo" className="img-fluid" />
+                    </a>
+                    <a
+                      href="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-50 ms-1"
+                    >
+                      <img src={appStore} alt="logo" className="img-fluid" />
+                    </a>
                   </div>
                 </Col>
               </Row>

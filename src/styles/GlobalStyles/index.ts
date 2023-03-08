@@ -19,6 +19,15 @@ body {
     position: relative;
     margin: 0;
     flex: 1 0 auto;
+
+    .slick-prev {
+  left: 3% !important;
+  z-index: 1;
+}
+.slick-next {
+  right: 3% !important;
+  z-index: 1;
+}
 }
 
 footer {

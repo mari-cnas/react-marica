@@ -73,7 +73,7 @@ const Home: React.FC = () => {
                   icon={RiMotorbikeFill}
                   title="Delivery"
                   description="Receba o melhor de Maricá no conforto da sua casa"
-                  page="/delivery"
+                  page="#"
                 />
               </Col>
               <Col className="d-flex col-6 col-md-4 ">

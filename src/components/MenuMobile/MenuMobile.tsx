@@ -40,31 +40,40 @@ const MenuMobile: React.FC<IMenuMobileProps> = ({
         />
         <nav>
           <Link to="/">
-            <AiFillHome /> Inicial
+            <AiFillHome />
+            &nbsp;Inicial
           </Link>
           <Link to="/sobre">
-            <HiOutlineLibrary /> Sobre a cidade
+            <HiOutlineLibrary />
+            &nbsp;Sobre a cidade
           </Link>
           <Link to="/pontos-turisticos">
-            <FaUmbrellaBeach /> Pontos Turísticos
+            <FaUmbrellaBeach />
+            &nbsp;Pontos Turísticos
           </Link>
           <Link to="/hoteis-e-pousadas">
-            <MdHotel /> Hotéis e Pousadas
+            <MdHotel />
+            &nbsp;Hotéis e Pousadas
           </Link>
           <Link to="/bares-e-restaurantes">
-            <GiForkKnifeSpoon /> Bares e Restaurantes
+            <GiForkKnifeSpoon />
+            &nbsp;Bares e Restaurantes
           </Link>
           <Link to="/delivery">
-            <RiMotorbikeFill /> Delivery
+            <RiMotorbikeFill />
+            &nbsp;Delivery
           </Link>
           <Link to="/comercio-local">
-            <MdStore /> Comércio Local
+            <MdStore />
+            &nbsp;Comércio Local
           </Link>
           <Link to="/espacos-para-eventos">
-            <GiMicrophone /> Espaços para Eventos
+            <GiMicrophone />
+            &nbsp;Espaços para Eventos
           </Link>
           <Link to="/eventos">
-            <FaRegCalendarAlt /> Eventos
+            <FaRegCalendarAlt />
+            &nbsp;Eventos
           </Link>
           <a
             href="https://contato.site/5d9bab8/marica-cvb3/paginaprincipal"
@@ -72,14 +81,15 @@ const MenuMobile: React.FC<IMenuMobileProps> = ({
             rel="noreferrer"
           >
             <FaRoute />
-            Roteiros Turísticos
+            &nbsp; Roteiros Turísticos
           </a>
           <a
             href="http://www.feirartemarica.com.br/"
             target="_blank"
             rel="noreferrer"
           >
-            <SiApacheairflow /> Artesanato
+            <SiApacheairflow />
+            &nbsp; Artesanato
           </a>
         </nav>
       </MenuContainer>

@@ -41,11 +41,11 @@ const leave = keyframes`
     }
 `
 
-export const MenuContainer = styled.section<IMenuContainerProps>`
+export const MenuContainer = styled.div<IMenuContainerProps>`
   position: fixed;
   backdrop-filter: blur(3px);
   width: 300px;
-  height: 100vh;
+  //height: 100vh;
   top: 0;
   right: 0;
   left: ${(props) => (props.isVisible ? 0 : -300)}px;
@@ -70,17 +70,39 @@ export const MenuContainer = styled.section<IMenuContainerProps>`
     flex-direction: column;
     gap: 2rem;
   }
+
+  /* unvisited link */
+  a:link {
+    color: white;
+    text-decoration: none;
+  }
+
+  /* visited link */
+  a:visited {
+    color: white;
+  }
+
+  /* mouse over link */
+  a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+
+  /* selected link */
+  a:active {
+    color: white;
+  }
 `
 export const MenuOverlay = styled.div<IMenuProps>`
   opacity: ${(props) => (props.menuIsVisible ? 1 : 0)};
   visibility: ${(props) => (props.menuIsVisible ? 'visible' : 'hidden')};
   animation: ${(props) => (props.menuIsVisible ? fadeIn : fadeOut)} 0.2s
     ease-out;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
   transition: all 0.2s ease-out;
   left: 0;
   z-index: 2;
   position: absolute;
-  height: 100vh;
+  height: 100%;
   width: 100%;
 `

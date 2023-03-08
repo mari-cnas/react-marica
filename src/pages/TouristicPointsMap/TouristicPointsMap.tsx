@@ -15,7 +15,7 @@ import { Wrapper } from 'styles/GlobalStyles'
 import { ButtonContainer, LinkBackToHome, PageTitle } from './styled'
 
 const TouristicPointsMap: React.FC = () => {
-  const { touristicPoints } = useTouristicPoints()
+  const { touristicPoints, fetchTouristicPoints } = useTouristicPoints()
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
 
@@ -23,6 +23,12 @@ const TouristicPointsMap: React.FC = () => {
     setTitle(t('Mapa | Pontos Turísticos'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
+
+  useEffect(() => {
+    fetchTouristicPoints()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchTouristicPoints])
+
   return (
     <Wrapper>
       <Header />

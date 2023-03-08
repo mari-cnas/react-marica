@@ -61,10 +61,8 @@ const EventSpace: React.FC = () => {
     <Wrapper>
       <Header />
       {loading && (
-        <div className="d-flex flex-column my-5">
-          <div className="d-flex flex-column align-self-center">
-            <Spinner animation="border" variant="primary" className="my-auto" />
-          </div>
+        <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1">
+          <Spinner animation="border" variant="primary" />
         </div>
       )}
       {!loading && !error && eventSpace && (
@@ -96,14 +94,14 @@ const EventSpace: React.FC = () => {
               <Row sm={1} className=" justify-content-between d-flex flex-wrap">
                 <Col className="col-12 col-md-8 ">
                   <div className="d-flex align-items-center">
-                    <Link to="/">
+                    <Link to="/espacos-para-eventos">
                       <AiOutlineArrowLeft
                         size={20}
                         style={{ color: 'black' }}
                       />
                     </Link>
                     <div className="d-flex flex-column mx-2">
-                      <p className="mb-1">Comércio Local</p>
+                      <p className="mb-1">Espaços para Eventos</p>
                       <h2 className="mb-4">{eventSpace.item.nome}</h2>
                     </div>
                   </div>
@@ -140,11 +138,8 @@ const EventSpace: React.FC = () => {
                           )}
                         </IconDiv>
                         <div className="d-flex flex-column" key={phone.id}>
-                          <p className="d-flex text-start me-3 mb-1">
-                            {phone.nome}
-                          </p>
-                          <p className="d-flex text-start me-3">
-                            {phone.number}
+                          <p className="d-flex text-start me-3 ">
+                            {phone.nome} &nbsp; {phone.number}
                           </p>
                         </div>
                       </div>
@@ -289,20 +284,18 @@ const EventSpace: React.FC = () => {
                       </Row>
                     </>
                   )}
-                  {eventSpace.item.estruturas.length > 0 && (
+                  {eventSpace.item.equipamentos.length > 0 && (
                     <>
-                      <h3>Estruturas</h3>
+                      <h3>Equipamentos</h3>
                       <Row className="border-top pt-3 mb-5 justify-content-between">
-                        {eventSpace.item.estruturas.map((estrutura) => (
+                        {eventSpace.item.equipamentos.map((equipamento) => (
                           <Col className="d-flex me-3 col-12 col-md-3">
                             <IconDiv>
-                              <SVG
-                                src={estrutura.icone}
-                                fill="rgb(110, 189, 0)"
-                                className="me-2"
-                              />
+                              <AiOutlineCheckCircle size={22} />
                             </IconDiv>
-                            <p>{estrutura.label}</p>
+                            <p>
+                              {equipamento.total}&nbsp;{equipamento.label}
+                            </p>
                           </Col>
                         ))}
                       </Row>
@@ -327,17 +320,21 @@ const EventSpace: React.FC = () => {
                       </Row>
                     </>
                   )}
-                  <h3>Formas de pagamento</h3>
-                  <Row className="border-top pt-3 mb-5 justify-content-between">
-                    {eventSpace?.item.formas_pagamento.map((pagamento) => (
-                      <Col className="d-flex me-3 col-12 col-md-3">
-                        <IconDiv>
-                          <AiOutlineCheckCircle size={22} />
-                        </IconDiv>
-                        <p>{pagamento.label}</p>
-                      </Col>
-                    ))}
-                  </Row>
+                  {eventSpace.item.formas_pagamento.length > 0 && (
+                    <>
+                      <h3>Formas de pagamento</h3>
+                      <Row className="border-top pt-3 mb-5 justify-content-between">
+                        {eventSpace?.item.formas_pagamento.map((pagamento) => (
+                          <Col className="d-flex me-3 col-12 col-md-3">
+                            <IconDiv>
+                              <AiOutlineCheckCircle size={22} />
+                            </IconDiv>
+                            <p>{pagamento.label}</p>
+                          </Col>
+                        ))}
+                      </Row>
+                    </>
+                  )}
                 </Col>
                 <Col className="col-12 col-md-4 ">
                   <p className="fw-bold">Localização</p>
@@ -351,12 +348,22 @@ const EventSpace: React.FC = () => {
                   </div>
                   <p className="fw-bold my-2">Conheça nosso app</p>
                   <div className="d-flex">
-                    <img
-                      src={googlePlay}
-                      alt="logo"
-                      className="img-fluid w-50"
-                    />
-                    <img src={appStore} alt="logo" className="img-fluid w-50" />
+                    <a
+                      href="https://play.google.com/store/apps/details?id=com.marica2030.app"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-50 me-1"
+                    >
+                      <img src={googlePlay} alt="logo" className="img-fluid" />
+                    </a>
+                    <a
+                      href="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-50 ms-1"
+                    >
+                      <img src={appStore} alt="logo" className="img-fluid" />
+                    </a>
                   </div>
                 </Col>
               </Row>

@@ -18,7 +18,7 @@ import useTitle from 'hooks/useTitle'
 
 import { Wrapper } from 'styles/GlobalStyles'
 
-import { HomeBg, InputBox, MapButton } from './styled'
+import { HomeBg, InputBox, MapButton, MapLink } from './styled'
 
 const TouristicPoints: React.FC = () => {
   const { t, i18n } = useTranslation()
@@ -98,12 +98,12 @@ const TouristicPoints: React.FC = () => {
                 </div>
               </Col>
               <Col className="d-flex flex-column flex-md-row align-items-center justify-content-end">
-                <Link to="/pontos-turisticos/mapa">
+                <MapLink to="/pontos-turisticos/mapa">
                   <MapButton className="me-3 my-2 py-2 px-3">
                     <FaMapMarkedAlt className="me-1" />
                     Mapa
                   </MapButton>
-                </Link>
+                </MapLink>
                 <InputBox>
                   <input
                     type="text"

@@ -1,4 +1,6 @@
-import { Dispatch, memo, SetStateAction, useCallback } from 'react'
+import { Dispatch, memo, SetStateAction, useCallback, useState } from 'react'
+
+import { useNavigate } from 'react-router-dom'
 
 import { CategoryType } from 'types/CategoryType'
 
@@ -8,19 +10,27 @@ interface ICategoryProps {
   categories: CategoryType[] | undefined
   fetchCategory: (id: number) => void
   setCategoryValue?: Dispatch<SetStateAction<string>>
+  pageNavigate?: boolean
 }
 
 const Category: React.FC<ICategoryProps> = ({
   categories,
   fetchCategory,
   setCategoryValue,
+  pageNavigate,
 }) => {
+  const navigate = useNavigate()
+  const [pgNavigate, setPgNavigate] = useState(pageNavigate)
   const handleCategoryButton = useCallback(
     (categoryId: number, categoryValue: string) => {
+      // setPgNavigate(pageNavigate)
+      if (pgNavigate === true) navigate(`/pontos-turisticos`)
       fetchCategory(categoryId)
       if (setCategoryValue) setCategoryValue(categoryValue)
+      setPgNavigate(false)
+      console.log(pgNavigate)
     },
-    [fetchCategory, setCategoryValue],
+    [fetchCategory, setCategoryValue, navigate, pgNavigate],
   )
 
   return (
@@ -40,16 +50,4 @@ const Category: React.FC<ICategoryProps> = ({
     </div>
   )
 }
-
 export default memo(Category)
-
-// {categories?.map((category) => (
-//   <Category
-//     className="me-2 my-2"
-//     key={category.id}
-//     value={category.label}
-//     onClick={handleSearch}
-//   >
-//     {category.label}
-//   </Category>
-// ))}

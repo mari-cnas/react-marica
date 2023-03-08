@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useCallback, useState } from 'react'
 
 import { getDate, getHours, getMinutes, getYear } from 'date-fns'
 import { Spinner, Col, Container, Row } from 'react-bootstrap'
@@ -16,11 +16,12 @@ import { BsTelephone, BsWhatsapp } from 'react-icons/bs'
 import { FaRegMoneyBillAlt } from 'react-icons/fa'
 import { TbWorld } from 'react-icons/tb'
 import SVG from 'react-inlinesvg'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
 
 import { useEvents } from 'context/EventsContext'
 
+import Category from 'components/Category'
 import Footer from 'components/Footer'
 import GoogleMap from 'components/GoogleMap'
 import Header from 'components/Header'
@@ -38,13 +39,23 @@ import { Wrapper } from 'styles/GlobalStyles'
 
 import appStore from '../../assets/app-store.png'
 import googlePlay from '../../assets/google-play.png'
-import { Categories, HomeBg, IconDiv, ImageDiv } from './styled'
+import { HomeBg, IconDiv, ImageDiv } from './styled'
 
 const Event: React.FC = () => {
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
-  const { loading, error, event, fetchEvent } = useEvents()
+  const {
+    loading,
+    error,
+    event,
+    categories,
+    fetchCategory,
+    fetchEvent,
+    searchEvents,
+  } = useEvents()
   const { id } = useParams()
+  const [categoryValue, setCategoryValue] = useState('')
+  const navigate = useNavigate()
 
   const settings = {
     dots: true,
@@ -53,6 +64,12 @@ const Event: React.FC = () => {
     slidesToShow: 4,
     slidesToScroll: 1,
   }
+
+  const returnToList = useCallback(() => {
+    navigate(categoryValue.length > 0 ? `/eventos` : `/`)
+    setCategoryValue('')
+    searchEvents('')
+  }, [navigate, categoryValue, setCategoryValue, searchEvents])
 
   useEffect(() => {
     if (event?.item?.nome) setTitle(t(`${event.item?.nome} | Eventos`))
@@ -68,10 +85,8 @@ const Event: React.FC = () => {
     <Wrapper>
       <Header />
       {loading && (
-        <div className="d-flex flex-column my-5">
-          <div className="d-flex flex-column align-self-center">
-            <Spinner animation="border" variant="primary" className="my-auto" />
-          </div>
+        <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1">
+          <Spinner animation="border" variant="primary" />
         </div>
       )}
       {!loading && !error && event && (
@@ -104,11 +119,17 @@ const Event: React.FC = () => {
               <Row sm={1} className=" justify-content-between d-flex flex-wrap">
                 <Col className="col-12 col-md-8 ">
                   <div className="d-flex align-items-center">
-                    <Link to="/">
-                      <AiOutlineArrowLeft
-                        size={20}
-                        style={{ color: 'black' }}
-                      />
+                    <Link to="/eventos">
+                      <button
+                        type="button"
+                        onClick={returnToList}
+                        style={{ border: 'none' }}
+                      >
+                        <AiOutlineArrowLeft
+                          size={20}
+                          style={{ color: 'black' }}
+                        />
+                      </button>
                     </Link>
                     <div className="d-flex flex-column mx-2">
                       <p className="mb-1">Eventos</p>
@@ -116,14 +137,11 @@ const Event: React.FC = () => {
                     </div>
                   </div>
                   <div className="d-flex flex-md-wrap">
-                    {event.item.categorias.map((categoria) => (
-                      <Categories
-                        className="d-flex text-start me-3 mb-3"
-                        key={categoria.id}
-                      >
-                        {categoria.label}
-                      </Categories>
-                    ))}
+                    <Category
+                      categories={categories}
+                      fetchCategory={fetchCategory}
+                      setCategoryValue={setCategoryValue}
+                    />
                   </div>
                   {event?.item.datahora_inicio_f && event?.item.datahora_fim_f && (
                     <div className="d-flex">
@@ -204,11 +222,8 @@ const Event: React.FC = () => {
                           )}
                         </IconDiv>
                         <div className="d-flex flex-column" key={phone.id}>
-                          <p className="d-flex text-start me-3 mb-1">
-                            {phone.nome}
-                          </p>
                           <p className="d-flex text-start me-3">
-                            {phone.number}
+                            {phone.nome} &nbsp; {phone.number}
                           </p>
                         </div>
                       </div>
@@ -270,30 +285,15 @@ const Event: React.FC = () => {
                       </div>
                     ))}
                   </div>
-                  <h3>Valor de Entrada</h3>
-                  <div className="border-top pt-3 mb-5 d-flex">
-                    <IconDiv>
-                      <FaRegMoneyBillAlt className="me-2" />
-                    </IconDiv>
-                    <p>{event.item.gratuito === 1 ? 'Gratuita' : ''}</p>
-                  </div>
-                  {event.item.estruturas.length > 0 && (
+                  {event.item?.gratuito === 1 && (
                     <>
-                      <h3>Estruturas</h3>
-                      <Row className="border-top pt-3 mb-5 justify-content-between">
-                        {event.item.estruturas.map((estrutura) => (
-                          <Col className="d-flex me-3 col-12 col-md-3">
-                            <IconDiv>
-                              <SVG
-                                src={estrutura.icone}
-                                fill="rgb(110, 189, 0)"
-                                className="me-2"
-                              />
-                            </IconDiv>
-                            <p>{estrutura.label}</p>
-                          </Col>
-                        ))}
-                      </Row>
+                      <h3>Valor de Entrada</h3>
+                      <div className="border-top pt-3 mb-5 d-flex">
+                        <IconDiv>
+                          <FaRegMoneyBillAlt className="me-2" />
+                        </IconDiv>
+                        <p>{event.item.gratuito === 1 ? 'Gratuita' : ''}</p>
+                      </div>
                     </>
                   )}
                   {event.item.estruturas.length > 0 && (

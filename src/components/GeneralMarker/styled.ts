@@ -1,25 +1,4 @@
-import styled, { keyframes } from 'styled-components'
-
-interface IMenuProps {
-  show: boolean
-}
-
-const fadeIn = keyframes`
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
-`
-const fadeOut = keyframes`
-    from{
-        opacity: 1;
-    }
-    to{
-        opacity: 0;
-    }
-`
+import styled from 'styled-components'
 
 export const IconContainer = styled.div`
   height: 30px;
@@ -32,21 +11,36 @@ export const Button = styled.button`
   background-color: transparent;
   border: none;
 `
-export const MenuOverlay = styled.div<IMenuProps>`
-  opacity: ${(props) => (props.show ? 1 : 0)};
-  visibility: ${(props) => (props.show ? 'visible' : 'hidden')};
-  animation: ${(props) => (props.show ? fadeIn : fadeOut)} 0.2s ease-out;
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: all 0.2s ease-out;
-  z-index: 2;
-`
-export const Menu = styled.div<IMenuProps>`
+export const Menu = styled.div`
+  position: absolute;
+  top: -30px;
+  left: 0px;
+  transform: translate(-50%, -100%);
   width: 300px;
-  opacity: ${(props) => (props.show ? 1 : 0)};
-  visibility: ${(props) => (props.show ? 'visible' : 'hidden')};
-  animation: ${(props) => (props.show ? fadeIn : fadeOut)} 0.2s ease-out;
-  z-index: 3;
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
+`
+export const TriangleDiv = styled.div`
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    width: 0px;
+    height: 0px;
+    border-width: 10px 10px 0px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-image: initial;
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-style: initial;
+    border-bottom-color: initial;
+    margin-left: -10px;
+    margin-bottom: -10px;
+  }
 `

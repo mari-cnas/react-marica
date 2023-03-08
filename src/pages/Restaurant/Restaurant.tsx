@@ -71,10 +71,8 @@ const Restaurant: React.FC = () => {
     <Wrapper>
       <Header />
       {loading && (
-        <div className="d-flex flex-column my-5">
-          <div className="d-flex flex-column align-self-center">
-            <Spinner animation="border" variant="primary" className="my-auto" />
-          </div>
+        <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1">
+          <Spinner animation="border" variant="primary" />
         </div>
       )}
       {!loading && !error && restaurant && (
@@ -107,14 +105,14 @@ const Restaurant: React.FC = () => {
               <Row sm={1} className=" justify-content-between d-flex flex-wrap">
                 <Col className="col-12 col-md-8 ">
                   <div className="d-flex align-items-center">
-                    <Link to="/">
+                    <Link to="/bares-e-restaurantes">
                       <AiOutlineArrowLeft
                         size={20}
                         style={{ color: 'black' }}
                       />
                     </Link>
                     <div className="d-flex flex-column mx-2">
-                      <p className="mb-1"> Pontos Turísticos</p>
+                      <p className="mb-1">Bares e Restaurantes</p>
                       <h2 className="mb-4">{restaurant.item.nome}</h2>
                     </div>
                   </div>
@@ -147,8 +145,7 @@ const Restaurant: React.FC = () => {
                           <BsTelephone size={22} className="me-2" />
                         </IconDiv>
                         <p className="d-flex text-start me-3" key={phone.id}>
-                          {phone.nome}
-                          {phone.number}
+                          {phone.nome} &nbsp;{phone.number}
                         </p>
                       </div>
                     ))}
@@ -229,69 +226,89 @@ const Restaurant: React.FC = () => {
                         )}
                     </IconDiv>
                   </div>
-                  <h3>Refeições</h3>
-                  <Row className="border-top pt-3 mb-5 justify-content-between">
-                    {restaurant?.item.refeicoes.map((refeicao) => (
-                      <Col className="d-flex me-3 col-12 col-md-3">
-                        <IconDiv>
-                          <AiOutlineCheckCircle size={22} />
-                        </IconDiv>
-                        <p>{refeicao.label}</p>
-                      </Col>
-                    ))}
-                  </Row>
-                  <h3>Cozinhas</h3>
-                  <Row className="border-top pt-3 mb-5 justify-content-between">
-                    {restaurant?.item.cozinhas.map((cozinha) => (
-                      <Col className="d-flex me-3 col-12 col-md-3">
-                        <IconDiv>
-                          <AiOutlineCheckCircle size={22} />
-                        </IconDiv>
-                        <p>{cozinha.label}</p>
-                      </Col>
-                    ))}
-                  </Row>
-                  <h3>Estruturas</h3>
-                  <Row className="border-top pt-3 mb-5 justify-content-between">
-                    {restaurant.item.estruturas.map((estrutura) => (
-                      <Col className="d-flex me-3 col-12 col-md-3">
-                        <IconDiv>
-                          <SVG
-                            src={estrutura.icone}
-                            fill="rgb(110, 189, 0)"
-                            className="me-2"
-                          />
-                        </IconDiv>
-                        <p>{estrutura.label}</p>
-                      </Col>
-                    ))}
-                  </Row>
-                  <h3>Restrições</h3>
-                  <Row className="border-top pt-3 mb-5 justify-content-between">
-                    {restaurant.item.restricoes.map((restricao) => (
-                      <Col className="d-flex me-3 col-12 col-md-3">
-                        <IconDiv>
-                          <SVG
-                            src={restricao.icone}
-                            fill="rgb(110, 189, 0)"
-                            className="me-2"
-                          />
-                        </IconDiv>
-                        <p>{restricao.label}</p>
-                      </Col>
-                    ))}
-                  </Row>
-                  <h3>Formas de pagamento</h3>
-                  <Row className="border-top pt-3 mb-5 justify-content-between">
-                    {restaurant?.item.formas_pagamento.map((pagamento) => (
-                      <Col className="d-flex me-3 col-12 col-md-3">
-                        <IconDiv>
-                          <AiOutlineCheckCircle size={22} />
-                        </IconDiv>
-                        <p>{pagamento.label}</p>
-                      </Col>
-                    ))}
-                  </Row>
+                  {restaurant.item?.refeicoes?.length > 0 && (
+                    <>
+                      <h3>Refeições</h3>
+                      <Row className="border-top pt-3 mb-5 justify-content-between">
+                        {restaurant?.item.refeicoes.map((refeicao) => (
+                          <Col className="d-flex me-3 col-12 col-md-3">
+                            <IconDiv>
+                              <AiOutlineCheckCircle size={22} />
+                            </IconDiv>
+                            <p>{refeicao.label}</p>
+                          </Col>
+                        ))}
+                      </Row>
+                    </>
+                  )}
+                  {restaurant.item?.refeicoes?.length > 0 && (
+                    <>
+                      <h3>Cozinhas</h3>
+                      <Row className="border-top pt-3 mb-5 justify-content-between">
+                        {restaurant?.item.cozinhas.map((cozinha) => (
+                          <Col className="d-flex me-3 col-12 col-md-3">
+                            <IconDiv>
+                              <AiOutlineCheckCircle size={22} />
+                            </IconDiv>
+                            <p>{cozinha.label}</p>
+                          </Col>
+                        ))}
+                      </Row>
+                    </>
+                  )}
+                  {restaurant.item?.estruturas?.length > 0 && (
+                    <>
+                      <h3>Estruturas</h3>
+                      <Row className="border-top pt-3 mb-5 justify-content-between">
+                        {restaurant.item.estruturas.map((estrutura) => (
+                          <Col className="d-flex me-3 col-12 col-md-3">
+                            <IconDiv>
+                              <SVG
+                                src={estrutura.icone}
+                                fill="rgb(110, 189, 0)"
+                                className="me-2"
+                              />
+                            </IconDiv>
+                            <p>{estrutura.label}</p>
+                          </Col>
+                        ))}
+                      </Row>
+                    </>
+                  )}
+                  {restaurant.item?.restricoes?.length > 0 && (
+                    <>
+                      <h3>Restrições</h3>
+                      <Row className="border-top pt-3 mb-5 justify-content-between">
+                        {restaurant.item.restricoes.map((restricao) => (
+                          <Col className="d-flex me-3 col-12 col-md-3">
+                            <IconDiv>
+                              <SVG
+                                src={restricao.icone}
+                                fill="rgb(110, 189, 0)"
+                                className="me-2"
+                              />
+                            </IconDiv>
+                            <p>{restricao.label}</p>
+                          </Col>
+                        ))}
+                      </Row>
+                    </>
+                  )}
+                  {restaurant.item?.formas_pagamento?.length > 0 && (
+                    <>
+                      <h3>Formas de pagamento</h3>
+                      <Row className="border-top pt-3 mb-5 justify-content-between">
+                        {restaurant?.item.formas_pagamento.map((pagamento) => (
+                          <Col className="d-flex me-3 col-12 col-md-3">
+                            <IconDiv>
+                              <AiOutlineCheckCircle size={22} />
+                            </IconDiv>
+                            <p>{pagamento.label}</p>
+                          </Col>
+                        ))}
+                      </Row>
+                    </>
+                  )}
                 </Col>
                 <Col className="col-12 col-md-4 ">
                   <p className="fw-bold">Localização</p>
@@ -305,12 +322,22 @@ const Restaurant: React.FC = () => {
                   </div>
                   <p className="fw-bold my-2">Conheça nosso app</p>
                   <div className="d-flex">
-                    <img
-                      src={googlePlay}
-                      alt="logo"
-                      className="img-fluid w-50"
-                    />
-                    <img src={appStore} alt="logo" className="img-fluid w-50" />
+                    <a
+                      href="https://play.google.com/store/apps/details?id=com.marica2030.app"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-50 me-1"
+                    >
+                      <img src={googlePlay} alt="logo" className="img-fluid" />
+                    </a>
+                    <a
+                      href="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-50 ms-1"
+                    >
+                      <img src={appStore} alt="logo" className="img-fluid" />
+                    </a>
                   </div>
                 </Col>
               </Row>
