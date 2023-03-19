@@ -9,4 +9,5 @@ export type EventType = {
   lng: number
   categorias: CategoryType[]
   enderecos: AddressType[]
+  datahora_inicio: string
 }

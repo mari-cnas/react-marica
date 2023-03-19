@@ -118,110 +118,138 @@ const EventSpace: React.FC = () => {
                   <p className="mb-5">{eventSpace.item.descricao_t}</p>
                   <h3>Sobre</h3>
                   <div className="border-top mb-5">
-                    {eventSpace.item.addresses.map((address) => (
-                      <div className="d-flex mt-3">
-                        <IconDiv>
-                          <BiMap size={22} className="me-2" />
-                        </IconDiv>
-                        <p className="d-flex text-start me-3" key={address.id}>
-                          {address.label}
-                        </p>
-                      </div>
-                    ))}
-                    {eventSpace?.item.phones.map((phone) => (
-                      <div className="d-flex align-items-center">
-                        <IconDiv>
-                          {phone.whatsapp === true ? (
-                            <BsWhatsapp size={22} className="me-2" />
-                          ) : (
-                            <BsTelephone size={22} className="me-2" />
-                          )}
-                        </IconDiv>
-                        <div className="d-flex flex-column" key={phone.id}>
-                          <p className="d-flex text-start me-3 ">
-                            {phone.nome} &nbsp; {phone.number}
-                          </p>
+                    {eventSpace.item.addresses != null && (
+                      <>
+                        {eventSpace.item.addresses.map((address) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <BiMap size={22} className="me-2" />
+                            </IconDiv>
+                            <p
+                              className="d-flex text-start me-3"
+                              key={address.id}
+                            >
+                              {address.label}
+                            </p>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {eventSpace.item.phones != null && (
+                      <>
+                        {eventSpace?.item.phones.map((phone) => (
+                          <div className="d-flex ">
+                            <IconDiv>
+                              {phone.whatsapp === true ? (
+                                <BsWhatsapp size={22} className="me-2" />
+                              ) : (
+                                <BsTelephone size={22} className="me-2" />
+                              )}
+                            </IconDiv>
+                            <div className="d-flex flex-column" key={phone.id}>
+                              <p className="d-flex text-start me-3 ">
+                                {phone.nome} &nbsp; {phone.number}
+                              </p>
+                            </div>
+                          </div>
+                        ))}{' '}
+                      </>
+                    )}
+                    {eventSpace.item.email != null && (
+                      <>
+                        <div className="d-flex ">
+                          <IconDiv>
+                            <AiOutlineMail size={22} className="me-2" />
+                          </IconDiv>
+                          <span>{eventSpace?.item.email}</span>
                         </div>
-                      </div>
-                    ))}
-                    <div className="d-flex ">
-                      <IconDiv>
-                        <AiOutlineMail size={22} className="me-2" />
-                      </IconDiv>
-                      <span>{eventSpace?.item.email}</span>
-                    </div>
-                    {eventSpace.item.site && (
-                      <div className="d-flex mt-3">
+                        {eventSpace.item.site != null && (
+                          <>
+                            {eventSpace.item.site && (
+                              <div className="d-flex mt-3">
+                                <IconDiv>
+                                  <TbWorld size={22} className="me-2" />
+                                </IconDiv>
+                                <a
+                                  href={eventSpace?.item.site}
+                                  target="_blank"
+                                  className=" text-decoration-none"
+                                  rel="noreferrer"
+                                >
+                                  {eventSpace?.item.site}
+                                </a>
+                              </div>
+                            )}{' '}
+                          </>
+                        )}
+                      </>
+                    )}
+                    {eventSpace.item.redes.length > 0 && (
+                      <>
+                        {eventSpace.item.redes.map((rede) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              {rede.nome === 'Facebook' ? (
+                                <div className="d-flex">
+                                  <AiFillFacebook size={22} className="me-2" />
+                                  <a
+                                    href={rede.url}
+                                    target="_blank"
+                                    className="d-flex text-start me-3 text-decoration-none"
+                                    key={rede.nome}
+                                    rel="noreferrer"
+                                  >
+                                    {rede.user}
+                                  </a>
+                                </div>
+                              ) : (
+                                <div className="d-flex">
+                                  <AiOutlineInstagram
+                                    size={22}
+                                    className="me-2"
+                                  />
+                                  <a
+                                    href={rede.url}
+                                    target="_blank"
+                                    className="d-flex text-start me-3 text-decoration-none"
+                                    key={rede.nome}
+                                    rel="noreferrer"
+                                  >
+                                    {rede.user}
+                                  </a>
+                                </div>
+                              )}
+                            </IconDiv>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {eventSpace.item.horario_funcionamento.length > 0 && (
+                      <div className="d-flex mt-3 w-50">
                         <IconDiv>
-                          <TbWorld size={22} className="me-2" />
+                          <AiOutlineClockCircle size={22} className="me-2" />
                         </IconDiv>
-                        <a
-                          href={eventSpace?.item.site}
-                          target="_blank"
-                          className=" text-decoration-none"
-                          rel="noreferrer"
-                        >
-                          {eventSpace?.item.site}
-                        </a>
+                        <Row>
+                          <Col className="col-4">
+                            {eventSpace.item.horario_funcionamento.map(
+                              (horario) => (
+                                <p className="fw-bold">{horario.label}</p>
+                              ),
+                            )}
+                          </Col>
+                          <Col className="col-8">
+                            {eventSpace.item.horario_funcionamento.map(
+                              (horario) => (
+                                <p>
+                                  {horario.horario.abre} às{' '}
+                                  {horario.horario.fecha}
+                                </p>
+                              ),
+                            )}
+                          </Col>
+                        </Row>
                       </div>
                     )}
-                    {eventSpace.item.redes.map((rede) => (
-                      <div className="d-flex mt-3">
-                        <IconDiv>
-                          {rede.nome === 'Facebook' ? (
-                            <div className="d-flex">
-                              <AiFillFacebook size={22} className="me-2" />
-                              <a
-                                href={rede.url}
-                                target="_blank"
-                                className="d-flex text-start me-3 text-decoration-none"
-                                key={rede.nome}
-                                rel="noreferrer"
-                              >
-                                {rede.user}
-                              </a>
-                            </div>
-                          ) : (
-                            <div className="d-flex">
-                              <AiOutlineInstagram size={22} className="me-2" />
-                              <a
-                                href={rede.url}
-                                target="_blank"
-                                className="d-flex text-start me-3 text-decoration-none"
-                                key={rede.nome}
-                                rel="noreferrer"
-                              >
-                                {rede.user}
-                              </a>
-                            </div>
-                          )}
-                        </IconDiv>
-                      </div>
-                    ))}
-                    <div className="d-flex mt-3 w-50">
-                      <IconDiv>
-                        <AiOutlineClockCircle size={22} className="me-2" />
-                      </IconDiv>
-                      <Row>
-                        <Col className="col-4">
-                          {eventSpace.item.horario_funcionamento.map(
-                            (horario) => (
-                              <p className="fw-bold">{horario.label}</p>
-                            ),
-                          )}
-                        </Col>
-                        <Col className="col-8">
-                          {eventSpace.item.horario_funcionamento.map(
-                            (horario) => (
-                              <p>
-                                {horario.horario.abre} às{' '}
-                                {horario.horario.fecha}
-                              </p>
-                            ),
-                          )}
-                        </Col>
-                      </Row>
-                    </div>
                   </div>
                   {eventSpace.item.espacos.length > 0 && (
                     <>

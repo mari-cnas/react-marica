@@ -1,4 +1,4 @@
-import { format, getMonth } from 'date-fns'
+import { format, getMinutes, getMonth } from 'date-fns'
 import slugify from 'slugify'
 
 export const strToSlug = (str: string): string =>
@@ -68,5 +68,32 @@ export const getMonthAbbreviation = (date: string | number): string => {
       return 'NOV'
     default:
       return 'DEZ'
+  }
+}
+
+export const normalizeMinutes = (min: number | Date): string => {
+  switch (getMinutes(min)) {
+    case 0:
+      return '00'
+    case 1:
+      return '01'
+    case 2:
+      return '02'
+    case 3:
+      return '03'
+    case 4:
+      return '04'
+    case 5:
+      return '05'
+    case 6:
+      return '06'
+    case 7:
+      return '07'
+    case 8:
+      return '08'
+    case 9:
+      return '09'
+    default:
+      return String(getMinutes(min))
   }
 }

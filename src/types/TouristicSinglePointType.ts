@@ -20,6 +20,7 @@ export type TouristicSinglePointType = {
       src: string
     }[]
     horario_funcionamento: []
+    preco_t: string
     phones: {
       id: string
       nome: string

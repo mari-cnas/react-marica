@@ -74,7 +74,7 @@ const Events: React.FC = () => {
       {!loading && !error && (
         <HomeBg className="d-flex flex-column py-5">
           <Container className="py-1">
-            <Row className=" justify-content-between">
+            <Row className=" justify-content-between my-3">
               <Col className="d-flex">
                 <div className="d-flex align-items-center">
                   <button
@@ -137,7 +137,11 @@ const Events: React.FC = () => {
             <Row className="justify-content-center row-cols-1 row-cols-md-3">
               {events?.map((point) => (
                 <Col className="d-flex my-2" key={point.id}>
-                  <GeneralCardSlug ponto={point} pagina="eventos" />
+                  <GeneralCardSlug
+                    ponto={point}
+                    pagina="eventos"
+                    startDate={point.datahora_inicio}
+                  />
                 </Col>
               ))}
             </Row>

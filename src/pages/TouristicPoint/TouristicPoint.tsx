@@ -131,42 +131,60 @@ const TouristicPoint: React.FC = () => {
                   <p className="mb-5">{touristicPoint.item.descricao_t}</p>
                   <h3>Sobre</h3>
                   <div className="border-top mb-5">
-                    {touristicPoint.item.addresses.map((address) => (
-                      <div className="d-flex mt-3">
-                        <IconDiv>
-                          <BiMap size={22} className="me-2" />
-                        </IconDiv>
-                        <p className="d-flex text-start me-3" key={address.id}>
-                          {address.label}
-                        </p>
-                      </div>
-                    ))}
-                    {touristicPoint.item.phones.map((phone) => (
-                      <div className="d-flex mt-3">
-                        <IconDiv>
-                          <BsTelephone size={22} className="me-2" />
-                        </IconDiv>
-                        <p className="d-flex text-start me-3" key={phone.id}>
-                          {phone.nome}&nbsp;{phone.number}
-                        </p>
-                      </div>
-                    ))}
-                    {touristicPoint.item.redes.map((rede) => (
-                      <div className="d-flex mt-3">
-                        <IconDiv>
-                          <BsFacebook size={22} className="me-2" />
-                        </IconDiv>
-                        <a
-                          href={rede.url}
-                          className="d-flex text-start me-3 text-decoration-none"
-                          key={rede.nome}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {rede.user}
-                        </a>
-                      </div>
-                    ))}
+                    {touristicPoint.item.addresses != null && (
+                      <>
+                        {touristicPoint.item.addresses.map((address) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <BiMap size={22} className="me-2" />
+                            </IconDiv>
+                            <p
+                              className="d-flex text-start me-3"
+                              key={address.id}
+                            >
+                              {address.label}
+                            </p>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {touristicPoint.item.phones != null && (
+                      <>
+                        {touristicPoint.item.phones.map((phone) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <BsTelephone size={22} className="me-2" />
+                            </IconDiv>
+                            <p
+                              className="d-flex text-start me-3"
+                              key={phone.id}
+                            >
+                              {phone.nome}&nbsp;{phone.number}
+                            </p>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {touristicPoint.item.redes != null && (
+                      <>
+                        {touristicPoint.item.redes.map((rede) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <BsFacebook size={22} className="me-2" />
+                            </IconDiv>
+                            <a
+                              href={rede.url}
+                              className="d-flex text-start me-3 text-decoration-none"
+                              key={rede.nome}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {rede.user}
+                            </a>
+                          </div>
+                        ))}
+                      </>
+                    )}
                   </div>
                   {touristicPoint.item?.dicas_t?.length > 0 && (
                     <>
@@ -176,19 +194,30 @@ const TouristicPoint: React.FC = () => {
                       </div>
                     </>
                   )}
-                  {touristicPoint.item?.gratuito === 1 && (
+                  {touristicPoint?.item?.gratuito === 1 && (
                     <>
                       <h3>Valor de Entrada</h3>
                       <div className="border-top pt-3 mb-5 d-flex">
                         <IconDiv>
                           <FaRegMoneyBillAlt className="me-2" />
                         </IconDiv>
-                        <p>
-                          {touristicPoint.item.gratuito === 1 ? 'Gratuita' : ''}
-                        </p>
+                        <p>Gratuita</p>
                       </div>
                     </>
                   )}
+                  {touristicPoint?.item?.gratuito === 0 &&
+                    touristicPoint?.item?.preco_t && (
+                      <>
+                        <h3>Valor de Entrada</h3>
+                        <div className="border-top pt-3 mb-5 d-flex">
+                          <IconDiv>
+                            <FaRegMoneyBillAlt className="me-2" />
+                          </IconDiv>
+                          <p>{touristicPoint?.item?.preco_t}</p>
+                        </div>
+                      </>
+                    )}
+
                   {touristicPoint.item?.viajantes?.length > 0 && (
                     <>
                       <h3>Tipos de Viajantes</h3>

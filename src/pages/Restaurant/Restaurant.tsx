@@ -129,85 +129,109 @@ const Restaurant: React.FC = () => {
                   <p className="mb-5">{restaurant.item.descricao_t}</p>
                   <h3>Sobre</h3>
                   <div className="border-top mb-5">
-                    {restaurant.item.addresses.map((address) => (
-                      <div className="d-flex mt-3">
+                    {restaurant.item.addresses != null && (
+                      <>
+                        {restaurant.item.addresses.map((address) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <BiMap size={22} className="me-2" />
+                            </IconDiv>
+                            <p
+                              className="d-flex text-start me-3"
+                              key={address.id}
+                            >
+                              {address.label}
+                            </p>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {restaurant.item.phones != null && (
+                      <>
+                        {restaurant.item.phones.map((phone) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <BsTelephone size={22} className="me-2" />
+                            </IconDiv>
+                            <p
+                              className="d-flex text-start me-3"
+                              key={phone.id}
+                            >
+                              {phone.nome} &nbsp;{phone.number}
+                            </p>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {restaurant.item.email != null && (
+                      <div className="d-flex ">
                         <IconDiv>
-                          <BiMap size={22} className="me-2" />
+                          <AiOutlineMail size={22} className="me-2" />
                         </IconDiv>
-                        <p className="d-flex text-start me-3" key={address.id}>
-                          {address.label}
-                        </p>
+                        <span>{restaurant?.item.email}</span>
                       </div>
-                    ))}
-                    {restaurant.item.phones.map((phone) => (
+                    )}
+                    {restaurant.item.site != null && (
                       <div className="d-flex mt-3">
                         <IconDiv>
-                          <BsTelephone size={22} className="me-2" />
-                        </IconDiv>
-                        <p className="d-flex text-start me-3" key={phone.id}>
-                          {phone.nome} &nbsp;{phone.number}
-                        </p>
-                      </div>
-                    ))}
-                    <div className="d-flex ">
-                      <IconDiv>
-                        <AiOutlineMail size={22} className="me-2" />
-                      </IconDiv>
-                      <span>{restaurant?.item.email}</span>
-                    </div>
-                    <div className="d-flex mt-3">
-                      <IconDiv>
-                        <TbWorld size={22} className="me-2" />
-                      </IconDiv>
-                      <a
-                        href={`https://${restaurant?.item.site}`}
-                        target="_blank"
-                        className=" text-decoration-none"
-                        rel="noreferrer"
-                      >
-                        {restaurant?.item.site}
-                      </a>
-                    </div>
-                    {restaurant.item.redes.map((rede) => (
-                      <div className="d-flex mt-3">
-                        <IconDiv>
-                          <BsFacebook size={22} className="me-2" />
+                          <TbWorld size={22} className="me-2" />
                         </IconDiv>
                         <a
-                          href={rede.url}
+                          href={`https://${restaurant?.item.site}`}
                           target="_blank"
-                          className="d-flex text-start me-3 text-decoration-none"
-                          key={rede.nome}
+                          className=" text-decoration-none"
                           rel="noreferrer"
                         >
-                          {rede.user}
+                          {restaurant?.item.site}
                         </a>
                       </div>
-                    ))}
-                    <div className="d-flex mt-3 w-50">
-                      <IconDiv>
-                        <AiOutlineClockCircle size={22} className="me-2" />
-                      </IconDiv>
-                      <Row>
-                        <Col className="col-4">
-                          {restaurant.item.horario_funcionamento.map(
-                            (horario) => (
-                              <p className="fw-bold">{horario.label}</p>
-                            ),
-                          )}
-                        </Col>
-                        <Col className="col-8">
-                          {restaurant.item.horario_funcionamento.map(
-                            (horario) => (
-                              <p>
-                                {horario.horario.abre} às{' '}
-                                {horario.horario.fecha}
-                              </p>
-                            ),
-                          )}
-                        </Col>
-                      </Row>
-                    </div>
+                    )}
+                    {restaurant.item.redes != null && (
+                      <>
+                        {restaurant.item.redes.map((rede) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <BsFacebook size={22} className="me-2" />
+                            </IconDiv>
+                            <a
+                              href={rede.url}
+                              target="_blank"
+                              className="d-flex text-start me-3 text-decoration-none"
+                              key={rede.nome}
+                              rel="noreferrer"
+                            >
+                              {rede.user}
+                            </a>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {restaurant.item.horario_funcionamento.length > 0 && (
+                      <div className="d-flex mt-3 w-50">
+                        <IconDiv>
+                          <AiOutlineClockCircle size={22} className="me-2" />
+                        </IconDiv>
+                        <Row>
+                          <Col className="col-4">
+                            {restaurant.item.horario_funcionamento.map(
+                              (horario) => (
+                                <p className="fw-bold">{horario.label}</p>
+                              ),
+                            )}
+                          </Col>
+                          <Col className="col-8">
+                            {restaurant.item.horario_funcionamento.map(
+                              (horario) => (
+                                <p>
+                                  {horario.horario.abre} às{' '}
+                                  {horario.horario.fecha}
+                                </p>
+                              ),
+                            )}
+                          </Col>
+                        </Row>
+                      </div>
+                    )}
                   </div>
                   <h3>Faixa de preço</h3>
                   <div className="border-top pt-3 mb-5 d-flex">

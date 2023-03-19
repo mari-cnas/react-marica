@@ -120,110 +120,136 @@ const LocalMarket: React.FC = () => {
                   <p className="mb-5">{localMarket.item.descricao_t}</p>
                   <h3>Sobre</h3>
                   <div className="border-top mb-5">
-                    {localMarket.item.addresses.map((address) => (
-                      <div className="d-flex mt-3">
+                    {localMarket.item.addresses != null && (
+                      <>
+                        {localMarket.item.addresses.map((address) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <BiMap size={22} className="me-2" />
+                            </IconDiv>
+                            <p
+                              className="d-flex text-start me-3"
+                              key={address.id}
+                            >
+                              {address.label}
+                            </p>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {localMarket.item.phones != null && (
+                      <>
+                        {localMarket?.item.phones.map((phone) => (
+                          <div className="d-flex ">
+                            <IconDiv>
+                              {phone.whatsapp === true ? (
+                                <BsWhatsapp size={22} className="me-2" />
+                              ) : (
+                                <BsTelephone size={22} className="me-2" />
+                              )}
+                            </IconDiv>
+                            <div className="d-flex flex-column" key={phone.id}>
+                              <p className="d-flex text-start me-3">
+                                {phone.nome} &nbsp;{phone.number}
+                              </p>
+                            </div>
+                          </div>
+                        ))}{' '}
+                      </>
+                    )}
+                    {localMarket.item.email != null && (
+                      <div className="d-flex ">
                         <IconDiv>
-                          <BiMap size={22} className="me-2" />
+                          <AiOutlineMail size={22} className="me-2" />
                         </IconDiv>
-                        <p className="d-flex text-start me-3" key={address.id}>
-                          {address.label}
-                        </p>
-                      </div>
-                    ))}
-                    {localMarket?.item.phones.map((phone) => (
-                      <div className="d-flex align-items-center">
-                        <IconDiv>
-                          {phone.whatsapp === true ? (
-                            <BsWhatsapp size={22} className="me-2" />
-                          ) : (
-                            <BsTelephone size={22} className="me-2" />
-                          )}
-                        </IconDiv>
-                        <div className="d-flex flex-column" key={phone.id}>
-                          <p className="d-flex text-start me-3">
-                            {phone.nome} &nbsp;{phone.number}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                    <div className="d-flex ">
-                      <IconDiv>
-                        <AiOutlineMail size={22} className="me-2" />
-                      </IconDiv>
-                      <span>{localMarket?.item.email}</span>
-                    </div>
-                    {localMarket.item.site && (
-                      <div className="d-flex mt-3">
-                        <IconDiv>
-                          <TbWorld size={22} className="me-2" />
-                        </IconDiv>
-                        <a
-                          href={localMarket?.item.site}
-                          target="_blank"
-                          className=" text-decoration-none"
-                          rel="noreferrer"
-                        >
-                          {localMarket?.item.site}
-                        </a>
+                        <span>{localMarket?.item.email}</span>
                       </div>
                     )}
-                    {localMarket.item.redes.map((rede) => (
-                      <div className="d-flex mt-3">
+                    {localMarket.item.site != null && (
+                      <>
+                        {localMarket.item.site && (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <TbWorld size={22} className="me-2" />
+                            </IconDiv>
+                            <a
+                              href={localMarket?.item.site}
+                              target="_blank"
+                              className=" text-decoration-none"
+                              rel="noreferrer"
+                            >
+                              {localMarket?.item.site}
+                            </a>
+                          </div>
+                        )}{' '}
+                      </>
+                    )}
+                    {localMarket.item.redes != null && (
+                      <>
+                        {localMarket.item.redes.map((rede) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              {rede.nome === 'Facebook' ? (
+                                <div className="d-flex">
+                                  <AiFillFacebook size={22} className="me-2" />
+                                  <a
+                                    href={rede.url}
+                                    target="_blank"
+                                    className="d-flex text-start me-3 text-decoration-none"
+                                    key={rede.nome}
+                                    rel="noreferrer"
+                                  >
+                                    {rede.user}
+                                  </a>
+                                </div>
+                              ) : (
+                                <div className="d-flex">
+                                  <AiOutlineInstagram
+                                    size={22}
+                                    className="me-2"
+                                  />
+                                  <a
+                                    href={rede.url}
+                                    target="_blank"
+                                    className="d-flex text-start me-3 text-decoration-none"
+                                    key={rede.nome}
+                                    rel="noreferrer"
+                                  >
+                                    {rede.user}
+                                  </a>
+                                </div>
+                              )}
+                            </IconDiv>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {localMarket.item.horario_funcionamento.length > 0 && (
+                      <div className="d-flex mt-3 w-50">
                         <IconDiv>
-                          {rede.nome === 'Facebook' ? (
-                            <div className="d-flex">
-                              <AiFillFacebook size={22} className="me-2" />
-                              <a
-                                href={rede.url}
-                                target="_blank"
-                                className="d-flex text-start me-3 text-decoration-none"
-                                key={rede.nome}
-                                rel="noreferrer"
-                              >
-                                {rede.user}
-                              </a>
-                            </div>
-                          ) : (
-                            <div className="d-flex">
-                              <AiOutlineInstagram size={22} className="me-2" />
-                              <a
-                                href={rede.url}
-                                target="_blank"
-                                className="d-flex text-start me-3 text-decoration-none"
-                                key={rede.nome}
-                                rel="noreferrer"
-                              >
-                                {rede.user}
-                              </a>
-                            </div>
-                          )}
+                          <AiOutlineClockCircle size={22} className="me-2" />
                         </IconDiv>
+                        <Row>
+                          <Col className="col-4">
+                            {localMarket.item.horario_funcionamento.map(
+                              (horario) => (
+                                <p className="fw-bold">{horario.label}</p>
+                              ),
+                            )}
+                          </Col>
+                          <Col className="col-8">
+                            {localMarket.item.horario_funcionamento.map(
+                              (horario) => (
+                                <p>
+                                  {horario.horario.abre} às{' '}
+                                  {horario.horario.fecha}
+                                </p>
+                              ),
+                            )}
+                          </Col>
+                        </Row>
                       </div>
-                    ))}
-                    <div className="d-flex mt-3 w-50">
-                      <IconDiv>
-                        <AiOutlineClockCircle size={22} className="me-2" />
-                      </IconDiv>
-                      <Row>
-                        <Col className="col-4">
-                          {localMarket.item.horario_funcionamento.map(
-                            (horario) => (
-                              <p className="fw-bold">{horario.label}</p>
-                            ),
-                          )}
-                        </Col>
-                        <Col className="col-8">
-                          {localMarket.item.horario_funcionamento.map(
-                            (horario) => (
-                              <p>
-                                {horario.horario.abre} às{' '}
-                                {horario.horario.fecha}
-                              </p>
-                            ),
-                          )}
-                        </Col>
-                      </Row>
-                    </div>
+                    )}
                   </div>
                   {localMarket.item?.estruturas?.length > 0 && (
                     <>

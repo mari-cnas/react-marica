@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { memo, useEffect, useCallback, useState } from 'react'
 
-import { getDate, getHours, getMinutes, getYear } from 'date-fns'
+import { getDate, getHours, getYear } from 'date-fns'
 import { Spinner, Col, Container, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import {
@@ -31,6 +31,7 @@ import {
   formatStartDate,
   getMonthAbbreviation,
   getMonthName,
+  normalizeMinutes,
 } from 'helpers'
 
 import useTitle from 'hooks/useTitle'
@@ -176,11 +177,11 @@ const Event: React.FC = () => {
                             new Date(
                               formatStartDate(event.item.datahora_inicio_f),
                             ),
-                          )}:${getMinutes(
+                          )}:${`${normalizeMinutes(
                             new Date(
                               formatStartDate(event.item.datahora_inicio_f),
                             ),
-                          )}h`}
+                          )}`}h`}
                         </div>
                         <div>
                           Até:{' '}
@@ -192,9 +193,11 @@ const Event: React.FC = () => {
                             new Date(formatEndDate(event.item.datahora_fim_f)),
                           )}, às ${getHours(
                             new Date(formatEndDate(event.item.datahora_fim_f)),
-                          )}:${getMinutes(
-                            new Date(formatEndDate(event.item.datahora_fim_f)),
-                          )}h`}
+                          )}:${`${normalizeMinutes(
+                            new Date(
+                              formatStartDate(event.item.datahora_inicio_f),
+                            ),
+                          )}`}h`}
                         </div>
                       </div>
                     </div>
@@ -202,88 +205,115 @@ const Event: React.FC = () => {
                   <p className="mb-5 my-3">{event.item.descricao_t}</p>
                   <h3>Sobre</h3>
                   <div className="border-top mb-5">
-                    {event.item.addresses.map((address) => (
-                      <div className="d-flex mt-3">
-                        <IconDiv>
-                          <BiMap size={22} className="me-2" />
-                        </IconDiv>
-                        <p className="d-flex text-start me-3" key={address.id}>
-                          {address.label}
-                        </p>
-                      </div>
-                    ))}
-                    {event?.item.phones.map((phone) => (
-                      <div className="d-flex align-items-center">
-                        <IconDiv>
-                          {phone.whatsapp === true ? (
-                            <BsWhatsapp size={22} className="me-2" />
-                          ) : (
-                            <BsTelephone size={22} className="me-2" />
-                          )}
-                        </IconDiv>
-                        <div className="d-flex flex-column" key={phone.id}>
-                          <p className="d-flex text-start me-3">
-                            {phone.nome} &nbsp; {phone.number}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                    {event.item.email && (
-                      <div className="d-flex ">
-                        <IconDiv>
-                          <AiOutlineMail size={22} className="me-2" />
-                        </IconDiv>
-                        <span>{event?.item.email}</span>
-                      </div>
+                    {event.item.addresses != null && (
+                      <>
+                        {event.item.addresses.map((address) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <BiMap size={22} className="me-2" />
+                            </IconDiv>
+                            <p
+                              className="d-flex text-start me-3"
+                              key={address.id}
+                            >
+                              {address.label}
+                            </p>
+                          </div>
+                        ))}
+                      </>
                     )}
-                    {event.item.site && (
-                      <div className="d-flex mt-3">
-                        <IconDiv>
-                          <TbWorld size={22} className="me-2" />
-                        </IconDiv>
-                        <a
-                          href={event?.item.site}
-                          target="_blank"
-                          className=" text-decoration-none"
-                          rel="noreferrer"
-                        >
-                          {event?.item.site}
-                        </a>
-                      </div>
+                    {event.item.phones != null && (
+                      <>
+                        {event?.item.phones.map((phone) => (
+                          <div className="d-flex align-items-center">
+                            <IconDiv>
+                              {phone.whatsapp === true ? (
+                                <BsWhatsapp size={22} className="me-2" />
+                              ) : (
+                                <BsTelephone size={22} className="me-2" />
+                              )}
+                            </IconDiv>
+                            <div className="d-flex flex-column" key={phone.id}>
+                              <p className="d-flex text-start me-3">
+                                {phone.nome} &nbsp; {phone.number}
+                              </p>
+                            </div>
+                          </div>
+                        ))}{' '}
+                      </>
                     )}
-                    {event.item.redes.map((rede) => (
-                      <div className="d-flex mt-3">
-                        <IconDiv>
-                          {rede.nome === 'Facebook' ? (
-                            <div className="d-flex">
-                              <AiFillFacebook size={22} className="me-2" />
-                              <a
-                                href={rede.url}
-                                target="_blank"
-                                className="d-flex text-start me-3 text-decoration-none"
-                                key={rede.nome}
-                                rel="noreferrer"
-                              >
-                                {rede.user}
-                              </a>
-                            </div>
-                          ) : (
-                            <div className="d-flex">
-                              <AiOutlineInstagram size={22} className="me-2" />
-                              <a
-                                href={rede.url}
-                                target="_blank"
-                                className="d-flex text-start me-3 text-decoration-none"
-                                key={rede.nome}
-                                rel="noreferrer"
-                              >
-                                {rede.user}
-                              </a>
-                            </div>
-                          )}
-                        </IconDiv>
-                      </div>
-                    ))}
+                    {event.item.email != null && (
+                      <>
+                        {event.item.email && (
+                          <div className="d-flex ">
+                            <IconDiv>
+                              <AiOutlineMail size={22} className="me-2" />
+                            </IconDiv>
+                            <span>{event?.item.email}</span>
+                          </div>
+                        )}{' '}
+                      </>
+                    )}
+                    {event.item.site != null && (
+                      <>
+                        {event.item.site && (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <TbWorld size={22} className="me-2" />
+                            </IconDiv>
+                            <a
+                              href={event?.item.site}
+                              target="_blank"
+                              className=" text-decoration-none"
+                              rel="noreferrer"
+                            >
+                              {event?.item.site}
+                            </a>
+                          </div>
+                        )}{' '}
+                      </>
+                    )}
+
+                    {event.item.redes.length > 0 && (
+                      <>
+                        {event.item.redes.map((rede) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              {rede.nome === 'Facebook' ? (
+                                <div className="d-flex">
+                                  <AiFillFacebook size={22} className="me-2" />
+                                  <a
+                                    href={rede.url}
+                                    target="_blank"
+                                    className="d-flex text-start me-3 text-decoration-none"
+                                    key={rede.nome}
+                                    rel="noreferrer"
+                                  >
+                                    {rede.user}
+                                  </a>
+                                </div>
+                              ) : (
+                                <div className="d-flex">
+                                  <AiOutlineInstagram
+                                    size={22}
+                                    className="me-2"
+                                  />
+                                  <a
+                                    href={rede.url}
+                                    target="_blank"
+                                    className="d-flex text-start me-3 text-decoration-none"
+                                    key={rede.nome}
+                                    rel="noreferrer"
+                                  >
+                                    {rede.user}
+                                  </a>
+                                </div>
+                              )}
+                            </IconDiv>
+                          </div>
+                        ))}
+                      </>
+                    )}
                   </div>
                   {event.item?.gratuito === 1 && (
                     <>
@@ -352,14 +382,17 @@ const Event: React.FC = () => {
                 </Col>
                 <Col className="col-12 col-md-4 ">
                   <p className="fw-bold">Localização</p>
-
-                  <div style={{ height: 300 }}>
-                    <GoogleMap
-                      lat={Number(event?.item.addresses[0].lat)}
-                      lng={Number(event?.item.addresses[0].lng)}
-                      zoom={15}
-                    />
-                  </div>
+                  {event?.item?.addresses.length > 0 ? (
+                    <div style={{ height: 300 }}>
+                      <GoogleMap
+                        lat={Number(event?.item.addresses[0].lat)}
+                        lng={Number(event?.item.addresses[0].lng)}
+                        zoom={15}
+                      />
+                    </div>
+                  ) : (
+                    'Localização Indisponível'
+                  )}
                   <p className="fw-bold my-2">Conheça nosso app</p>
                   <div className="d-flex">
                     <a

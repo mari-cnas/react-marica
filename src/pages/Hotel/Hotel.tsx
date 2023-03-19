@@ -120,67 +120,86 @@ const Hotel: React.FC = () => {
                   <p className="mb-5">{hotel?.item.descricao_t}</p>
                   <h3>Sobre</h3>
                   <div className="border-top mb-5">
-                    {hotel?.item.addresses.map((address) => (
+                    {hotel.item.addresses != null && (
+                      <>
+                        {hotel?.item.addresses.map((address) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <BiMap size={22} className="me-2" />
+                            </IconDiv>
+                            <p
+                              className="d-flex text-start me-3"
+                              key={address.id}
+                            >
+                              {address.label}
+                            </p>
+                          </div>
+                        ))}{' '}
+                      </>
+                    )}
+                    {hotel.item.phones != null && (
+                      <>
+                        {hotel?.item.phones.map((phone) => (
+                          <div className="d-flex">
+                            <IconDiv>
+                              {phone.whatsapp === true ? (
+                                <BsWhatsapp size={22} className="me-2" />
+                              ) : (
+                                <BsTelephone size={22} className="me-2" />
+                              )}
+                            </IconDiv>
+                            <div className="d-flex flex-column" key={phone.id}>
+                              <p className="d-flex text-start me-3 ">
+                                {phone.nome} &nbsp;{phone.number}
+                              </p>
+                            </div>
+                          </div>
+                        ))}{' '}
+                      </>
+                    )}
+                    {hotel.item.email != null && (
+                      <div className="d-flex ">
+                        <IconDiv>
+                          <AiOutlineMail size={22} className="me-2" />
+                        </IconDiv>
+                        <span>{hotel?.item.email}</span>
+                      </div>
+                    )}
+                    {hotel.item.site != null && (
                       <div className="d-flex mt-3">
                         <IconDiv>
-                          <BiMap size={22} className="me-2" />
-                        </IconDiv>
-                        <p className="d-flex text-start me-3" key={address.id}>
-                          {address.label}
-                        </p>
-                      </div>
-                    ))}
-                    {hotel?.item.phones.map((phone) => (
-                      <div className="d-flex align-items-center">
-                        <IconDiv>
-                          {phone.whatsapp === true ? (
-                            <BsWhatsapp size={22} className="me-2" />
-                          ) : (
-                            <BsTelephone size={22} className="me-2" />
-                          )}
-                        </IconDiv>
-                        <div className="d-flex flex-column" key={phone.id}>
-                          <p className="d-flex text-start me-3 ">
-                            {phone.nome} &nbsp;{phone.number}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                    <div className="d-flex ">
-                      <IconDiv>
-                        <AiOutlineMail size={22} className="me-2" />
-                      </IconDiv>
-                      <span>{hotel?.item.email}</span>
-                    </div>
-                    <div className="d-flex mt-3">
-                      <IconDiv>
-                        <TbWorld size={22} className="me-2" />
-                      </IconDiv>
-                      <a
-                        href={`https://${hotel?.item.site}`}
-                        target="_blank"
-                        className=" text-decoration-none"
-                        rel="noreferrer"
-                      >
-                        {hotel?.item.site}
-                      </a>
-                    </div>
-                    {hotel.item.redes.map((rede) => (
-                      <div className="d-flex mt-3">
-                        <IconDiv>
-                          <BsFacebook size={22} className="me-2" />
+                          <TbWorld size={22} className="me-2" />
                         </IconDiv>
                         <a
-                          href="https://www.facebook.com/pnsdoamparomarica/"
+                          href={`https://${hotel?.item.site}`}
                           target="_blank"
-                          className="d-flex text-start me-3 text-decoration-none"
-                          key={rede.nome}
+                          className=" text-decoration-none"
                           rel="noreferrer"
                         >
-                          {rede.user}
+                          {hotel?.item.site}
                         </a>
                       </div>
-                    ))}
+                    )}
+                    {hotel.item.redes != null && (
+                      <>
+                        {hotel.item.redes.map((rede) => (
+                          <div className="d-flex mt-3">
+                            <IconDiv>
+                              <BsFacebook size={22} className="me-2" />
+                            </IconDiv>
+                            <a
+                              href="https://www.facebook.com/pnsdoamparomarica/"
+                              target="_blank"
+                              className="d-flex text-start me-3 text-decoration-none"
+                              key={rede.nome}
+                              rel="noreferrer"
+                            >
+                              {rede.user}
+                            </a>
+                          </div>
+                        ))}
+                      </>
+                    )}
                   </div>
                   {hotel.item?.quartos > 0 && (
                     <>
