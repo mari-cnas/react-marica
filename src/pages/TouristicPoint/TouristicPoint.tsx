@@ -122,7 +122,7 @@ const TouristicPoint: React.FC = () => {
                   </div>
                   <div className="d-flex ">
                     <Category
-                      categories={categories}
+                      categories={touristicPoint.item.categorias}
                       fetchCategory={fetchCategory}
                       setCategoryValue={setCategoryValue}
                       pageNavigate

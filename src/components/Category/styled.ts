@@ -15,7 +15,7 @@ export const CategoryBtn = styled.button`
   width: fit-content;
   height: 30px;
   white-space: nowrap;
-  flex-wrap: wrap;
+  //flex-wrap: wrap;
 
   /* unvisited link */
   a:link {
@@ -40,12 +40,12 @@ export const CategoryBtn = styled.button`
 `
 
 export const CategoriesList = styled.div`
+  display: flex;
+  //flex-wrap: nowrap;
   @media (min-width: 768px) {
     flex-wrap: wrap;
   }
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     overflow-x: scroll;
   }
-  display: flex;
-  flex-wrap: nowrap;
 `

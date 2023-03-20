@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useState, useCallback } from 'react'
 
 import { Spinner, Col, Container, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
@@ -20,6 +20,7 @@ import Slider from 'react-slick'
 
 import { useEventSpaces } from 'context/EventSpacesContext'
 
+import Category from 'components/Category'
 import Footer from 'components/Footer'
 import GoogleMap from 'components/GoogleMap'
 import Header from 'components/Header'
@@ -30,13 +31,15 @@ import { Wrapper } from 'styles/GlobalStyles'
 
 import appStore from '../../assets/app-store.png'
 import googlePlay from '../../assets/google-play.png'
-import { Categories, HomeBg, IconDiv, ImageDiv } from './styled'
+import { HomeBg, IconDiv, ImageDiv } from './styled'
 
 const EventSpace: React.FC = () => {
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
-  const { loading, error, eventSpace, fetchEventSpace } = useEventSpaces()
+  const { loading, error, eventSpace, fetchCategory, fetchEventSpace } =
+    useEventSpaces()
   const { id } = useParams()
+  const [categoryValue, setCategoryValue] = useState('')
 
   const settings = {
     dots: true,
@@ -105,16 +108,11 @@ const EventSpace: React.FC = () => {
                       <h2 className="mb-4">{eventSpace.item.nome}</h2>
                     </div>
                   </div>
-                  <div className="d-flex flex-md-wrap">
-                    {eventSpace.item.categorias.map((categoria) => (
-                      <Categories
-                        className="d-flex text-start me-3 mb-3"
-                        key={categoria.id}
-                      >
-                        {categoria.label}
-                      </Categories>
-                    ))}
-                  </div>
+                  <Category
+                    categories={eventSpace.item.categorias}
+                    fetchCategory={fetchCategory}
+                    setCategoryValue={setCategoryValue}
+                  />
                   <p className="mb-5">{eventSpace.item.descricao_t}</p>
                   <h3>Sobre</h3>
                   <div className="border-top mb-5">
@@ -225,7 +223,7 @@ const EventSpace: React.FC = () => {
                       </>
                     )}
                     {eventSpace.item.horario_funcionamento.length > 0 && (
-                      <div className="d-flex mt-3 w-50">
+                      <div className="d-flex mt-3 ">
                         <IconDiv>
                           <AiOutlineClockCircle size={22} className="me-2" />
                         </IconDiv>

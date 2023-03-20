@@ -1,13 +1,12 @@
+import { CategoryType } from './CategoryType'
+
 export type HotelType = {
   id: number
   nome: string
   capa: string
   lat: number
   lng: number
-  categorias: {
-    id: number
-    label: string
-  }[]
+  categorias: CategoryType[]
   enderecos: {
     id: number
     lat: number

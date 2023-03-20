@@ -24,12 +24,17 @@ export const CellDiv = styled.div`
 `
 export const Title = styled.p`
   font-weight: 700;
-  font-size: 60px;
+  font-size: 35px;
   font-family: Roboto, sans-serif;
   color: white;
+
+  @media (min-width: 768px) {
+    font-size: 60px;
+  }
 `
 export const Text = styled.p`
   font-size: 22px;
   font-family: Roboto, sans-serif;
   color: white;
+  max-width: 650px;
 `

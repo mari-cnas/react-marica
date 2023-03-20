@@ -74,7 +74,7 @@ const EventSpaces: React.FC = () => {
       {!loading && !error && (
         <HomeBg className="d-flex flex-column py-5">
           <Container className="py-1">
-            <Row className=" justify-content-between">
+            <Row className="flex-column flex-md-row justify-content-between my-3">
               <Col className="d-flex">
                 <div className="d-flex align-items-center">
                   <button
@@ -96,7 +96,7 @@ const EventSpaces: React.FC = () => {
                   </div>
                 </div>
               </Col>
-              <Col className="d-flex flex-column flex-md-row align-items-center justify-content-end">
+              <Col className="d-flex align-items-center justify-content-end">
                 <Link to="/espacos-para-eventos/mapa">
                   <MapButton className="me-3 my-2 py-2 px-3">
                     <FaMapMarkedAlt className="me-1" />

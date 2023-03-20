@@ -22,11 +22,11 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
   return (
     <FooterBg>
       <Container>
-        <Row className="d-flex justify-content-between pt-2 pb-2">
-          <Col className="d-flex flex-column align-items-center align-items-md-start">
-            <ul className="list-unstyled list-group list-group-horizontal align-items-center  mb-4">
-              <li className="d-flex align-items-center me-3">
-                <AiFillFacebook className="me-2" />{' '}
+        <Row className="d-flex flex-column flex-xl-row justify-content-between pt-2 pb-2">
+          <Col className="d-flex flex-column align-items-center align-items-xl-start">
+            <ul className="list-unstyled list-group list-group-horizontal align-items-center  mt-4 mt-xl-0 mb-1 mb-xl-4">
+              <li className="d-flex align-items-center me-xl-3">
+                <AiFillFacebook className="me-2" size={22} />{' '}
                 <a
                   href="https://web.facebook.com/prefeiturademarica"
                   className="d-flex d-none d-md-block "
@@ -36,8 +36,8 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
                   Facebook
                 </a>
               </li>
-              <li className="d-flex align-items-center me-3">
-                <AiOutlineInstagram className="me-2" />
+              <li className="d-flex align-items-center me-xl-3">
+                <AiOutlineInstagram className="me-2" size={22} />
                 <a
                   href="https://www.instagram.com/prefeiturademarica"
                   className="d-flex d-none d-md-block"
@@ -47,8 +47,8 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
                   Instagram
                 </a>
               </li>
-              <li className="d-flex align-items-center me-3">
-                <AiOutlineTwitter className="me-2" />
+              <li className="d-flex align-items-center me-xl-3">
+                <AiOutlineTwitter className="me-2" size={22} />
                 <a
                   href="https://twitter.com/MaricaRJ"
                   className="d-flex d-none d-md-block"
@@ -58,8 +58,8 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
                   Twitter
                 </a>
               </li>
-              <li className="d-flex align-items-center me-3">
-                <AiFillYoutube className="me-2" />
+              <li className="d-flex align-items-center me-xl-3">
+                <AiFillYoutube className="me-2" size={22} />
                 <a
                   href="https://www.youtube.com/user/prefeiturademarica1"
                   className="d-flex d-none d-md-block"
@@ -79,11 +79,11 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
               Área do comerciante
             </a>
           </Col>
-          <Col className="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <Col className="d-flex flex-column flex-md-row justify-content-center justify-content-xl-between align-items-center">
             <img
               src={logo2}
               alt="logo2"
-              className=" mx-3 "
+              className=" mx-3 my-3 my-xl-0"
               style={{ height: '60px', width: '108px' }}
             />
 
@@ -106,7 +106,7 @@ const Footer: React.FC<IBaseComponentProps> = ({ children }) => {
                 Manual Hospedagem
               </a>
             </div>
-            <img src={logo} alt="logo" className=" ms-3" />
+            <img src={logo} alt="logo" className=" ms-3 my-3 my-xl-0" />
           </Col>
         </Row>
       </Container>

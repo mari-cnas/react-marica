@@ -28,7 +28,6 @@ const Category: React.FC<ICategoryProps> = ({
       fetchCategory(categoryId)
       if (setCategoryValue) setCategoryValue(categoryValue)
       setPgNavigate(false)
-      console.log(pgNavigate)
     },
     [fetchCategory, setCategoryValue, navigate, pgNavigate],
   )

@@ -1,3 +1,5 @@
+import { CategoryType } from './CategoryType'
+
 export type HotelSingleType = {
   item: {
     id: string
@@ -35,10 +37,7 @@ export type HotelSingleType = {
       ordem: boolean
       number: string
     }[]
-    categorias: {
-      id: string
-      label: string
-    }[]
+    categorias: CategoryType[]
     estruturas: {
       icone: string
       label: string

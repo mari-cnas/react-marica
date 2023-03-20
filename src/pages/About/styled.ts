@@ -5,6 +5,11 @@ export const BodyBg = styled.div`
   border-radius: 5px;
   box-shadow: rgb(0 0 0 / 30%) 0px 1px 5px;
   transform: translateY(-200px);
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 `
 export const AboutBg = styled.div`
   background-image: url('https://app-marica-fotos.s3-sa-east-1.amazonaws.com/marica-about.jpg');

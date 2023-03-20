@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { memo, useEffect, useCallback, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import { getDate, getHours, getYear } from 'date-fns'
 import { Spinner, Col, Container, Row } from 'react-bootstrap'
@@ -16,7 +16,7 @@ import { BsTelephone, BsWhatsapp } from 'react-icons/bs'
 import { FaRegMoneyBillAlt } from 'react-icons/fa'
 import { TbWorld } from 'react-icons/tb'
 import SVG from 'react-inlinesvg'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
 
 import { useEvents } from 'context/EventsContext'
@@ -45,18 +45,9 @@ import { HomeBg, IconDiv, ImageDiv } from './styled'
 const Event: React.FC = () => {
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
-  const {
-    loading,
-    error,
-    event,
-    categories,
-    fetchCategory,
-    fetchEvent,
-    searchEvents,
-  } = useEvents()
+  const { loading, error, event, fetchCategory, fetchEvent } = useEvents()
   const { id } = useParams()
   const [categoryValue, setCategoryValue] = useState('')
-  const navigate = useNavigate()
 
   const settings = {
     dots: true,
@@ -65,12 +56,6 @@ const Event: React.FC = () => {
     slidesToShow: 4,
     slidesToScroll: 1,
   }
-
-  const returnToList = useCallback(() => {
-    navigate(categoryValue.length > 0 ? `/eventos` : `/`)
-    setCategoryValue('')
-    searchEvents('')
-  }, [navigate, categoryValue, setCategoryValue, searchEvents])
 
   useEffect(() => {
     if (event?.item?.nome) setTitle(t(`${event.item?.nome} | Eventos`))
@@ -121,29 +106,23 @@ const Event: React.FC = () => {
                 <Col className="col-12 col-md-8 ">
                   <div className="d-flex align-items-center">
                     <Link to="/eventos">
-                      <button
-                        type="button"
-                        onClick={returnToList}
-                        style={{ border: 'none' }}
-                      >
-                        <AiOutlineArrowLeft
-                          size={20}
-                          style={{ color: 'black' }}
-                        />
-                      </button>
+                      <AiOutlineArrowLeft
+                        size={20}
+                        style={{ color: 'black' }}
+                      />
                     </Link>
                     <div className="d-flex flex-column mx-2">
                       <p className="mb-1">Eventos</p>
                       <h2 className="mb-4">{event.item.nome}</h2>
                     </div>
                   </div>
-                  <div className="d-flex flex-md-wrap">
-                    <Category
-                      categories={categories}
-                      fetchCategory={fetchCategory}
-                      setCategoryValue={setCategoryValue}
-                    />
-                  </div>
+
+                  <Category
+                    categories={event.item.categorias}
+                    fetchCategory={fetchCategory}
+                    setCategoryValue={setCategoryValue}
+                  />
+
                   {event?.item.datahora_inicio_f && event?.item.datahora_fim_f && (
                     <div className="d-flex">
                       <div className="d-flex flex-column align-items-center me-3">

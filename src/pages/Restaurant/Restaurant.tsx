@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import { Spinner, Col, Container, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
@@ -19,6 +19,7 @@ import Slider from 'react-slick'
 
 import { useRestaurants } from 'context/RestaurantsContext'
 
+import Category from 'components/Category'
 import Footer from 'components/Footer'
 import GoogleMap from 'components/GoogleMap'
 import Header from 'components/Header'
@@ -29,13 +30,15 @@ import { Wrapper } from 'styles/GlobalStyles'
 
 import appStore from '../../assets/app-store.png'
 import googlePlay from '../../assets/google-play.png'
-import { Categories, HomeBg, IconDiv, ImageDiv } from './styled'
+import { HomeBg, IconDiv, ImageDiv } from './styled'
 
 const Restaurant: React.FC = () => {
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
-  const { loading, error, restaurant, fetchRestaurant } = useRestaurants()
+  const { loading, error, restaurant, fetchCategory, fetchRestaurant } =
+    useRestaurants()
   const { id } = useParams()
+  const [categoryValue, setCategoryValue] = useState('')
 
   const settings = {
     dots: true,
@@ -116,16 +119,11 @@ const Restaurant: React.FC = () => {
                       <h2 className="mb-4">{restaurant.item.nome}</h2>
                     </div>
                   </div>
-                  <div className="d-flex flex-md-wrap">
-                    {restaurant.item.categorias.map((categoria) => (
-                      <Categories
-                        className="d-flex text-start me-3 mb-3"
-                        key={categoria.id}
-                      >
-                        {categoria.label}
-                      </Categories>
-                    ))}
-                  </div>
+                  <Category
+                    categories={restaurant.item.categorias}
+                    fetchCategory={fetchCategory}
+                    setCategoryValue={setCategoryValue}
+                  />
                   <p className="mb-5">{restaurant.item.descricao_t}</p>
                   <h3>Sobre</h3>
                   <div className="border-top mb-5">
@@ -149,7 +147,7 @@ const Restaurant: React.FC = () => {
                     {restaurant.item.phones != null && (
                       <>
                         {restaurant.item.phones.map((phone) => (
-                          <div className="d-flex mt-3">
+                          <div className="d-flex ">
                             <IconDiv>
                               <BsTelephone size={22} className="me-2" />
                             </IconDiv>
@@ -207,7 +205,7 @@ const Restaurant: React.FC = () => {
                       </>
                     )}
                     {restaurant.item.horario_funcionamento.length > 0 && (
-                      <div className="d-flex mt-3 w-50">
+                      <div className="d-flex mt-3 ">
                         <IconDiv>
                           <AiOutlineClockCircle size={22} className="me-2" />
                         </IconDiv>

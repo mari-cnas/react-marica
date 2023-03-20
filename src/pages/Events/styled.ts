@@ -1,4 +1,4 @@
-import { Button, Row } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import styled from 'styled-components'
 
 export const HomeBg = styled.div`

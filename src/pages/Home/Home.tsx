@@ -68,14 +68,14 @@ const Home: React.FC = () => {
                   page="/bares-e-restaurantes"
                 />
               </Col>
-              <Col className="d-flex col-6 col-md-4 ">
+              {/* <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
                   icon={RiMotorbikeFill}
                   title="Delivery"
                   description="Receba o melhor de Maricá no conforto da sua casa"
                   page="#"
                 />
-              </Col>
+              </Col> */}
               <Col className="d-flex col-6 col-md-4 ">
                 <HomeCard
                   icon={MdStore}

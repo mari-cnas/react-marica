@@ -25,7 +25,7 @@ const HomeCard: React.FC<IHomeCardProps> = ({
   const Icon = icon
   children as ReactElement
   return (
-    <CardBg className="w-100 ">
+    <CardBg className="d-flex w-100 ">
       <div className="d-flex justify-content-center">
         <a href={page} target={target}>
           <Icon style={{ width: '48px', height: '56px' }} />
@@ -36,7 +36,7 @@ const HomeCard: React.FC<IHomeCardProps> = ({
           <InfoTitle className="text-center">{title}</InfoTitle>
         </a>
         <InfoText className="text-center">{description}</InfoText>
-        <LinkBtn className="d-flex align-self-center">
+        <LinkBtn className="d-flex align-self-center mt-auto">
           <a href={page} target={target}>
             Acessar
           </a>
