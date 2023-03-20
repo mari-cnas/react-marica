@@ -15,7 +15,6 @@ export const CategoryBtn = styled.button`
   width: fit-content;
   height: 30px;
   white-space: nowrap;
-  //flex-wrap: wrap;
 
   /* unvisited link */
   a:link {

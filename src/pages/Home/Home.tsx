@@ -41,7 +41,7 @@ const Home: React.FC = () => {
         </div>
       )}
       {!isLoading && (
-        <HomeBg className="d-flex flex-column py-5">
+        <HomeBg className="d-flex flex-column py-4">
           <Container className="py-5">
             <Row className="justify-content-center g-2">
               <Col className="d-flex col-6 col-md-4 ">
